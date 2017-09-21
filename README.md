@@ -21,8 +21,11 @@ However, the easiest way to get started developing on this project is to use Doc
 The following command will start two MySQL databases, one for the application server 
 and one for Keycloak, and also run Keycloak itself.
 
+    mkdir $HOME/.niord-gh
     docker-compose -f docker/docker-dev-compose.yml pull
     docker-compose -f docker/docker-dev-compose.yml up -d
+
+The initial *mkdir* command is just to avoid permission problems later on.
 
 Once this is up and running, create a Keycloak admin user (niordadmin/keycloak)
 which can be used to create user groups and assign domain roles to the groups:
