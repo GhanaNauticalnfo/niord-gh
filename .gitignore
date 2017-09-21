@@ -1,6 +1,5 @@
 target/
 /wildfly-*
-/keycloak-*
 .settings
 .project
 .classpath
