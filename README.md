@@ -21,6 +21,7 @@ However, the easiest way to get started developing on this project is to use Doc
 The following command will start two MySQL databases, one for the application server 
 and one for Keycloak, and also run Keycloak itself.
 
+    docker-compose -f docker/docker-dev-compose.yml pull
     docker-compose -f docker/docker-dev-compose.yml up -d
 
 Once this is up and running, create a Keycloak admin user (niordadmin/keycloak)
