@@ -1,0 +1,27 @@
+[
+  {
+    "typeId": "navtex",
+    "serviceId": "navtex",
+    "name": "NAVTEX",
+    "priority": 1,
+    "active": true,
+    "promulgateByDefault": false,
+    "language": "en",
+    "domains": [
+      { "domainId": "niord-nw" }
+    ]
+  },
+  {
+    "typeId": "twitter",
+    "serviceId": "twitter",
+    "name": "Twitter",
+    "priority": 100,
+    "active": true,
+    "promulgateByDefault": true,
+    "language": "en",
+    "domains": [
+      { "domainId": "niord-nw" },
+      { "domainId": "niord-nm" }
+    ]
+  }
+]

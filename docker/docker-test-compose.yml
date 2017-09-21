@@ -1,0 +1,112 @@
+
+version: '3'
+
+services:
+
+  niordkc-mysql:
+    image: mysql:5.7.16
+    container_name: niordkc-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: niordkc
+      MYSQL_PASSWORD: niordkc
+      MYSQL_DATABASE: niordkc
+    volumes:
+      - ~$USER/niord-gh/mysql/niordkc:/var/lib/mysql
+
+  niord-mysql:
+    image: mysql:5.7.16
+    container_name: niord-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: niord
+      MYSQL_PASSWORD: niord
+      MYSQL_DATABASE: niord
+    volumes:
+      - ~$USER/niord-gh/mysql/niord:/var/lib/mysql
+
+  niord-smtp:
+    image: namshi/smtp:latest
+    container_name: niord-smtp
+    restart: unless-stopped
+    environment:
+      SES_REGION: eu-west-1
+      SES_USER: UNDEF
+      SES_PASSWORD: UNDEF
+    ports:
+      - "1025:25"
+
+  niord-keycloak:
+    image: dmadk/niord-keycloak:1.0.1
+    container_name: niord-keycloak
+    restart: unless-stopped
+    environment:
+      KCDB_PORT_3306_TCP_ADDR: niordkc-mysql
+      KCDB_PASSWORD: niordkc
+    links:
+      - niordkc-mysql:kcdb
+    depends_on:
+      - niordkc-mysql
+    ports:
+      - "8090:8080"
+
+  niord-appsrv:
+    image: dmadk/niord-gh:1.0.1
+    container_name: niord-appsrv
+    restart: unless-stopped
+    environment:
+      NIORDDB_PORT_3306_TCP_ADDR: niord-mysql
+      NIORDDB_PASSWORD: niord
+      NIORDSMTP_PORT_25_TCP_ADDR: niord-smtp
+      NIORD_HOME: /opt/niord
+    links:
+      - niord-mysql:niorddb
+      - niord-smtp:niordsmtp
+    depends_on:
+      - niord-mysql
+      - niord-smtp
+    ports:
+      - "8080:8080"
+    volumes:
+      - ~$USER/niord-gh:/opt/niord
+
+  niord-proxy:
+    image: dmadk/niord-proxy:1.0.0
+    container_name: niord-proxy
+    restart: unless-stopped
+    environment:
+      EXECUTION_MODE: test
+      NIORD_REPO_TYPE: shared
+      NIORD_REPO_PATH: "/opt/niord/repo"
+      NIORD_PROXY_SERVER: "http://niord-appsrv:8080"
+      NIORD_PROXY_AREAS: "urn:mrn:iho:country:gh|7|-1|7"
+      NIORD_PROXY_TRACKING_ID: ""
+      NIORD_PROXY_WMS_URL: ""
+    links:
+      - niord-appsrv:appsrv
+    depends_on:
+      - niord-appsrv
+    ports:
+      - "9090:8080"
+    volumes:
+      - ~$USER/niord-gh:/opt/niord
+
+  niord-httpd:
+    image: dmadk/niord-httpd:1.0.0
+    container_name: niord-httpd
+    restart: unless-stopped
+    environment:
+      APPSRV_NAME: "niord.e-navigation.net"
+      KEYCLOAK_NAME: "niord-keycloak.e-navigation.net"
+      PROXY_NAME: "niord-proxy.e-navigation.net"
+    links:
+      - niord-appsrv:appsrv
+      - niord-keycloak:keycloak
+      - niord-proxy:proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ~$USER/niord-gh/ssl:/usr/local/apache2/conf/ssl

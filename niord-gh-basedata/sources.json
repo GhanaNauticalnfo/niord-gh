@@ -1,0 +1,22 @@
+[
+  {
+    "active": true,
+    "descs": [
+      {
+        "lang": "en",
+        "abbreviation": "GMA",
+        "name": "The Ghana Maritime Authority"
+      }
+    ]
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "lang": "en",
+        "abbreviation": "IMO",
+        "name": "International Maritime Organization"
+      }
+    ]
+  }
+]

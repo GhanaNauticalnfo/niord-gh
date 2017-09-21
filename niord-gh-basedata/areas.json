@@ -1,0 +1,23 @@
+[
+  {
+    "mrn": "urn:mrn:iho:country:gh",
+    "type": "COUNTRY",
+    "children": [
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Lake Volta"
+          }
+        ]
+      }
+    ],
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Ghana"
+      }
+    ],
+    "siblingSortOrder": 0.0
+  }
+]

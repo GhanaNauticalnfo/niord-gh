@@ -1,0 +1,1136 @@
+[
+  {
+    "type": "COMPOSITE",
+    "name": "ais",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "radio_navigation_aton_list",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "AtoN Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "AtoN name",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "ais_status",
+        "type": "radio_navigation_status_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Status",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "buoy_by_function",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "buoy_function_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Buoy Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Buoy Name",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "buoy_by_type",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "buoy_type_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Buoy Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Buoy Name",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "buoy_replacement",
+    "templateParams": [
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Buoy Type"
+          }
+        ],
+        "mandatory": true,
+        "paramId": "aton_type",
+        "positionList": false,
+        "type": "buoy_function_list"
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Buoy Name"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "aton_name",
+        "positionList": false,
+        "type": "aton_name"
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Replaced by"
+          }
+        ],
+        "mandatory": true,
+        "paramId": "aton_replacement",
+        "positionList": false,
+        "type": "marking_type_list"
+      }
+    ],
+    "type": "COMPOSITE"
+  },
+  {
+    "type": "LIST",
+    "name": "buoy_function_list",
+    "values": [
+      {
+        "key": "aton.function.buoy.north_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.south_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.east_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.west_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.port_hand"
+      },
+      {
+        "key": "aton.function.buoy.starboard_hand"
+      },
+      {
+        "key": "aton.function.buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.function.buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.function.buoy.safe_water"
+      },
+      {
+        "key": "aton.function.buoy.special"
+      },
+      {
+        "key": "aton.function.buoy.isolated_danger"
+      },
+      {
+        "key": "aton.function.buoy"
+      },
+      {
+        "key": "aton.function.aton"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "buoy_type_list",
+    "values": [
+      {
+        "key": "aton.type.buoy.black_yellow"
+      },
+      {
+        "key": "aton.type.buoy.yellow_black"
+      },
+      {
+        "key": "aton.type.buoy.black_yellow_black"
+      },
+      {
+        "key": "aton.type.buoy.yellow_black_yellow"
+      },
+      {
+        "key": "aton.type.buoy.green"
+      },
+      {
+        "key": "aton.type.buoy.red"
+      },
+      {
+        "key": "aton.type.buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.type.buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.type.buoy.red_white"
+      },
+      {
+        "key": "aton.type.buoy.yellow"
+      },
+      {
+        "key": "aton.type.buoy.black_red"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "beacon_function_list",
+    "values": [
+      {
+        "key": "aton.function.beacon"
+      },
+      {
+        "key": "aton.function.beacon.front"
+      },
+      {
+        "key": "aton.function.beacon.rear"
+      },
+      {
+        "key": "aton.function.beacon.cable"
+      },
+      {
+        "key": "aton.function.beacon.front_rear"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "dgps",
+    "templateParams": [
+      {
+        "paramId": "dgps_station",
+        "type": "dgps_station_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "DGPS Station",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "dgps_status",
+        "type": "radio_navigation_status_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Status",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "dgps_station_list",
+    "values": [
+      {
+        "key": "radio_navigation.dgps.skagen"
+      },
+      {
+        "key": "radio_navigation.dgps.blåvand"
+      },
+      {
+        "key": "radio_navigation.dgps.hammer_odde"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "light",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "light_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Name",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "light_buoy_by_function",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "light_buoy_function_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Buoy Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Buoy Name",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "light_buoy_by_type",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "light_buoy_type_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Buoy Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Buoy Name",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_light",
+        "type": "light_character",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Character",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "light_buoy_replacement",
+    "templateParams": [
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Light Buoy Type"
+          }
+        ],
+        "mandatory": true,
+        "paramId": "aton_type",
+        "positionList": false,
+        "type": "light_buoy_function_list"
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Light Buoy Name"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "aton_name",
+        "positionList": false,
+        "type": "aton_name"
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Replaced by"
+          }
+        ],
+        "mandatory": true,
+        "paramId": "aton_replacement",
+        "positionList": false,
+        "type": "marking_type_list"
+      },
+      {
+        "paramId": "aton_light",
+        "type": "light_character",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Light Character",
+            "lang": "en"
+          }
+        ]
+      }
+    ],
+    "type": "COMPOSITE"
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "beacon_by_function",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "beacon_function_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Beacon Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Beacon Name",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "light_buoy_function_list",
+    "values": [
+      {
+        "key": "aton.function.light_buoy.north_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.south_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.east_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.west_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.port_hand"
+      },
+      {
+        "key": "aton.function.light_buoy.starboard_hand"
+      },
+      {
+        "key": "aton.function.light_buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.function.light_buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.function.light_buoy.safe_water"
+      },
+      {
+        "key": "aton.function.light_buoy.special"
+      },
+      {
+        "key": "aton.function.light_buoy.isolated_danger"
+      },
+      {
+        "key": "aton.function.light_buoy.emergency_wreck"
+      },
+      {
+        "key": "aton.function.light_buoy"
+      },
+      {
+        "key": "aton.function.aton"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "light_buoy_type_list",
+    "values": [
+      {
+        "key": "aton.type.light_buoy.black_yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow_black"
+      },
+      {
+        "key": "aton.type.light_buoy.black_yellow_black"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow_black_yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.green"
+      },
+      {
+        "key": "aton.type.light_buoy.red"
+      },
+      {
+        "key": "aton.type.light_buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.type.light_buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.type.light_buoy.red_white"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.black_red"
+      },
+      {
+        "key": "aton.type.light_buoy.blue_yellow"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "light_list",
+    "values": [
+      {
+        "key": "aton.type.light"
+      },
+      {
+        "key": "aton.type.light.front"
+      },
+      {
+        "key": "aton.type.light.rear"
+      },
+      {
+        "key": "aton.type.light.front_rear"
+      },
+      {
+        "key": "aton.type.light.sector"
+      },
+      {
+        "key": "aton.type.light.mole"
+      },
+      {
+        "key": "aton.type.light.post"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "marking_bearing",
+    "values": [
+      {
+        "key": "aton.bearing.n"
+      },
+      {
+        "key": "aton.bearing.e"
+      },
+      {
+        "key": "aton.bearing.s"
+      },
+      {
+        "key": "aton.bearing.w"
+      },
+      {
+        "key": "aton.bearing.ne"
+      },
+      {
+        "key": "aton.bearing.se"
+      },
+      {
+        "key": "aton.bearing.sw"
+      },
+      {
+        "key": "aton.bearing.nw"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "marking_type_list",
+    "values": [
+      {
+        "key": "aton.type.buoy.black_yellow"
+      },
+      {
+        "key": "aton.type.buoy.yellow_black"
+      },
+      {
+        "key": "aton.type.buoy.black_yellow_black"
+      },
+      {
+        "key": "aton.type.buoy.yellow_black_yellow"
+      },
+      {
+        "key": "aton.type.buoy.green"
+      },
+      {
+        "key": "aton.type.buoy.red"
+      },
+      {
+        "key": "aton.type.buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.type.buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.type.buoy.red_white"
+      },
+      {
+        "key": "aton.type.buoy.yellow"
+      },
+      {
+        "key": "aton.type.buoy.black_red"
+      },
+      {
+        "key": "aton.type.light_buoy.black_yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow_black"
+      },
+      {
+        "key": "aton.type.light_buoy.black_yellow_black"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow_black_yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.green"
+      },
+      {
+        "key": "aton.type.light_buoy.red"
+      },
+      {
+        "key": "aton.type.light_buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.type.light_buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.type.light_buoy.red_white"
+      },
+      {
+        "key": "aton.type.light_buoy.yellow"
+      },
+      {
+        "key": "aton.type.light_buoy.black_red"
+      },
+      {
+        "key": "aton.type.light_buoy.blue_yellow"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "other_marking_color_list",
+    "values": [
+      {
+        "key": "marking.color.red"
+      },
+      {
+        "key": "marking.color.orange"
+      },
+      {
+        "key": "marking.color.yellow"
+      },
+      {
+        "key": "marking.color.blue"
+      },
+      {
+        "key": "marking.color.white"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "other_marking_type_list",
+    "values": [
+      {
+        "key": "marking.type.balloon"
+      },
+      {
+        "key": "marking.type.fender"
+      },
+      {
+        "key": "marking.type.container"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "object_adrift_list",
+    "values": [
+      {
+        "key": "object.adrift.object"
+      },
+      {
+        "key": "object.adrift.boat"
+      },
+      {
+        "key": "object.adrift.lifeboat"
+      },
+      {
+        "key": "object.adrift.life_raft"
+      },
+      {
+        "key": "object.adrift.sailboat"
+      },
+      {
+        "key": "object.adrift.dinghy"
+      },
+      {
+        "key": "object.adrift.fishing_vessel"
+      },
+      {
+        "key": "object.adrift.shooting_target"
+      },
+      {
+        "key": "object.adrift.fish_farm"
+      },
+      {
+        "key": "object.adrift.fishing_net"
+      },
+      {
+        "key": "object.adrift.fishing_stakes"
+      },
+      {
+        "key": "object.adrift.logs"
+      },
+      {
+        "key": "object.adrift.container"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "racon",
+    "templateParams": [
+      {
+        "paramId": "aton_type",
+        "type": "radio_navigation_aton_list",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "AtoN Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "aton_name",
+        "type": "aton_name",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "AtoN name",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "racon_status",
+        "type": "radio_navigation_status_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Status",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "radio_navigation_aton_list",
+    "values": [
+      {
+        "key": "aton.type.light"
+      },
+      {
+        "key": "aton.function.buoy.north_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.south_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.east_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.west_cardinal"
+      },
+      {
+        "key": "aton.function.buoy.port_hand"
+      },
+      {
+        "key": "aton.function.buoy.starboard_hand"
+      },
+      {
+        "key": "aton.function.buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.function.buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.function.buoy.safe_water"
+      },
+      {
+        "key": "aton.function.buoy.isolated_danger"
+      },
+      {
+        "key": "aton.function.buoy.special"
+      },
+      {
+        "key": "aton.function.light_buoy.north_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.south_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.east_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.west_cardinal"
+      },
+      {
+        "key": "aton.function.light_buoy.port_hand"
+      },
+      {
+        "key": "aton.function.light_buoy.starboard_hand"
+      },
+      {
+        "key": "aton.function.light_buoy.port_bifurcation"
+      },
+      {
+        "key": "aton.function.light_buoy.starboard_bifurcation"
+      },
+      {
+        "key": "aton.function.light_buoy.safe_water"
+      },
+      {
+        "key": "aton.function.light_buoy.isolated_danger"
+      },
+      {
+        "key": "aton.function.light_buoy.special"
+      },
+      {
+        "key": "aton.function.light_buoy.emergency_wreck"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "radio_navigation_status_list",
+    "values": [
+      {
+        "key": "radio_navigation.status.unreliable"
+      },
+      {
+        "key": "radio_navigation.status.inoperative"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "reduced_depth",
+    "templateParams": [
+      {
+        "paramId": "water_depth",
+        "type": "number",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Water Depth (m)",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "locality",
+        "type": "text",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Entrance to",
+            "lang": "en"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "vessel_type_list",
+    "values": [
+      {
+        "key": "vessel.type.vessel"
+      },
+      {
+        "key": "vessel.type.fishing_vessel"
+      },
+      {
+        "key": "vessel.type.sailing_vessel"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "salvage_type_list",
+    "values": [
+      {
+        "key": "salvage.type.wreck"
+      },
+      {
+        "key": "salvage.type.submarine"
+      },
+      {
+        "key": "salvage.type.platform"
+      },
+      {
+        "key": "salvage.type.wind_mill"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "exercise_type_list",
+    "values": [
+      {
+        "key": "exercise.type.military"
+      },
+      {
+        "key": "exercise.type.missile"
+      },
+      {
+        "key": "exercise.type.torpedo"
+      },
+      {
+        "key": "exercise.type.mine_laying"
+      },
+      {
+        "key": "exercise.type.mine_laying_sweeping"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "wreck",
+    "templateParams": [
+      {
+        "paramId": "wreck_type",
+        "type": "vessel_type_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Vessel Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "wreck_depth",
+        "type": "number",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Depth over wreck (m)",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Visible above sea surface"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "wreck_visible",
+        "positionList": false,
+        "type": "boolean"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "obstruction_type_list",
+    "values": [
+      {
+        "key": "obstruction.type.obstruction"
+      },
+      {
+        "key": "obstruction.type.ground"
+      },
+      {
+        "key": "obstruction.type.stone"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "obstruction_report_list",
+    "values": [
+      {
+        "key": "obstruction.report.observed"
+      },
+      {
+        "key": "obstruction.report.reported"
+      }
+    ]
+  },
+  {
+    "type": "LIST",
+    "name": "aton_withdrawn_duration",
+    "values": [
+      {
+        "key": "aton.withdrawn.permanently"
+      },
+      {
+        "key": "aton.withdrawn.temporarily"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "obstruction",
+    "templateParams": [
+      {
+        "paramId": "obstruction_type",
+        "type": "obstruction_type_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Obstruction Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "obstruction_report",
+        "type": "obstruction_report_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Reporting Type",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "obstruction_depth",
+        "type": "number",
+        "mandatory": false,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Depth over obstruction (m)",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Visible above sea surface"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "obstruction_visible",
+        "positionList": false,
+        "type": "boolean"
+      }
+    ]
+  }
+]

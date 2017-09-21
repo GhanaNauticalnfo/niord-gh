@@ -1,0 +1,37 @@
+[
+  {
+    "reportId": "nm-report",
+    "name": "NM report",
+    "sortOrder": 2,
+    "templatePath": "templates/messages/nm-report-pdf.ftl",
+    "domains": [
+      { "domainId": "niord-nm" }
+    ],
+    "properties": {
+      "mapThumbnails": false,
+      "ISSN": "AAAA-XXXX",
+      "volume": "1"
+    },
+    "params": {
+      "week": "${week}",
+      "year": "${year}"
+    }
+  },
+  {
+    "reportId": "nm-tp-report",
+    "name": "NM T&P report",
+    "sortOrder": 3,
+    "templatePath": "templates/messages/nm-tp-report-pdf.ftl",
+    "domains": [
+      { "domainId": "niord-nm" }
+    ],
+    "properties": {
+      "mapThumbnails": false
+    },
+    "params": {
+      "week": "${week}",
+      "year": "${year}"
+    }
+  }
+]
+

@@ -1,0 +1,76 @@
+[
+  {
+    "mailingListId": "navwarn-overview",
+    "active": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Active coastal warnings",
+        "description": "List of active Ghanese coastal warnings"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "SCHEDULED",
+        "scheduleType": "DAILY",
+        "scheduledExecutionTime":"07:30",
+        "scheduledExecutionTimeZone":"GMT",
+        "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&type=COASTAL_WARNING",
+        "scriptResourcePaths": [
+          "templates/mailinglist/active-navwarns.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "Active navigational warning"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mailingListId": "navwarn-update",
+    "active": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Navwarn updates",
+        "description": "Mailing list for Ghanese coastal warnings"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "STATUS_CHANGE",
+        "statusChanges": [
+          "CANCELLED"
+        ],
+        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw' && msg.type == 'COASTAL_WARNING'",
+        "scriptResourcePaths": [
+          "templates/mailinglist/cancel-navwarn.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "Cancel Ghanese Navigational Warning ${short-id}"
+          }
+        ]
+      },
+      {
+        "type": "STATUS_CHANGE",
+        "statusChanges": [
+          "PUBLISHED"
+        ],
+        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw' && msg.type == 'COASTAL_WARNING'",
+        "scriptResourcePaths": [
+          "templates/mailinglist/publish-navwarn.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "Ghanese Navigational Warning ${short-id}"
+          }
+        ]
+      }
+    ]
+  }
+]

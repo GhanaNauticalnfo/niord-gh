@@ -1,0 +1,10 @@
+target/
+/wildfly-*
+/keycloak-*
+.settings
+.project
+.classpath
+*~
+.DS_Store
+.idea
+*.iml

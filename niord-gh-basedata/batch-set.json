@@ -1,0 +1,62 @@
+[
+  {
+    "jobName": "domain-import",
+    "fileName": "domains.json",
+    "delay": 2000
+  },
+  {
+    "jobName": "dictionary-import",
+    "fileName": "aton-dict.json",
+    "delay": 2100
+  },
+  {
+    "jobName": "chart-import",
+    "fileName": "charts.json",
+    "delay": 5000
+  },
+  {
+    "jobName": "area-import",
+    "fileName": "areas.json",
+    "delay": 5100
+  },
+  {
+    "jobName": "publication-category-import",
+    "fileName": "publication-categories.json",
+    "delay": 5300
+  },
+  {
+    "jobName": "source-import",
+    "fileName": "sources.json",
+    "delay": 5400
+  },
+  {
+    "jobName": "param-type-import",
+    "fileName": "parameter-types.json",
+    "delay": 5600
+  },
+  {
+    "jobName": "mailing-list-import",
+    "fileName": "mailing-lists.json",
+    "delay": 5700
+  },
+  {
+    "jobName": "category-import",
+    "fileName": "categories.json",
+    "delay": 10000
+  },
+  {
+    "jobName": "publication-import",
+    "fileName": "publications.json",
+    "delay": 15000
+  },
+  {
+    "jobName": "report-import",
+    "fileName": "reports.json",
+    "delay": 15100
+  },
+  {
+    "jobName": "promulgation-type-import",
+    "fileName": "promulgation-types.json",
+    "delay": 15200
+  }
+]

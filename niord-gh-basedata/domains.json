@@ -1,0 +1,41 @@
+[
+  {
+    "domainId": "niord-nw",
+    "active": true,
+    "sortOrder": 1,
+    "name": "NW",
+    "timeZone": "GMT",
+    "messageSeries": [
+      {
+        "seriesId": "gma-nw",
+        "mainType": "NW",
+        "shortFormat": "NW-${number-3-digits}-${year-2-digits}",
+        "navtexFormat": "${publish-date}\nGHANESE NAV WARN ${number-year-id}",
+        "numberSequenceType": "YEARLY"
+      },
+      {
+        "seriesId": "gma-nw-local",
+        "mainType": "NW",
+        "numberSequenceType": "NONE"
+      }
+    ],
+    "publish": true,
+    "templates":true
+  },
+  {
+    "domainId": "niord-nm",
+    "active": true,
+    "sortOrder": 3,
+    "name": "NM",
+    "timeZone": "GMT",
+    "messageSeries": [
+      {
+        "seriesId": "gma-nm",
+        "mainType": "NM",
+        "shortFormat": "NM-${number-3-digits}-${year-2-digits}",
+        "numberSequenceType": "YEARLY"
+      }
+    ],
+    "publish": true
+  }
+]

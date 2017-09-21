@@ -1,0 +1,46 @@
+[
+  {
+    "categoryId": "gh-external-publications",
+    "priority": 100,
+    "publish": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "External publications"
+      }
+    ]
+  },
+  {
+    "categoryId": "gh-gma-publications",
+    "priority": 50,
+    "publish": true,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Danish Maritime Authority publications"
+      }
+    ]
+  },
+  {
+    "categoryId": "gh-gma-internal-publications",
+    "priority": 60,
+    "publish": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Danish Maritime Authority internal publications"
+      }
+    ]
+  },
+  {
+    "categoryId": "gh-gma-weekly-nm-publications",
+    "priority": 10,
+    "publish": true,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Weekly Notices to Mariners"
+      }
+    ]
+  }
+]

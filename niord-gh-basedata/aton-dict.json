@@ -1,0 +1,917 @@
+[
+  {
+    "name": "aton",
+    "entries": [
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "buoy",
+          "longValue": "the buoy"
+        }],
+        "key": "aton.function.aton",
+        "atonFilter": "aton.kv('seamark:type', 'buoy.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "buoy",
+          "longValue": "the buoy"
+        }],
+        "key": "aton.function.buoy",
+        "atonFilter": "aton.kv('seamark:type', 'buoy.*') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "light buoy",
+          "longValue": "the light buoy"
+        }],
+        "key": "aton.function.light_buoy",
+        "atonFilter": "aton.kv('seamark:type', 'buoy.*') && aton.k('seamark:light.*')"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "north cardinal buoy",
+          "longValue": "the north cardinal buoy"
+        }],
+        "key": "aton.function.buoy.north_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'north') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "south cardinal buoy",
+          "longValue": "the south cardinal buoy"
+        }],
+        "key": "aton.function.buoy.south_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'south') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "east cardinal buoy",
+          "longValue": "the east cardinal buoy"
+        }],
+        "key": "aton.function.buoy.east_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'east') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "west cardinal buoy",
+          "longValue": "the west cardinal buoy"
+        }],
+        "key": "aton.function.buoy.west_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'west') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "port hand buoy",
+          "longValue": "the port hand buoy"
+        }],
+        "key": "aton.function.buoy.port_hand",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'port') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "starboard hand buoy",
+          "longValue": "the starboard hand buoy"
+        }],
+        "key": "aton.function.buoy.starboard_hand",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'starboard') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "preferred channel to port hand buoy",
+          "longValue": "the preferred channel to port hand buoy"
+        }],
+        "key": "aton.function.buoy.port_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_port') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "preferred channel to starboard hand buoy",
+          "longValue": "the preferred channel to starboard hand buoy"
+        }],
+        "key": "aton.function.buoy.starboard_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_starboard') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "safe water buoy",
+          "longValue": "the safe water buoy"
+        }],
+        "key": "aton.function.buoy.safe_water",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_safe_water') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "special buoy",
+          "longValue": "the special buoy"
+        }],
+        "key": "aton.function.buoy.special",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_special_purpose') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "isolated danger buoy",
+          "longValue": "the isolated danger buoy"
+        }],
+        "key": "aton.function.buoy.isolated_danger",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_isolated_danger') && !aton.k('seamark:light.*')"
+      },
+
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "north cardinal light buoy",
+          "longValue": "the north cardinal light buoy"
+        }],
+        "key": "aton.function.light_buoy.north_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'north') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "south cardinal light buoy",
+          "longValue": "the south cardinal light buoy"
+        }],
+        "key": "aton.function.light_buoy.south_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'south') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "east cardinal light buoy",
+          "longValue": "the east cardinal light buoy"
+        }],
+        "key": "aton.function.light_buoy.east_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'east') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "west cardinal light buoy",
+          "longValue": "the west cardinal light buoy"
+        }],
+        "key": "aton.function.light_buoy.west_cardinal",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'west') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "port hand light buoy",
+          "longValue": "the port hand light buoy"
+        }],
+        "key": "aton.function.light_buoy.port_hand",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'port') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "starboard hand light buoy",
+          "longValue": "the starboard hand light buoy"
+        }],
+        "key": "aton.function.light_buoy.starboard_hand",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'starboard') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "preferred channel to port hand light buoy",
+          "longValue": "the preferred channel to port hand light buoy"
+        }],
+        "key": "aton.function.light_buoy.port_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_port') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "preferred channel to starboard hand light buoy",
+          "longValue": "the preferred channel to starboard hand light buoy"
+        }],
+        "key": "aton.function.light_buoy.starboard_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_starboard') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "safe water light buoy",
+          "longValue": "the safe water light buoy"
+        }],
+        "key": "aton.function.light_buoy.safe_water",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_safe_water') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "special light buoy",
+          "longValue": "the special light buoy"
+        }],
+        "key": "aton.function.light_buoy.special",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_special_purpose') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "isolated danger light buoy",
+          "longValue": "the isolated danger light buoy"
+        }],
+        "key": "aton.function.light_buoy.isolated_danger",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_isolated_danger') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "emergency wreck light buoy",
+          "longValue": "the emergency wreck light buoy"
+        }],
+        "key": "aton.function.light_buoy.emergency_wreck",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_emergency_wreck') && aton.k('seamark:light.*')"
+      },
+
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "black-yellow buoy",
+          "longValue": "a black-yellow buoy"
+        }],
+        "key": "aton.type.buoy.black_yellow",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'north') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow-black buoy",
+          "longValue": "a yellow-black buoy"
+        }],
+        "key": "aton.type.buoy.yellow_black",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'south') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "black-yellow-black buoy",
+          "longValue": "a black-yellow-black buoy"
+        }],
+        "key": "aton.type.buoy.black_yellow_black",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'east') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow-black-yellow buoy",
+          "longValue": "a yellow-black-yellow buoy"
+        }],
+        "key": "aton.type.buoy.yellow_black_yellow",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'west') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red buoy",
+          "longValue": "a red buoy"
+        }],
+        "key": "aton.type.buoy.red",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'port') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "green buoy",
+          "longValue": "a green buoy"
+        }],
+        "key": "aton.type.buoy.green",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'starboard') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red-green-red buoy",
+          "longValue": "a red-green-red buoy"
+        }],
+        "key": "aton.type.buoy.port_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_port') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "green-red-green buoy",
+          "longValue": "a green-red-green buoy"
+        }],
+        "key": "aton.type.buoy.starboard_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_starboard') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red-white bouy",
+          "longValue": "a red-white bouy"
+        }],
+        "key": "aton.type.buoy.red_white",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_safe_water') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow buoy",
+          "longValue": "a yellow buoy"
+        }],
+        "key": "aton.type.buoy.yellow",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_special_purpose') && !aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "black-red buoy",
+          "longValue": "a black-red buoy"
+        }],
+        "key": "aton.type.buoy.black_red",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_isolated_danger') && !aton.k('seamark:light.*')"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "black-yellow light buoy",
+          "longValue": "a black-yellow light buoy"
+        }],
+        "key": "aton.type.light_buoy.black_yellow",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'north') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow-black light buoy",
+          "longValue": "a yellow-black light buoy"
+        }],
+        "key": "aton.type.light_buoy.yellow_black",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'south') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "black-yellow-black light buoy",
+          "longValue": "a black-yellow-black light buoy"
+        }],
+        "key": "aton.type.light_buoy.black_yellow_black",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'east') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow-black-yellow light buoy",
+          "longValue": "a yellow-black-yellow light buoy"
+        }],
+        "key": "aton.type.light_buoy.yellow_black_yellow",
+        "atonFilter": "aton.kv('seamark:buoy_cardinal:category', 'west') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red light buoy",
+          "longValue": "a red light buoy"
+        }],
+        "key": "aton.type.light_buoy.red",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'port') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "green light buoy",
+          "longValue": "a green light buoy"
+        }],
+        "key": "aton.type.light_buoy.green",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'starboard') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red-green-red light buoy",
+          "longValue": "a red-green-red light buoy"
+        }],
+        "key": "aton.type.light_buoy.port_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_port') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "green-red-green light buoy",
+          "longValue": "a green-red-green light buoy"
+        }],
+        "key": "aton.type.light_buoy.starboard_bifurcation",
+        "atonFilter": "aton.kv('seamark:buoy_lateral:category', 'preferred_channel_starboard') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "red-white bouy",
+          "longValue": "a red-white bouy"
+        }],
+        "key": "aton.type.light_buoy.red_white",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_safe_water') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow light buoy",
+          "longValue": "a yellow light buoy"
+        }],
+        "key": "aton.type.light_buoy.yellow",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_special_purpose') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "black-red light buoy",
+          "longValue": "a black-red light buoy"
+        }],
+        "key": "aton.type.light_buoy.black_red",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_isolated_danger') && aton.k('seamark:light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "blue-yellow light buoy",
+          "longValue": "a blue-yellow light buoy"
+        }],
+        "key": "aton.type.light_buoy.blue_yellow",
+        "atonFilter": "aton.kv('seamark:type', 'buoy_emergency_wreck') && aton.k('seamark:light.*')"
+      },
+
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "light",
+          "longValue": "the light"
+        }],
+        "key": "aton.type.light",
+        "atonFilter": "aton.kv('seamark:type', 'light.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "front light",
+          "longValue": "the front light"
+        }],
+        "key": "aton.type.light.front",
+        "atonFilter": "aton.kv('seamark:light:category', 'front')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "rear light",
+          "longValue": "the rear light"
+        }],
+        "key": "aton.type.light.rear",
+        "atonFilter": "aton.kv('seamark:light:category', 'rear')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "front and rear light",
+          "longValue": "the front and rear light"
+        }],
+        "key": "aton.type.light.front_rear",
+        "atonFilter": "aton.kv('seamark:light:category', 'front|rear')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "sector light",
+          "longValue": "the sector light"
+        }],
+        "key": "aton.type.light.sector",
+        "atonFilter": "aton.kv('seamark:light:.*:category', 'directional')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "mole head light",
+          "longValue": "the mole head light"
+        }],
+        "key": "aton.type.light.mole"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "light post",
+          "longValue": "the light post"
+        }],
+        "key": "aton.type.light.post"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "beacon",
+          "longValue": "the beacon"
+        }],
+        "key": "aton.function.beacon",
+        "atonFilter": "aton.kv('seamark:type', 'beacon.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "front beacon",
+          "longValue": "the front beacon"
+        }],
+        "key": "aton.function.beacon.front",
+        "atonFilter": "aton.kv('seamark:type', 'beacon.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "rear beacon",
+          "longValue": "the rear beacon"
+        }],
+        "key": "aton.function.beacon.rear",
+        "atonFilter": "aton.kv('seamark:type', 'beacon.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "cable beacon",
+          "longValue": "the cable beacon"
+        }],
+        "key": "aton.function.beacon.cable",
+        "atonFilter": "aton.kv('seamark:type', 'beacon.*')"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "front and rear beacon",
+          "longValue": "the front and rear beacon"
+        }],
+        "key": "aton.function.beacon.front_rear",
+        "atonFilter": "aton.kv('seamark:type', 'beacon.*')"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "N",
+          "longValue": "North"
+        }],
+        "key": "aton.bearing.n"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "S",
+          "longValue": "South"
+        }],
+        "key": "aton.bearing.s"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "E",
+          "longValue": "East"
+        }],
+        "key": "aton.bearing.e"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "W",
+          "longValue": "west"
+        }],
+        "key": "aton.bearing.w"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "NE",
+          "longValue": "North East"
+        }],
+        "key": "aton.bearing.ne"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "SW",
+          "longValue": "South West"
+        }],
+        "key": "aton.bearing.sw"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "SE",
+          "longValue": "South East"
+        }],
+        "key": "aton.bearing.se"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "NW",
+          "longValue": "North West"
+        }],
+        "key": "aton.bearing.nw"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "vessel",
+          "longValue": "a vessel"
+        }],
+        "key": "vessel.type.vessel"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fishing vessel",
+          "longValue": "a fishing vessel"
+        }],
+        "key": "vessel.type.fishing_vessel"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "sailing vessel",
+          "longValue": "a sailing vessel"
+        }],
+        "key": "vessel.type.sailing_vessel"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "military exercise",
+          "longValue": "a military exercise"
+        }],
+        "key": "exercise.type.military"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "missile exercise",
+          "longValue": "a missile exercise"
+        }],
+        "key": "exercise.type.missile"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "torpedo exercise",
+          "longValue": "a torpedo exercise"
+        }],
+        "key": "exercise.type.torpedo"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "mine laying exercise",
+          "longValue": "a mine laying exercise"
+        }],
+        "key": "exercise.type.mine_laying"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "mine laying and mine sweeping exercise",
+          "longValue": "a mine laying and mine sweeping exercise"
+        }],
+        "key": "exercise.type.mine_laying_sweeping"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "wreck",
+          "longValue": "the wreck"
+        }],
+        "key": "salvage.type.wreck"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "submarine",
+          "longValue": "the submarine"
+        }],
+        "key": "salvage.type.submarine"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "platform",
+          "longValue": "the platform"
+        }],
+        "key": "salvage.type.platform"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "wind mill",
+          "longValue": "the wind mill"
+        }],
+        "key": "salvage.type.wind_mill"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "object",
+          "longValue": "an object"
+        }],
+        "key": "object.adrift.object"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "boat",
+          "longValue": "a boat"
+        }],
+        "key": "object.adrift.boat"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "lifeboat",
+          "longValue": "a lifeboat"
+        }],
+        "key": "object.adrift.lifeboat"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "life raft",
+          "longValue": "a life raft"
+        }],
+        "key": "object.adrift.life_raft"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "sailboat",
+          "longValue": "a sailboat"
+        }],
+        "key": "object.adrift.sailboat"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "dinghy",
+          "longValue": "a dinghy"
+        }],
+        "key": "object.adrift.dinghy"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fishing vessel",
+          "longValue": "a fishing vessel"
+        }],
+        "key": "object.adrift.fishing_vessel"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "shooting target",
+          "longValue": "a shooting target"
+        }],
+        "key": "object.adrift.shooting_target"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "logs",
+          "longValue": "logs"
+        }],
+        "key": "object.adrift.logs"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "container",
+          "longValue": "a container"
+        }],
+        "key": "object.adrift.container"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fish farm",
+          "longValue": "a fish farm"
+        }],
+        "key": "object.adrift.fish_farm"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fishing net",
+          "longValue": "a fishing net"
+        }],
+        "key": "object.adrift.fishing_net"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fishing stakes",
+          "longValue": "fishing stakes"
+        }],
+        "key": "object.adrift.fishing_stakes"
+      },
+
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "unreliable",
+          "longValue": "is unreliable"
+        }],
+        "key": "radio_navigation.status.unreliable"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "inoperative",
+          "longValue": "is inoperative"
+        }],
+        "key": "radio_navigation.status.inoperative"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "Skagen"
+        }],
+        "key": "radio_navigation.dgps.skagen"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "Blåvand"
+        }],
+        "key": "radio_navigation.dgps.blåvand"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "Hammer Odde"
+        }],
+        "key": "radio_navigation.dgps.hammer_odde"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "Torshavn"
+        }],
+        "key": "radio_navigation.dgps.torshavn"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "red"
+        }],
+        "key": "marking.color.red"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "orange"
+        }],
+        "key": "marking.color.orange"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "yellow"
+        }],
+        "key": "marking.color.yellow"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "blue"
+        }],
+        "key": "marking.color.blue"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "white"
+        }],
+        "key": "marking.color.white"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "balloon",
+          "longValue": "a {{color}} balloon"
+        }],
+        "key": "marking.type.balloon"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "fender",
+          "longValue": "a {{color}} fender"
+        }],
+        "key": "marking.type.fender"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "container",
+          "longValue": "a {{color}} container"
+        }],
+        "key": "marking.type.container"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "obstruction",
+          "longValue": "the obstruction"
+        }],
+        "key": "obstruction.type.obstruction"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "ground",
+          "longValue": "the ground"
+        }],
+        "key": "obstruction.type.ground"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "stone",
+          "longValue": "the stone"
+        }],
+        "key": "obstruction.type.stone"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "observed"
+        }],
+        "key": "obstruction.report.observed"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "reported"
+        }],
+        "key": "obstruction.report.reported"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "permanently"
+        }],
+        "key": "aton.withdrawn.permanently"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "temporarily"
+        }],
+        "key": "aton.withdrawn.temporarily"
+      }
+    ]
+  }
+]

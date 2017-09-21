@@ -1,0 +1,46 @@
+
+version: '3'
+
+
+services:
+
+  niordkc-mysql:
+    image: mysql:5.7.16
+    container_name: niordkc-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: niordkc
+      MYSQL_PASSWORD: niordkc
+      MYSQL_DATABASE: niordkc
+    volumes:
+      - ~$USER/.niord-gh/mysql/niordkc:/var/lib/mysql
+
+  niord-mysql:
+    image: mysql:5.7.16
+    container_name: niord-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_USER: niord
+      MYSQL_PASSWORD: niord
+      MYSQL_DATABASE: niord
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~$USER/.niord-gh/mysql/niord:/var/lib/mysql
+
+  niord-keycloak:
+    image: dmadk/niord-keycloak:1.0.1
+    container_name: niord-keycloak
+    restart: unless-stopped
+    environment:
+      KCDB_PORT_3306_TCP_ADDR: niordkc-mysql
+      KCDB_PASSWORD: niordkc
+    links:
+      - niordkc-mysql:kcdb
+    depends_on:
+      - niordkc-mysql
+    ports:
+      - "8090:8080"
+

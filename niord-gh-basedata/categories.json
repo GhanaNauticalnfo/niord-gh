@@ -1,0 +1,1615 @@
+[
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Light",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light unlit",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-unlit.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light unreliable",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-unreliable.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light damaged",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-damaged.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      }
+    ],
+    "siblingSortOrder": -10.0,
+    "atonFilter": "aton.kv('seamark:type', 'light.*')",
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Light buoy",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy missing",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 1.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-missing.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy off station",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 1.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-off-station.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy unlit",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 2.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-unlit.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy unreliable",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 4.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-unreliable.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy established",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 4.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_type",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-established.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      },
+      {
+        "active": true,
+        "atonFilter": "",
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Light buoy replaced"
+          }
+        ],
+        "domains": [
+          {
+            "active": true,
+            "domainId": "niord-nw"
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-replaced.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ],
+        "siblingSortOrder": 4.75,
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Light Buoy"
+              }
+            ],
+            "mandatory": false,
+            "paramId": "aton",
+            "positionList": true,
+            "type": "light_buoy_replacement"
+          }
+        ],
+        "type": "TEMPLATE"
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Light buoy withdrawn",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 5.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "light_buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Buoy",
+                "lang": "en"
+              }
+            ]
+          },
+          {
+            "paramId": "duration",
+            "type": "aton_withdrawn_duration",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Duration",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-buoy-withdrawn.ftl",
+          "templates/tmpl/compute-affected-radius.js"
+        ]
+      }
+    ],
+    "siblingSortOrder": -5.0,
+    "atonFilter": "aton.kv('seamark:type', 'buoy.*') && aton.k('seamark:light.*')",
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Buoy",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Buoy missing",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -20.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/buoy-missing.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Buoy off station",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -15.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/buoy-off-station.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Buoy established",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -10.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "buoy_by_type",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/buoy-established.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "atonFilter": "",
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Buoy replaced"
+          }
+        ],
+        "domains": [
+          {
+            "active": true,
+            "domainId": "niord-nw"
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/buoy-replaced.ftl"
+        ],
+        "siblingSortOrder": 0.0,
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Buoy"
+              }
+            ],
+            "mandatory": false,
+            "paramId": "aton",
+            "positionList": true,
+            "type": "buoy_replacement"
+          }
+        ],
+        "type": "TEMPLATE"
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Buoy withdrawn",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 2.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "buoy_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Buoy",
+                "lang": "en"
+              }
+            ]
+          },
+          {
+            "paramId": "duration",
+            "type": "aton_withdrawn_duration",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Duration",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/buoy-withdrawn.ftl"
+        ]
+      }
+    ],
+    "siblingSortOrder": 0.0,
+    "atonFilter": "aton.kv('seamark:type', 'buoy.*') && !aton.k('seamark:light.*')",
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Beacon",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Beacon missing",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -20.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "beacon_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Beacon",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/beacon-missing.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Beacon damaged",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -15.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "areas",
+          "type",
+          "promulgation",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "beacon_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Beacon",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/beacon-damaged.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Beacon partly obscured",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": -10.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton",
+            "type": "beacon_by_function",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Beacon",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/beacon-partly-obscured.ftl"
+        ]
+      }
+    ],
+    "siblingSortOrder": 0.0,
+    "atonFilter": "aton.kv('seamark:type', 'beacon.*')",
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Obstruction",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Uncharted obstruction",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "markings"
+        ],
+        "templateParams": [
+          {
+            "paramId": "obstruction",
+            "type": "obstruction",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Obstruction",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/uncharted-obstruction.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Wreck",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "markings"
+        ],
+        "templateParams": [
+          {
+            "paramId": "wreck",
+            "type": "wreck",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Wreck",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/wreck.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Reduced depth",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "reduced_depth",
+            "type": "reduced_depth",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Reduced Depth",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/reduced-depth.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Salvage operations"
+          }
+        ],
+        "domains": [
+          {
+            "active": true,
+            "domainId": "niord-nw"
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/salvage-operations.ftl"
+        ],
+        "siblingSortOrder": 0.0,
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Salvage type"
+              }
+            ],
+            "mandatory": true,
+            "paramId": "salvage_type",
+            "positionList": false,
+            "type": "salvage_type_list"
+          }
+        ],
+        "type": "TEMPLATE"
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Hydrographic survey",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 2.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/hydrographic-survey.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Cable operations",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 3.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/cable-opetations.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Underwater survey",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 4.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/underwater-survey.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Diving operations",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 6.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/diving-operations.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Bridge closed for passage",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 6.1,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "bridge_name",
+            "type": "text",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Bridge name",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/bridge-closed.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "light destroyed",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 6.25,
+        "atonFilter": "aton.kv('seamark:type', 'light.*')",
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "markings"
+        ],
+        "templateParams": [
+          {
+            "paramId": "aton_name",
+            "type": "aton_name",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "Light Name",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/light-destroyed.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Exercise"
+          }
+        ],
+        "domains": [
+          {
+            "active": true,
+            "domainId": "niord-nw"
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/exercise.ftl"
+        ],
+        "siblingSortOrder": 6.5,
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Exercise type"
+              }
+            ],
+            "mandatory": true,
+            "paramId": "exercise_type",
+            "positionList": false,
+            "type": "exercise_type_list"
+          }
+        ],
+        "type": "TEMPLATE"
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Mine",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 11.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/mine.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Torpedo",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 16.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/torpedo.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Grenade",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 26.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/grenade.ftl"
+        ]
+      }
+    ],
+    "siblingSortOrder": 1.5,
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Drifting object",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Object adrift",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "positions",
+          "areas"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Observed"
+              }
+            ],
+            "mandatory": true,
+            "paramId": "date",
+            "positionList": false,
+            "type": "date"
+          },
+          {
+            "paramId": "object",
+            "type": "object_adrift_list",
+            "mandatory": true,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Object",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/object-adrift.js",
+          "templates/tmpl/object-adrift.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "Buoy adrift",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "atonFilter": "aton.kv('seamark:type', 'buoy.*|beacon.*')",
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "positions",
+          "areas"
+        ],
+        "templateParams": [
+          {
+            "descs": [
+              {
+                "lang": "en",
+                "name": "Observed"
+              }
+            ],
+            "mandatory": true,
+            "paramId": "date",
+            "positionList": false,
+            "type": "date"
+          },
+          {
+            "paramId": "object",
+            "type": "marking_type_list",
+            "mandatory": true,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "Buoy",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/object-adrift.js",
+          "templates/tmpl/object-adrift.ftl"
+        ]
+      }
+    ],
+    "siblingSortOrder": 3.5,
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Radio navigation",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "RACON",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "atonFilter": "aton.kv('seamark:radar_transponder:category', 'racon')",
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "racon",
+            "type": "racon",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "RACON",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/radio-navigation.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "AIS",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "atonFilter": "aton.kv('radio_transponder:AIS', 'yes')",
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions"
+        ],
+        "templateParams": [
+          {
+            "paramId": "ais",
+            "type": "ais",
+            "mandatory": false,
+            "positionList": true,
+            "descs": [
+              {
+                "name": "AIS",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/radio-navigation.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
+            "name": "DGPS",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 0.0,
+        "atonFilter": "aton.kv('seamark:radio_station:category', 'dgps')",
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "event_dates"
+        ],
+        "templateParams": [
+          {
+            "paramId": "dgps",
+            "type": "dgps",
+            "mandatory": false,
+            "positionList": false,
+            "descs": [
+              {
+                "name": "DGPS",
+                "lang": "en"
+              }
+            ]
+          }
+        ],
+        "scriptResourcePaths": [
+          "templates/tmpl/dgps.js",
+          "templates/tmpl/dgps.ftl"
+        ]
+      }
+    ],
+    "siblingSortOrder": 4.0,
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  },
+  {
+    "active": true,
+    "descs": [
+      {
+        "name": "Firing Exercises",
+        "lang": "en"
+      }
+    ],
+    "type": "CATEGORY",
+    "children": [],
+    "siblingSortOrder": 17.0,
+    "editorFields": [
+      "prohibition",
+      "signals"
+    ],
+    "domains": [],
+    "stdTemplateFields": [],
+    "templateParams": [],
+    "scriptResourcePaths": []
+  }
+]
