@@ -19,6 +19,8 @@ setting up Wildfly, Keycloak, etc.
 
 However, the easiest way to get started developing on this project is to use Docker.
 
+### Starting MySQL and Keycloak
+
 You may want to start by creating a *.env* file in your working directory, which overrides the environment variables 
 (such as database passwords) used in the docker compose file.
 
@@ -39,13 +41,15 @@ which can be used to create user groups and assign domain roles to the groups:
 
 Enter [http://localhost:8090/auth/](http://localhost:8090/auth/) and check that you can log in using the Keycloak admin user.
 
+### Configuring Wildfly
+
 Next, create and configure a Wildfly installation using:
 
     ./install-wildfly.sh
 
 Import or open the niord-gh project in your favorite IDE. Here we describe  the 
 *IntelliJ* set-up:
-* From Github, check out the niord-gh and parent 
+* From Github, also check out the niord-gh parent 
   [niord](https://github.com/NiordOrg/niord) projects.
 * Import the niord-gh project in IntelliJ via its pom.xml.
 * Under the "Maven Projects" also import the parent niord project.
@@ -60,6 +64,8 @@ that should be used for the initial configuration of the system, whereupon they 
 deleted.
 
 Enter [http://localhost:8080](http://localhost:8080) and check that you can log in using the Niord sysadmin user.
+
+### Finishing touches
 
 Import the Ghana base data into Niord:
 
