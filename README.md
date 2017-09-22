@@ -18,14 +18,19 @@ The [niord-appsrv](https://github.com/NiordOrg/niord-appsrv) project contains sc
 setting up Wildfly, Keycloak, etc.
 
 However, the easiest way to get started developing on this project is to use Docker.
-The following command will start two MySQL databases, one for the application server 
+
+You may want to start by creating a *.env* file in your working directory, which overrides the environment variables 
+(such as database passwords) used in the docker compose file.
+
+The following commands will start two MySQL databases, one for the application server 
 and one for Keycloak, and also run Keycloak itself.
 
     mkdir $HOME/.niord-gh
     docker-compose -f docker/docker-dev-compose.yml pull
     docker-compose -f docker/docker-dev-compose.yml up -d
 
-The initial *mkdir* command is just to avoid permission problems later on.
+The initial *mkdir* command is just to avoid permission problems since docker would otherwise create it as owned
+by root.
 
 Once this is up and running, create a Keycloak admin user (niordadmin/keycloak)
 which can be used to create user groups and assign domain roles to the groups:
