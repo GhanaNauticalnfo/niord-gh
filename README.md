@@ -32,12 +32,12 @@ and one for Keycloak, and also run Keycloak itself.
 The initial *mkdir* command is just to avoid permission problems since docker would otherwise create it as owned
 by root.
 
-Once this is up and running, create a Keycloak admin user (niordadmin/keycloak)
+Once this is up and running, create a Keycloak admin user (default niordadmin/keycloak)
 which can be used to create user groups and assign domain roles to the groups:
 
     ./keycloak-admin-user.sh
 
-Enter http://localhost:8090/auth/ and check that you can log in using the Keycloak admin user.
+Enter [http://localhost:8090/auth/](http://localhost:8090/auth/) and check that you can log in using the Keycloak admin user.
 
 Next, create and configure a Wildfly installation using:
 
@@ -59,7 +59,7 @@ The Keycloak docker image creates an initial domain, "Master", and a Niord user,
 that should be used for the initial configuration of the system, whereupon they should be
 deleted.
 
-Enter http://localhost:8080 and check that you can log in using the Niord sysadmin user.
+Enter [http://localhost:8080](http://localhost:8080) and check that you can log in using the Niord sysadmin user.
 
 Import the Ghana base data into Niord:
 
