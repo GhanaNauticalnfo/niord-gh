@@ -18,6 +18,7 @@
 
     <modules>
         <module>niord-gh-web</module>
+        <module>niord-gh-proxy</module>
     </modules>
 
 </project>
