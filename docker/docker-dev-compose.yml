@@ -11,8 +11,8 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-mysql}
       MYSQL_USER: niordkc
-      MYSQL_PASSWORD: niordkc
-      MYSQL_DATABASE: ${KCDB_PASSWORD:-niordkc}
+      MYSQL_PASSWORD: ${KCDB_PASSWORD:-niordkc}
+      MYSQL_DATABASE: niordkc
     volumes:
       - ${NIORD_HOME:-~/.niord-gh}/mysql/niordkc:/var/lib/mysql
 
