@@ -81,9 +81,9 @@ services:
       NIORD_REPO_TYPE: shared
       NIORD_REPO_PATH: "/opt/niord/repo"
       NIORD_PROXY_SERVER: "http://niord-appsrv:8080"
-      NIORD_PROXY_AREAS: "urn:mrn:iho:country:gh|7|-1|7"
-      NIORD_PROXY_TRACKING_ID: ""
-      NIORD_PROXY_WMS_URL: ""
+      NIORD_PROXY_AREAS: ${PROXY_AREAS:-urn:mrn:iho:country:gh|7|-1|7}
+      NIORD_PROXY_TRACKING_ID: ${PROXY_TRACKING_ID:-}
+      NIORD_PROXY_WMS_URL: ${PROXY_WMS_URL:-}
     links:
       - niord-appsrv:appsrv
     depends_on:
