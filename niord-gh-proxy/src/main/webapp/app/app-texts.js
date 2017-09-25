@@ -63,8 +63,8 @@ angular.module('niord.proxy.app')
             'MSG_NOT_FOUND' : 'Message {{messageId}} is not available',
             'MORE_MSGS' : ' and {{messageNo}} more messages',
             'TEASER_TEXT': 'Click the map for<br>Notices to Mariners<br>and Navigational Warnings',
-            'MAP_COPYRIGHT' : '&copy; <a href="http://www.dma.dk" target="_blank">Danish Maritime Authority</a>.',
-            'FOOTER_COPYRIGHT' : '&copy; 2017 Danish Maritime Authority',
+            'MAP_COPYRIGHT' : '&copy; <a href="http://www.ghanamaritime.org" target="_blank">Ghana Maritime Authority</a>.',
+            'FOOTER_COPYRIGHT' : '&copy; 2017 Ghana Maritime Authority',
             'FOOTER_DISCLAIMER' : 'Disclaimer',
             'FOOTER_COOKIES' : 'Cookies'
         });
