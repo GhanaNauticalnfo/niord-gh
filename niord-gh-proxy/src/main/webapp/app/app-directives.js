@@ -363,9 +363,9 @@ angular.module('niord.proxy.app')
 
 
                     // Just used for bootstrapping the map
-                    var zoom = 6;
-                    var lon  = 11;
-                    var lat  = 56;
+                    var zoom = 7;
+                    var lon  = -1;
+                    var lat  = 7;
 
                     // Defined the zoom level for which to show a center point
                     scope.centerPointZoomLevel = scope.centerPointZoomLevel || 12;

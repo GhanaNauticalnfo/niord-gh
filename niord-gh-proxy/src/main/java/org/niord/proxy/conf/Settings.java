@@ -77,7 +77,7 @@ public class Settings {
         // Accept incomplete SSL certificate chains from the server
         checkInitHttpsConnections(server);
 
-        String[] areaIds = System.getProperty("niord-proxy.areas", "urn:mrn:iho:country:gh").split(",");
+        String[] areaIds = System.getProperty("niord-proxy.areas", "urn:mrn:iho:country:gh|7|-1|7").split(",");
         rootAreas = Arrays.stream(areaIds).map(RootArea::new).toArray(RootArea[]::new);
         log.info("AreaIds: " + Arrays.asList(areaIds));
 
