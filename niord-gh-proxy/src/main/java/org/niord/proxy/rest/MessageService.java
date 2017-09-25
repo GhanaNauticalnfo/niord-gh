@@ -36,7 +36,6 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -138,41 +137,6 @@ public class MessageService extends AbstractNiordService {
                 language, mainTypes, areaIds, wkt, result.size()));
 
         return result;
-    }
-
-
-    /**
-     * Returns a filtered set of messages associated with the given publication
-     * @param language the language of the descriptive fields to include
-     * @param publication the ID of the publication to fetch message from
-     * @return the resulting set of messages
-     */
-    public List<MessageVo> getPublicationMessages(String language, String publication) throws Exception {
-
-        language = settings.language(language);
-        DataFilter filter = MESSAGE_DETAILS_FILTER.lang(language);
-
-        List<MessageVo> messages = executeNiordJsonRequest(
-                getPublicationMessagesUrl(publication, language),
-                json -> new ObjectMapper().readValue(json, new TypeReference<List<MessageVo>>(){})
-        );
-
-        if (messages == null) {
-            log.severe(String.format("Error searching for language=%s, publication=%s",
-                    language, publication));
-            return Collections.emptyList();
-
-        }
-
-        log.info(String.format("Search for language=%s, publication=%s -> returning %d messages",
-                language, publication, messages.size()));
-
-        // If there are any general messages present (messages without an area), add a virtual "General" area
-        checkAddGeneralAreas(messages);
-
-        return messages.stream()
-                .map(this::checkRewriteRepoPath)
-                .collect(Collectors.toList());
     }
 
 
@@ -440,18 +404,6 @@ public class MessageService extends AbstractNiordService {
      */
     private String getActiveMessagesUrl() {
         return settings.getServer() + "/rest/public/v1/messages";
-    }
-
-
-    /**
-     * Returns the url for fetching the list of publication messages
-     * @return the list of publication messages
-     */
-    private String getPublicationMessagesUrl(String publicationId, String language) {
-        return settings.getServer()
-                + "/rest/public/v1/messages"
-                + "?publication=" + WebUtils.encodeURIComponent(publicationId)
-                + "&lang=" + language;
     }
 
 

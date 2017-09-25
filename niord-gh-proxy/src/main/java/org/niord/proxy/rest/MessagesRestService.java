@@ -15,7 +15,6 @@
  */
 package org.niord.proxy.rest;
 
-import org.apache.commons.lang.StringUtils;
 import org.niord.model.message.MainType;
 import org.niord.model.message.MessageVo;
 
@@ -56,18 +55,12 @@ public class MessagesRestService {
 	public List<MessageVo> search(
 	        @QueryParam("language") @DefaultValue("en") String language,
             @QueryParam("mainType") Set<MainType> mainTypes,
-            @QueryParam("publication") String publication,
             @QueryParam("areaId") Set<Integer> areaIds,
             @QueryParam("wkt") String wkt,
             @QueryParam("active") boolean active
             ) throws Exception {
 
-        if (StringUtils.isBlank(publication)) {
-            return messageService.getMessages(language, mainTypes, areaIds, wkt, active);
-        } else {
-            return messageService.getPublicationMessages(language, publication);
-
-        }
+        return messageService.getMessages(language, mainTypes, areaIds, wkt, active);
     }
 
 

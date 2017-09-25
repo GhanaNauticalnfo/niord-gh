@@ -71,13 +71,13 @@ public class Settings {
     private void init() {
         // Initialize settings from system properties
 
-        server = System.getProperty("niord-proxy.server", "https://niord.e-navigation.net");
+        server = System.getProperty("niord-proxy.server", "https://niord.ghanamaritime.info");
         log.info("server: " + server);
 
         // Accept incomplete SSL certificate chains from the server
         checkInitHttpsConnections(server);
 
-        String[] areaIds = System.getProperty("niord-proxy.areas", "urn:mrn:iho:country:dk").split(",");
+        String[] areaIds = System.getProperty("niord-proxy.areas", "urn:mrn:iho:country:gh").split(",");
         rootAreas = Arrays.stream(areaIds).map(RootArea::new).toArray(RootArea[]::new);
         log.info("AreaIds: " + Arrays.asList(areaIds));
 
@@ -94,13 +94,13 @@ public class Settings {
         }
         log.info("repoType: " + repoType);
 
-        timeZone = System.getProperty("niord-proxy.timeZone", "Europe/Copenhagen");
+        timeZone = System.getProperty("niord-proxy.timeZone", "UTC");
         log.info("timeZone: " + timeZone);
 
         analyticsTrackingId = System.getProperty("niord-proxy.analyticsTrackingId", "");
         log.info("analyticsTrackingId: " + analyticsTrackingId);
 
-        languages = System.getProperty("niord-proxy.languages", "da,en").split(",");
+        languages = System.getProperty("niord-proxy.languages", "en").split(",");
         log.info("languages: " + Arrays.asList(languages));
 
         try {

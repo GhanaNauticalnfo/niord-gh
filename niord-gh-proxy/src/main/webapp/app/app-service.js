@@ -97,13 +97,6 @@ angular.module('niord.proxy.app')
 
             return {
 
-                /** Returns the publication with the given ID **/
-                getPublication: function (publicationId, language) {
-                    return $http.get('/rest/publications/publication/' + encodeURIComponent(publicationId)
-                            + '?language=' + language);
-                },
-
-
                 /** Returns the area roots **/
                 getAreaRoots: function () {
                     return $http.get('/rest/messages/area-roots');
@@ -211,23 +204,6 @@ angular.module('niord.proxy.app')
                 details: function (id) {
                     return $http.get('/rest/messages/message/' + encodeURIComponent(id)
                                 + '?language=' + $rootScope.language);
-                }
-            };
-        }])
-
-
-    /**
-     * Interface for publication-related functionality
-     */
-    .factory('PublicationService', [ '$rootScope', '$http',
-        function($rootScope, $http) {
-            'use strict';
-
-            return {
-
-                /** Returns the publications */
-                search: function(params) {
-                    return $http.get('/rest/publications/search?' + params);
                 }
             };
         }])

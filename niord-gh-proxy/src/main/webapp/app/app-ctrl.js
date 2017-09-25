@@ -36,9 +36,7 @@ angular.module('niord.proxy.app')
     /**********************************************************************
      * Controller that handles the messages used for list and map overview
      **********************************************************************
-     * The messages area either fetched based on a message filter or defined
-     * by a publication.
-     * When the messages are fetched by message filter, every change to
+     * The messages are fetched based on a message filter. Every change to
      * the filter will cause a filtered set of messages to be loaded from
      * the server, except for the sub-area selection. This section is
      * handled in this controller.
@@ -50,7 +48,6 @@ angular.module('niord.proxy.app')
             'use strict';
 
             $scope.loading = true;
-            $scope.publication = undefined;
             $scope.modeText = '';
 
             // All messages for area based searches
@@ -75,9 +72,6 @@ angular.module('niord.proxy.app')
             $scope.params = {
                 language: AppService.getLanguage(),
 
-                // Publication based message list
-                publicationId: undefined,
-
                 // Active messages
                 activeNow: false,
                 mainTypes: {
@@ -89,44 +83,26 @@ angular.module('niord.proxy.app')
             };
 
 
-            if ($stateParams.publicationId) {
-                // Look for selected publication
-                MessageService.getPublication($stateParams.publicationId, AppService.getLanguage())
-                    .success(function (publication) {
-                        $scope.params.publicationId = publication.publicationId;
-                        $scope.publication = publication;
+            // Pre-load the area roots
+            MessageService.getAreaRoots()
+                .success(function (areaRoots) {
 
-                        // Ready to load messages
-                        $scope.loading = false;
-                    })
-                    .error(function () {
-                        // Ready to load messages
-                        $scope.loading = false;
-                    });
+                    $scope.areaRoots = areaRoots;
+                    if ($scope.areaRoots.length > 0) {
+                        var selRoot = $.grep($scope.areaRoots, function (area) {
+                            return initRootAreaId && (area.id === initRootAreaId || area.mrn === initRootAreaId);
+                        });
+                        var rootArea = selRoot.length === 1 ? selRoot[0] : $scope.areaRoots[0];
+                        $scope.updateRootArea(rootArea);
+                    }
 
-            } else {
-
-                // Pre-load the area roots
-                MessageService.getAreaRoots()
-                    .success(function (areaRoots) {
-
-                        $scope.areaRoots = areaRoots;
-                        if ($scope.areaRoots.length > 0) {
-                            var selRoot = $.grep($scope.areaRoots, function (area) {
-                                return initRootAreaId && (area.id === initRootAreaId || area.mrn === initRootAreaId);
-                            });
-                            var rootArea = selRoot.length === 1 ? selRoot[0] : $scope.areaRoots[0];
-                            $scope.updateRootArea(rootArea);
-                        }
-
-                        // Ready to load messages
-                        $scope.loading = false;
-                    })
-                    .error(function () {
-                        // Ready to load messages
-                        $scope.loading = false;
-                    });
-            }
+                    // Ready to load messages
+                    $scope.loading = false;
+                })
+                .error(function () {
+                    // Ready to load messages
+                    $scope.loading = false;
+                });
 
 
             // Update the currently selected root area
@@ -192,40 +168,34 @@ angular.module('niord.proxy.app')
             $scope.getSearchParams = function (subAreaFilter) {
                 var p = 'language=' + $scope.params.language;
 
-                if ($scope.params.publicationId) {
-                    // Publication-based searching
-                    p += '&publication=' + $scope.params.publicationId;
-
+                // Active messages searching
+                if ($scope.params.activeNow) {
+                    p += '&active=true';
+                }
+                if ($scope.teaser) {
+                    // Always show both NW and NM on teaser page
+                    p += '&mainType=NW&mainType=NM';
                 } else {
-                    // Active messages searching
-                    if ($scope.params.activeNow) {
-                        p += '&active=true';
+                    if ($scope.params.mainTypes.NW) {
+                        p += '&mainType=NW';
                     }
-                    if ($scope.teaser) {
-                        // Always show both NW and NM on teaser page
-                        p += '&mainType=NW&mainType=NM';
-                    } else {
-                        if ($scope.params.mainTypes.NW) {
-                            p += '&mainType=NW';
-                        }
-                        if ($scope.params.mainTypes.NM) {
-                            p += '&mainType=NM';
-                        }
+                    if ($scope.params.mainTypes.NM) {
+                        p += '&mainType=NM';
                     }
-                    var areas =  subAreaFilter && $scope.subAreas ? $scope.subAreas : [];
-                    var selectedAreas = 0;
-                    for (var x = 0; x < areas.length; x++) {
-                        if (areas[x].selected) {
-                            p += '&areaId=' + areas[x].id;
-                            selectedAreas++;
-                        }
+                }
+                var areas =  subAreaFilter && $scope.subAreas ? $scope.subAreas : [];
+                var selectedAreas = 0;
+                for (var x = 0; x < areas.length; x++) {
+                    if (areas[x].selected) {
+                        p += '&areaId=' + areas[x].id;
+                        selectedAreas++;
                     }
-                    if ($scope.params.rootArea && selectedAreas === 0) {
-                        p += '&areaId=' + $scope.params.rootArea.id;
-                    }
-                    if ($scope.params.wkt) {
-                        p += '&wkt=' + encodeURIComponent($scope.params.wkt);
-                    }
+                }
+                if ($scope.params.rootArea && selectedAreas === 0) {
+                    p += '&areaId=' + $scope.params.rootArea.id;
+                }
+                if ($scope.params.wkt) {
+                    p += '&wkt=' + encodeURIComponent($scope.params.wkt);
                 }
 
                 return p;
@@ -235,18 +205,16 @@ angular.module('niord.proxy.app')
             /** Refreshes the message list from the back-end **/
             $scope.refreshMessages = function () {
 
-                // If publication/area groups have not been loaded yet, wait with the messages
+                // If area groups have not been loaded yet, wait with the messages
                 if ($scope.loading) {
                     return;
                 }
 
                 // Store the current NW/NM settings
-                if (!$scope.params.publicationId) {
-                    storage.NW = '' + $scope.params.mainTypes.NW;
-                    storage.NM = '' + $scope.params.mainTypes.NM;
-                    if ($scope.params.rootArea && !requestParams.area) {
-                        storage.rootAreaId = $scope.params.rootArea.id;
-                    }
+                storage.NW = '' + $scope.params.mainTypes.NW;
+                storage.NM = '' + $scope.params.mainTypes.NM;
+                if ($scope.params.rootArea && !requestParams.area) {
+                    storage.rootAreaId = $scope.params.rootArea.id;
                 }
 
                 // Perform the search
@@ -427,138 +395,6 @@ angular.module('niord.proxy.app')
 
             $scope.loadMessageDetails();
 
-        }])
-
-
-
-
-    /**********************************************************************
-     * Controller that handles the list of publications
-     **********************************************************************/
-    .controller('PublicationCtrl', ['$scope', '$rootScope', '$window', '$location', '$timeout',
-                'AppService', 'PublicationService', 'AnalyticsService',
-        function ($scope, $rootScope, $window, $location, $timeout,
-                  AppService, PublicationService, AnalyticsService) {
-            'use strict';
-
-            $scope.activePublications = [];
-            $scope.historicalPublications = [];
-            $scope.dateFormat = 'dd-MM-yyyy';
-            $scope.params = {
-                language: AppService.getLanguage(),
-                dateInterval: { startDate: null, endDate: null}
-            };
-
-            $scope.datePickerConfig = {
-                dropdownSelector: '#date',
-                startView:'day',
-                minView:'day'
-            };
-
-            $scope.dateRangeOptions = {
-                linkedCalendars: false,
-                showWeekNumbers: true,
-                locale: {
-                    applyLabel: "Apply",
-                    fromLabel: "From",
-                    format: "ll",
-                    toLabel: "To",
-                    cancelLabel: 'Cancel'
-                }
-            };
-
-
-            // Compute a set of fixed data ranges
-            $scope.ranges = [];
-            var currentYear = moment().year();
-            for (var x = 0; x < 5; x++) {
-                var year = '' + (currentYear - x);
-                $scope.ranges.push({
-                    name: year,
-                    dateInterval: {
-                        startDate: moment("01-01-" + year, "MM-DD-YYYY"),
-                        endDate: moment("12-31-" + year, "MM-DD-YYYY") }
-                });
-            }
-
-
-            /** Updates the date range selector UI for the currently selected language **/
-            $scope.updateDateSelectorLanguage = function () {
-                var locale = $scope.dateRangeOptions.locale;
-                locale.applyLabel = AppService.translate('TERM_APPLY');
-                locale.cancelLabel = AppService.translate('TERM_CANCEL');
-                locale.fromLabel = AppService.translate('DATE_FROM');
-                locale.toLabel = AppService.translate('DATE_TO');
-            };
-            $scope.updateDateSelectorLanguage();
-
-
-            /** Refreshes the active publication list from the back-end **/
-            $scope.refreshActivePublications = function () {
-
-                // Perform the search
-                var params = 'language=' + $scope.params.language;
-                PublicationService.search(params)
-                    .success(function (publications) {
-                        $scope.activePublications = publications;
-                        $scope.checkGroupByCategory($scope.activePublications);
-                    });
-            };
-
-
-            /** Refreshes the historical publication list from the back-end **/
-            $scope.refreshHistoricalPublications = function () {
-
-                // Perform the search
-                var params = 'language=' + $scope.params.language;
-                var startDate = $scope.params.dateInterval.startDate;
-                var endDate = $scope.params.dateInterval.endDate;
-                if (startDate || endDate) {
-                    if (startDate) {
-                        params += '&from=' + startDate;
-                    }
-                    if (endDate) {
-                        params += '&to=' + endDate;
-                    }
-                    PublicationService.search(params)
-                        .success(function (publications) {
-                            $scope.historicalPublications = publications;
-                            $scope.checkGroupByCategory($scope.historicalPublications);
-                        });
-                } else {
-                    $scope.historicalPublications.length = 0;
-                }
-            };
-
-
-            // Every time the parameters change, refresh the publication list
-            $scope.$watch("params", $scope.refreshHistoricalPublications, true);
-
-            // Every time the language change, update the params
-            $scope.$watch(AppService.getLanguage, function (lang) {
-                $scope.params.language = lang;
-                $scope.refreshActivePublications();
-                $scope.updateDateSelectorLanguage();
-            }, true);
-
-
-            /**
-             * Scans through the search result and marks all publications that should
-             * display a category head line
-             **/
-            $scope.checkGroupByCategory = function (publications) {
-
-                var lastCategoryId = undefined;
-                if (publications && publications.length > 0) {
-                    for (var p = 0; p < publications.length; p++) {
-                        var pub = publications[p];
-                        if (pub.category && (lastCategoryId === undefined || lastCategoryId !== pub.category.categoryId)) {
-                            lastCategoryId = pub.category.categoryId;
-                            pub.categoryHeading = pub.category;
-                        }
-                    }
-                }
-            };
         }])
 
 

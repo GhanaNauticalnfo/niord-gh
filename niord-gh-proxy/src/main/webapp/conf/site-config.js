@@ -29,7 +29,7 @@ angular.module('niord.proxy.conf')
          * with database settings by the SiteConfigServlet.
          */
 
-        $rootScope.languages = [ "da", "en" ];
+        $rootScope.languages = [ "en" ];
         $rootScope.analyticsTrackingId = "";
         $rootScope.executionMode = "DEVELOPMENT";
         $rootScope.wmsLayer = false;

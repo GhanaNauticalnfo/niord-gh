@@ -10,7 +10,6 @@ angular.module('niord.proxy.app',
     [   'ngSanitize',
         'ui.bootstrap',
         'ui.router',
-        'daterangepicker',
         'pascalprecht.translate',
         'niord.proxy.conf'
     ])
@@ -49,10 +48,6 @@ angular.module('niord.proxy.app',
                 .state('messages.details.message', {
                     url: "/message/{messageId:.*}",
                     templateUrl: "/app/messages-viewmode-details.html"
-                })
-                .state('publications', {
-                    url: "/publications",
-                    templateUrl: "/app/publications.html"
                 });
 
         }])
