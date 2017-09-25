@@ -51,6 +51,7 @@ angular.module('niord.proxy.app')
             $scope.modeText = '';
 
             // All messages for area based searches
+            $scope.showAreaFilter = false; // With very few NWs and NMs and sub-areas in Ghana, hide area filter menu
             $scope.areaMessages = [];
             $scope.subAreas = [];
 

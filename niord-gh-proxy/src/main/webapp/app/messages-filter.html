@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="row-fluid filter-bar" ng-if="areaRoots.length > 0">
+    <div class="row-fluid filter-bar" ng-if="showAreaFilter && areaRoots.length > 0">
         <div class="input-group col-xs-12 center filter-bar-btns">
             <span ng-if="areaRoots.length > 1"
                 ng-repeat="rootArea in areaRoots" class="filter-bar-btn"
