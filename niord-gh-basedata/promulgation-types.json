@@ -1,14 +1,18 @@
 [
   {
-    "typeId": "navtex",
-    "serviceId": "navtex",
-    "name": "NAVTEX",
-    "priority": 1,
+    "typeId": "safetynet",
+    "serviceId": "safetynet",
+    "name": "SafetyNET",
+    "priority": 10,
     "active": true,
-    "promulgateByDefault": false,
+    "requirement": "OPTIONAL",
     "language": "en",
     "domains": [
       { "domainId": "niord-nw" }
+    ],
+    "messageTypes": [
+      "COASTAL_WARNING",
+      "NAVAREA_WARNING"
     ]
   },
   {
@@ -20,8 +24,12 @@
     "promulgateByDefault": true,
     "language": "en",
     "domains": [
-      { "domainId": "niord-nw" },
-      { "domainId": "niord-nm" }
+      {
+        "domainId": "niord-nw"
+      },
+      {
+        "domainId": "niord-nm"
+      }
     ]
   }
 ]
