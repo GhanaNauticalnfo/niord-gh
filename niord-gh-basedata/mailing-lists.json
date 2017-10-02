@@ -13,8 +13,8 @@
       {
         "type": "SCHEDULED",
         "scheduleType": "DAILY",
-        "scheduledExecutionTime":"07:30",
-        "scheduledExecutionTimeZone":"GMT",
+        "scheduledExecutionTime": "07:30",
+        "scheduledExecutionTimeZone": "GMT",
         "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&type=COASTAL_WARNING",
         "scriptResourcePaths": [
           "templates/mailinglist/active-navwarns.ftl"
@@ -72,5 +72,36 @@
         ]
       }
     ]
+  },
+  {
+    "mailingListId": "safetynet",
+    "active": true,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "SafetyNET",
+        "description": "Mailing list for SafetyNET messages"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "STATUS_CHANGE",
+        "statusChanges": [
+          "PUBLISHED"
+        ],
+        "messageFilter": "msg.promulgation('safetynet').promulgate",
+        "scriptResourcePaths": [
+          "templates/mailinglist/publish-safetynet.js",
+          "templates/mailinglist/publish-safetynet.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "GHANA NAV WARN ${number-year-id}"
+          }
+        ]
+      }
+    ],
+    "recipientNo": 1
   }
 ]

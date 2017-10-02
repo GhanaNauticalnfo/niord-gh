@@ -8,11 +8,16 @@
     "requirement": "OPTIONAL",
     "language": "en",
     "domains": [
-      { "domainId": "niord-nw" }
+      {
+        "domainId": "niord-nw"
+      }
     ],
     "messageTypes": [
-      "COASTAL_WARNING",
-      "NAVAREA_WARNING"
+      "NAVAREA_WARNING",
+      "COASTAL_WARNING"
+    ],
+    "scriptResourcePaths": [
+      "templates/tmpl/safetynet.ftl"
     ]
   },
   {
