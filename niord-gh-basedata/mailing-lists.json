@@ -97,11 +97,26 @@
         "descs": [
           {
             "lang": "en",
-            "subject": "GHANA NAV WARN ${number-year-id}"
+            "subject": "GHANA NAV WARN ${short-id}"
+          }
+        ]
+      },
+      {
+        "type": "STATUS_CHANGE",
+        "statusChanges": [
+          "CANCELLED"
+        ],
+        "messageFilter": "msg.promulgation('safetynet').promulgate",
+        "scriptResourcePaths": [
+          "templates/mailinglist/cancel-safetynet.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "CANCEL GHANA NAV WARN ${short-id}"
           }
         ]
       }
-    ],
-    "recipientNo": 1
+    ]
   }
 ]
