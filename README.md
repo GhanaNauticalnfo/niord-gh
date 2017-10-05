@@ -1,8 +1,10 @@
 # niord-gh
 
-The niord-gh project contains Ghana-specific extensions and versions for the 
+The niord-gh project contains Ghana-specific extensions and versions for  
 [niord](https://github.com/NiordOrg) system, i.e. a system
 for the producing and promulgating NW + NM T&P messages.
+
+Niord is documented extensively at http://docs.niord.org
 
 There are two main sub-projects:
 * *niord-gh-web*: An overlay web-application of the [niord](https://github.com/NiordOrg/niord)
