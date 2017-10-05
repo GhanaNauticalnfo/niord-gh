@@ -49,6 +49,8 @@ Next, create and configure a Wildfly installation using:
 
 Import or open the niord-gh project in your favorite IDE. Here we describe  the 
 *IntelliJ* set-up:
+* Firstly, you may want to right-click the wildfly-10.1.0-Final folder and mark
+  the folder as excluded.
 * From Github, also check out the niord-gh parent 
   [niord](https://github.com/NiordOrg/niord) projects.
 * Import the niord-gh project in IntelliJ via its pom.xml.
