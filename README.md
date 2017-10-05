@@ -98,3 +98,18 @@ First clean up a bit:
 * Go through the configuration and settings of the Niord Sysadmin pages and adjust as 
   appropriate.
 
+
+## Creating a Docker Release
+
+First, build the *niord-gh-web* war using the "dist" maven profile:
+
+    cd niord-gh-web/
+    mvn -P dist clean install
+    
+Next, build the docker image (ensure that Wildfly is not running):
+
+    cd ../docker/
+    ./build-niord-gh.sh build ../niord-gh-web/target/niord-gh-web.war
+     
+    # If successful, and if you have previously used "docker login", push to dockerhub:
+    ./build-niord-gh.sh push
