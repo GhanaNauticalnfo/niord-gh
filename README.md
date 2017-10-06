@@ -71,6 +71,8 @@ Import or open the niord-gh project in your favorite IDE. Here we describe  the
 * Deploy "niord-gh-web:war exploded" to the server.
 * If you have only updated web resources, there is no need to re-deploy the web application. Use the "Update resources" 
   function instead.
+* To get rid of superfluous IntelliJ code editor warnings, disable the "Declaration access can be weaker" 
+  and "Dangling Javadoc comment" inspections.
 
 The Keycloak docker image creates an initial domain, "Master", and a Niord user, sysadmin/sysadmin,
 that should be used for the initial configuration of the system, whereupon they should be
