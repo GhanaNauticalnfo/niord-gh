@@ -98,9 +98,9 @@ services:
     container_name: niord-httpd
     restart: unless-stopped
     environment:
-      APPSRV_NAME: ${APPSRV_NAME:-niord.ghanamaritime.info}
-      KEYCLOAK_NAME: ${KEYCLOAK_NAME:-niord-keycloak.ghanamaritime.info}
-      PROXY_NAME: ${PROXY_NAME:-niord-proxy.ghanamaritime.info}
+      APPSRV_NAME: ${APPSRV_NAME:-niord.ghananautical.info}
+      KEYCLOAK_NAME: ${KEYCLOAK_NAME:-niord-keycloak.ghananautical.info}
+      PROXY_NAME: ${PROXY_NAME:-niord-proxy.ghananautical.info}
     links:
       - niord-appsrv:appsrv
       - niord-keycloak:keycloak
