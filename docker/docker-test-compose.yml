@@ -93,20 +93,20 @@ services:
     volumes:
       - ${NIORD_HOME:-/data/niord-gh}:/opt/niord
 
-  niord-httpd:
-    image: dmadk/niord-httpd:${NIORD_HTTPD_VERSION:-1.0.0}
-    container_name: niord-httpd
-    restart: unless-stopped
-    environment:
-      APPSRV_NAME: ${APPSRV_NAME:-niord.ghananautical.info}
-      KEYCLOAK_NAME: ${KEYCLOAK_NAME:-niord-keycloak.ghananautical.info}
-      PROXY_NAME: ${PROXY_NAME:-niord-proxy.ghananautical.info}
-    links:
-      - niord-appsrv:appsrv
-      - niord-keycloak:keycloak
-      - niord-proxy:proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ${NIORD_HOME:-/data/niord-gh}/ssl:/usr/local/apache2/conf/ssl
+#  niord-httpd:
+#    image: dmadk/niord-httpd:${NIORD_HTTPD_VERSION:-1.0.0}
+#    container_name: niord-httpd
+#    restart: unless-stopped
+#    environment:
+#      APPSRV_NAME: ${APPSRV_NAME:-niord.ghananautical.info}
+#      KEYCLOAK_NAME: ${KEYCLOAK_NAME:-niord-keycloak.ghananautical.info}
+#      PROXY_NAME: ${PROXY_NAME:-niord-proxy.ghananautical.info}
+#    links:
+#      - niord-appsrv:appsrv
+#      - niord-keycloak:keycloak
+#      - niord-proxy:proxy
+#    ports:
+#      - "80:80"
+#      - "443:443"
+#    volumes:
+#      - ${NIORD_HOME:-/data/niord-gh}/ssl:/usr/local/apache2/conf/ssl
