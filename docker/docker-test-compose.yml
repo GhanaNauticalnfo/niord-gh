@@ -13,7 +13,7 @@ services:
       MYSQL_PASSWORD: ${KCDB_PASSWORD:-niordkc}
       MYSQL_DATABASE: niordkc
     volumes:
-      - ${NIORD_HOME:-~/niord-gh}/mysql/niordkc:/var/lib/mysql
+      - ${NIORD_HOME:-/data/niord-gh}/mysql/niordkc:/var/lib/mysql
 
   niord-mysql:
     image: mysql:${MYSQL_VERSION:-5.7.16}
@@ -25,7 +25,7 @@ services:
       MYSQL_PASSWORD: ${NIORDDB_PASSWORD:-niord}
       MYSQL_DATABASE: niord
     volumes:
-      - ${NIORD_HOME:-~/niord-gh}/mysql/niord:/var/lib/mysql
+      - ${NIORD_HOME:-/data/niord-gh}/mysql/niord:/var/lib/mysql
 
   niord-smtp:
     image: namshi/smtp:${NIORD_SMTP_VERSION:-latest}
@@ -91,7 +91,7 @@ services:
     ports:
       - "9090:8080"
     volumes:
-      - ${NIORD_HOME:-~/niord-gh}:/opt/niord
+      - ${NIORD_HOME:-/data/niord-gh}:/opt/niord
 
   niord-httpd:
     image: dmadk/niord-httpd:${NIORD_HTTPD_VERSION:-1.0.0}
@@ -109,4 +109,4 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ${NIORD_HOME:-~/niord-gh}/ssl:/usr/local/apache2/conf/ssl
+      - ${NIORD_HOME:-/data/niord-gh}/ssl:/usr/local/apache2/conf/ssl
