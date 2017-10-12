@@ -60,6 +60,7 @@ services:
       NIORDDB_PORT_3306_TCP_ADDR: niord-mysql
       NIORDDB_PASSWORD: ${NIORDDB_PASSWORD:-niord}
       NIORDSMTP_PORT_25_TCP_ADDR: niord-smtp
+      NIORDSMTP_PORT_25_TCP_PORT: 25
       NIORD_HOME: /opt/niord
     links:
       - niord-mysql:niorddb
