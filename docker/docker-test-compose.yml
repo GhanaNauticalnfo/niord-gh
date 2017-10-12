@@ -69,9 +69,6 @@ services:
       - niord-smtp
     ports:
       - "8080:8080"
-    extra_hosts:
-     - "niord.ghananautical.info:52.31.51.11"
-     - "niord-keycloak.ghananautical.info:52.31.51.11"
     volumes:
       - ${NIORD_HOME:-/data/niord-gh}:/opt/niord
 
