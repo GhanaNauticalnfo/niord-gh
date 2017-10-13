@@ -22,7 +22,8 @@
       }
     ],
     "publish": true,
-    "templates":true
+    "templates":true,
+    "color":"#55f"
   },
   {
     "domainId": "niord-nm",
@@ -38,6 +39,7 @@
         "numberSequenceType": "YEARLY"
       }
     ],
-    "publish": true
+    "publish": true,
+    "color":"#5a5"
   }
 ]
