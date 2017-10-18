@@ -23,3 +23,21 @@ body {
     background-color: #d0cfd4;
 }
 
+table.front-page-links {
+    margin: 20px auto 0  auto;
+}
+
+table.front-page-links tr td {
+    text-align: center;
+    padding: 0 10px;
+}
+
+table.front-page-links tr td a {
+    color: #ddd;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+table.front-page-links tr td a img {
+    width: 24px;
+}
