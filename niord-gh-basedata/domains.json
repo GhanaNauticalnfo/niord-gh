@@ -12,13 +12,7 @@
         "shortFormat": "NW-${number-3-digits}-${year-2-digits}",
         "navtexFormat": "${publish-date}\nGHANESE NAV WARN ${number-year-id}",
         "numberSequenceType": "YEARLY",
-        "types": ["NAVAREA_WARNING", "COASTAL_WARNING"]
-      },
-      {
-        "seriesId": "gma-nw-local",
-        "mainType": "NW",
-        "numberSequenceType": "NONE",
-        "types": ["LOCAL_WARNING"]
+        "types": ["LOCAL_WARNING", "NAVAREA_WARNING", "COASTAL_WARNING"]
       }
     ],
     "publish": true,

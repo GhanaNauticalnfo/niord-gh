@@ -13,8 +13,7 @@
       }
     ],
     "messageTypes": [
-      "NAVAREA_WARNING",
-      "COASTAL_WARNING"
+      "NAVAREA_WARNING"
     ],
     "scriptResourcePaths": [
       "templates/tmpl/safetynet.ftl"
