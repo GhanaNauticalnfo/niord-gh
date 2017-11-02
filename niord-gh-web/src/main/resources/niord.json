@@ -145,6 +145,13 @@
     "editable"    : true
   },
   {
+    "key"         : "lightCharacterUrl",
+    "description" : "Help link for light character input fields",
+    "value"       : "https://en.wikipedia.org/wiki/Light_characteristic",
+    "web"         : true,
+    "editable"    : true
+  },
+  {
     "key"         : "mapImageServer",
     "description" : "URL of static-map service used for generation map thumbnails",
     "value"       : "http://staticmap.openstreetmap.de/staticmap.php",
