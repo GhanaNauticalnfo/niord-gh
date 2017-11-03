@@ -1543,47 +1543,6 @@
         "scriptResourcePaths": [
           "templates/tmpl/radio-navigation.ftl"
         ]
-      },
-      {
-        "active": true,
-        "descs": [
-          {
-            "name": "DGPS",
-            "lang": "en"
-          }
-        ],
-        "type": "TEMPLATE",
-        "siblingSortOrder": 0.0,
-        "atonFilter": "aton.kv('seamark:radio_station:category', 'dgps')",
-        "domains": [
-          {
-            "domainId": "niord-nw",
-            "active": true
-          }
-        ],
-        "stdTemplateFields": [
-          "type",
-          "promulgation",
-          "event_dates"
-        ],
-        "templateParams": [
-          {
-            "paramId": "dgps",
-            "type": "dgps",
-            "mandatory": false,
-            "positionList": false,
-            "descs": [
-              {
-                "name": "DGPS",
-                "lang": "en"
-              }
-            ]
-          }
-        ],
-        "scriptResourcePaths": [
-          "templates/tmpl/dgps.js",
-          "templates/tmpl/dgps.ftl"
-        ]
       }
     ],
     "siblingSortOrder": 4.0,
