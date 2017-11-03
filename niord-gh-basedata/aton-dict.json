@@ -911,6 +911,30 @@
           "value": "temporarily"
         }],
         "key": "aton.withdrawn.temporarily"
+      },
+
+
+      {
+        "descs": [{
+          "lang": "en",
+          "value": "attack",
+          "longValue": "attacked"
+        }],
+        "key": "piracy.kind.attack"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "hijack",
+          "longValue": "hijacked"
+        }],
+        "key": "piracy.kind.hijack"
+      }, {
+        "descs": [{
+          "lang": "en",
+          "value": "robbery",
+          "longValue": "robbed"
+        }],
+        "key": "piracy.kind.robbery"
       }
     ]
   }

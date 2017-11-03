@@ -1132,5 +1132,62 @@
         "type": "boolean"
       }
     ]
+  },
+  {
+    "type": "LIST",
+    "name": "piracy_kind_list",
+    "values": [
+      {
+        "key": "piracy.kind.attack"
+      },
+      {
+        "key": "piracy.kind.hijack"
+      },
+      {
+        "key": "piracy.kind.robbery"
+      }
+    ]
+  },
+  {
+    "type": "COMPOSITE",
+    "name": "piracy",
+    "templateParams": [
+      {
+        "paramId": "piracy_date",
+        "type": "date",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Date",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "paramId": "piracy_kind",
+        "type": "piracy_kind_list",
+        "mandatory": true,
+        "positionList": false,
+        "descs": [
+          {
+            "name": "Kind",
+            "lang": "en"
+          }
+        ]
+      },
+      {
+        "descs": [
+          {
+            "lang": "en",
+            "name": "Confirmed"
+          }
+        ],
+        "mandatory": false,
+        "paramId": "piracy_confirmed",
+        "positionList": false,
+        "type": "boolean"
+      }
+    ]
   }
 ]
