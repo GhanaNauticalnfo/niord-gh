@@ -15,7 +15,7 @@
         "scheduleType": "DAILY",
         "scheduledExecutionTime": "07:30",
         "scheduledExecutionTimeZone": "GMT",
-        "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&type=COASTAL_WARNING",
+        "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&type=COASTAL_WARNING&sortBy=ID",
         "scriptResourcePaths": [
           "templates/mailinglist/active-navwarns.ftl"
         ],
