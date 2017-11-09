@@ -30,10 +30,10 @@
     "domains": [
       {
         "domainId": "niord-nw"
-      },
-      {
-        "domainId": "niord-nm"
       }
+    ],
+    "scriptResourcePaths": [
+      "templates/tmpl/twitter.ftl"
     ]
   }
 ]
