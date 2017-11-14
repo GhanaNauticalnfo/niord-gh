@@ -1063,6 +1063,35 @@
         "active": true,
         "descs": [
           {
+            "name": "Drilling Operations",
+            "lang": "en"
+          }
+        ],
+        "type": "TEMPLATE",
+        "siblingSortOrder": 3.5,
+        "domains": [
+          {
+            "domainId": "niord-nw",
+            "active": true
+          }
+        ],
+        "stdTemplateFields": [
+          "type",
+          "promulgation",
+          "areas",
+          "positions",
+          "event_dates",
+          "work_vessel"
+        ],
+        "templateParams": [],
+        "scriptResourcePaths": [
+          "templates/tmpl/drilling-opetations.ftl"
+        ]
+      },
+      {
+        "active": true,
+        "descs": [
+          {
             "name": "Underwater survey",
             "lang": "en"
           }
