@@ -86,7 +86,7 @@ Import the Ghana base data into Niord:
 
     ./install-base-data.sh
     
-Withing a minute or so, this will import domains, areas, categories, etc. needed to run the Niord Ghana project. 
+Within a minute or so, this will import domains, areas, categories, etc. needed to run the Niord Ghana project. 
 First clean up a bit:
 * In Niord, under Sysadmin -> Domains, click the "Create in Keycloak" button for the "NW" and "NM" domains. 
   This will create the two domains in Keycloak. 
