@@ -25,7 +25,7 @@
     "name": "Twitter",
     "priority": 100,
     "active": true,
-    "promulgateByDefault": true,
+    "requirement": "OPTIONAL",
     "language": "en",
     "domains": [
       {
