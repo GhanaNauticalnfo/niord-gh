@@ -5,8 +5,8 @@
     "descs": [
       {
         "lang": "en",
-        "name": "Active coastal warnings",
-        "description": "List of active Ghanese coastal warnings"
+        "name": "Active Navigational Warnings",
+        "description": "List of active Ghanaian Navigational Warnings"
       }
     ],
     "triggers": [
@@ -15,14 +15,14 @@
         "scheduleType": "DAILY",
         "scheduledExecutionTime": "07:30",
         "scheduledExecutionTimeZone": "GMT",
-        "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&type=COASTAL_WARNING&sortBy=ID",
+        "messageQuery": "messageSeries=gma-nw&status=PUBLISHED&sortBy=ID",
         "scriptResourcePaths": [
           "templates/mailinglist/active-navwarns.ftl"
         ],
         "descs": [
           {
             "lang": "en",
-            "subject": "Active navigational warning"
+            "subject": "Active Ghanaian Navigational Warnings"
           }
         ]
       }
@@ -34,8 +34,8 @@
     "descs": [
       {
         "lang": "en",
-        "name": "Navwarn updates",
-        "description": "Mailing list for Ghanese coastal warnings"
+        "name": "Navigational Warning updates",
+        "description": "Mailing list for Ghanaian Navigational Warning Updates"
       }
     ],
     "triggers": [
@@ -44,14 +44,14 @@
         "statusChanges": [
           "CANCELLED"
         ],
-        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw' && msg.type == 'COASTAL_WARNING'",
+        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw'",
         "scriptResourcePaths": [
           "templates/mailinglist/cancel-navwarn.ftl"
         ],
         "descs": [
           {
             "lang": "en",
-            "subject": "Cancel Ghanese Navigational Warning ${short-id}"
+            "subject": "Cancel Ghanaian Navigational Warning ${short-id}"
           }
         ]
       },
@@ -60,14 +60,14 @@
         "statusChanges": [
           "PUBLISHED"
         ],
-        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw' && msg.type == 'COASTAL_WARNING'",
+        "messageFilter": "msg.messageSeries.seriesId == 'gma-nw'",
         "scriptResourcePaths": [
           "templates/mailinglist/publish-navwarn.ftl"
         ],
         "descs": [
           {
             "lang": "en",
-            "subject": "Ghanese Navigational Warning ${short-id}"
+            "subject": "Ghanaian Navigational Warning ${short-id}"
           }
         ]
       }
@@ -80,7 +80,7 @@
       {
         "lang": "en",
         "name": "SafetyNET",
-        "description": "Mailing list for SafetyNET messages"
+        "description": "Mailing List for SafetyNET Messages"
       }
     ],
     "triggers": [
