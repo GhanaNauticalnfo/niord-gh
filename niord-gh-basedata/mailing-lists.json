@@ -132,8 +132,8 @@
     "triggers": [
       {
         "type": "SCHEDULED",
-        "scheduleType": "DAILY",
-        "scheduledExecutionTime": "07:40",
+        "scheduleType": "FRIDAY",
+        "scheduledExecutionTime": "12:00",
         "scheduledExecutionTimeZone": "GMT",
         "messageQuery": "messageSeries=gma-nm&status=PUBLISHED",
         "scriptResourcePaths": [
