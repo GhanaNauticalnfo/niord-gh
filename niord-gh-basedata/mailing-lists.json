@@ -118,5 +118,34 @@
         ]
       }
     ]
+  },
+  {
+    "mailingListId": "nm-overview",
+    "active": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Active Notices to Mariners",
+        "description": "List of active Ghanaian Notices to Mariners"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "SCHEDULED",
+        "scheduleType": "DAILY",
+        "scheduledExecutionTime": "07:40",
+        "scheduledExecutionTimeZone": "GMT",
+        "messageQuery": "messageSeries=gma-nm&status=PUBLISHED",
+        "scriptResourcePaths": [
+          "templates/mailinglist/active-nms.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "Active Ghanaian Notices to Mariners"
+          }
+        ]
+      }
+    ]
   }
 ]
