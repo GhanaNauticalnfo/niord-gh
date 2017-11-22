@@ -17,6 +17,7 @@
 
 var safetynet = message.promulgation('safetynet');
 if (safetynet !== null) {
+    message.type = org.niord.model.message.Type.NAVAREA_WARNING;
     safetynet.promulgate = true;
     safetynet.priority = org.niord.core.promulgation.SafetyNetMessagePromulgation$SafetyNetPriority.URGENCY;
 }
