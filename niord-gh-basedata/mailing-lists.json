@@ -137,12 +137,41 @@
         "scheduledExecutionTimeZone": "GMT",
         "messageQuery": "messageSeries=gma-nm&status=PUBLISHED",
         "scriptResourcePaths": [
-          "templates/mailinglist/active-nms.ftl"
+          "templates/mailinglist/active-nm.ftl"
         ],
         "descs": [
           {
             "lang": "en",
             "subject": "Active Ghanaian Notices to Mariners"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "mailingListId": "nm-tp-overview",
+    "active": false,
+    "descs": [
+      {
+        "lang": "en",
+        "name": "Active Notices to Mariners T&P",
+        "description": "Compact list of active Ghanaian Notices to Mariners T&P"
+      }
+    ],
+    "triggers": [
+      {
+        "type": "SCHEDULED",
+        "scheduleType": "FRIDAY",
+        "scheduledExecutionTime": "12:01",
+        "scheduledExecutionTimeZone": "GMT",
+        "messageQuery": "messageSeries=gma-nm&status=PUBLISHED&type=TEMPORARY_NOTICE&type=PRELIMINARY_NOTICE&sortBy=ID",
+        "scriptResourcePaths": [
+          "templates/mailinglist/active-nm-tp.ftl"
+        ],
+        "descs": [
+          {
+            "lang": "en",
+            "subject": "Active Ghanaian Notices to Mariners T&P"
           }
         ]
       }
