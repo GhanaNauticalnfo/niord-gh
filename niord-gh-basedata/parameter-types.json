@@ -1141,6 +1141,9 @@
         "key": "piracy.kind.attack"
       },
       {
+        "key": "piracy.kind.approached"
+      },
+      {
         "key": "piracy.kind.hijack"
       },
       {

@@ -924,6 +924,13 @@
       }, {
         "descs": [{
           "lang": "en",
+          "value": "approached",
+          "longValue": "approached"
+        }],
+        "key": "piracy.kind.approached"
+      }, {
+        "descs": [{
+          "lang": "en",
           "value": "hijack",
           "longValue": "hijacked"
         }],
