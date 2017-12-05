@@ -116,7 +116,7 @@ services:
       - ${NIORD_HOME:-/data/niord-gh}:/opt/niord
 
 
-#  NB: AWS Elastic Load Balancer user for SSL offloading - no web server needed
+#  NB: AWS Elastic Load Balancer used for SSL offloading - no web server needed
 #
 #  niord-httpd:
 #    image: dmadk/niord-httpd:${NIORD_HTTPD_VERSION:-1.0.0}
