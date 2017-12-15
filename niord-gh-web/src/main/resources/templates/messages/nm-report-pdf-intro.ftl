@@ -7,7 +7,9 @@
     A * indicates that the notice is based on original information.
 </p>
 
-<div style="text-align: center; margin-top: 4cm;">
+<#include "nm-affected-charts.ftl">
+
+<div style="text-align: center; margin-top: 2cm;">
     <table style="width: 7.5cm">
         <tr>
             <td colspan="2">
