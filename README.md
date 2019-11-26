@@ -68,6 +68,8 @@ Import or open the niord-gh project in your favorite IDE. Here we describe  the
 * Under the "Maven Projects" also import the parent niord project.
 * In Run -> Edit configuration..., configure a new local JBoss server based on the Wilfly
   installation produced above.
+* In Run -> Edit configuration..., Startup/Connection tab, disable the Startup Script "default" checkbox and add `-c standalone-full.xml` i.e.
+  `path_on_your_system/niord-gh/wildfly-10.1.0.Final/bin/standalone.sh -c standalone-full.xml`
 * Deploy "niord-gh-web:war exploded" to the server.
 * If you have only updated web resources, there is no need to re-deploy the web application. Use the "Update resources" 
   function instead.
