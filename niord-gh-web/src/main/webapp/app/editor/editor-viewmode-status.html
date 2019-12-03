@@ -59,7 +59,7 @@
                         <span class="glyphicon glyphicon-send"></span>
                         <span translate>editor.status.publish_msg</span>...
                     </button>
-                    <p>Editors cannot publish NW or NM's. You need to be an admin.</p>
+                    <p><small>Editors cannot publish NW or NM's. You need to be an admin.</small></p>
                 </div>
 
                 <div ng-if="isAdmin && message.status == 'VERIFIED' && !message.publishDateFrom">
@@ -91,7 +91,7 @@
                         <span translate>editor.status.delete_msg</span>...
                     </button>
                 </div>
-                <div ng-if="isEditor && message.status == 'PUBLISHED'">
+                <div ng-if="isAdmin && message.status == 'PUBLISHED'">
                     <button href class="btn btn-default btn-sm message-status-action"
                             ng-disabled="canSaveMessage"
                             ng-click="cancel()">
