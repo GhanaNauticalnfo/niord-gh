@@ -1,0 +1,139 @@
+
+<div class="editor-contents container" ng-controller="EditorStatusCtrl">
+    <h3 class="page-header">
+        Status
+        <span ng-if="canSaveMessage" class="glyphicon glyphicon-floppy-disk editor-dirty" uib-tooltip="Unsaved changes"></span>
+
+        <span class="pull-right">
+            <a ng-href="{{backToListUrl}}" ng-if="backToListUrl"
+               class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-arrow-left"></span> <span translate>editor.back_to_list</span>
+            </a>
+            <a href ng-click="clearMessage()" ng-if="message"
+               style="margin-left: 5px"
+               class="btn btn-default btn-xs">
+                <span class="glyphicon glyphicon-remove"></span> <span translate>editor.clear</span>
+            </a>
+        </span>
+    </h3>
+
+    <div class="empty-search-result" ng-if="!message.created">
+        <p>No persisted message selected</p>
+    </div>
+
+    <div class="row" ng-if="message.created">
+
+        <div class="col-sm-12 col-md-8 col-lg-9">
+            <div class="message-status-lang">
+                <span ng-repeat="lang in modelLanguages" ng-click="previewLanguage(lang)"
+                      class="message-status-lang-btn pointer" ng-class="{'preview-lang-selected' : previewLang == lang}">
+                    <img ng-src="/img/flags/{{lang}}.png" height="14"/>
+                    {{'lang.' + lang | translate}}
+                </span>
+            </div>
+
+            <table ng-if="message.id" class='table table-condensed'>
+                <tr render-message-details
+                    msg="previewMessage"
+                    language="previewLang"
+                    format="details"
+                    show-promulgation="true"
+                    promulgation-class="col-sm-12 col-md-6"
+                    show-details-menu="false"></tr>
+            </table>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="panel panel-default message-status-panel">
+                <p style="margin-bottom: 20px;">
+                    Status:
+                    <strong translate>{{'msg.status.' + message.status}}</strong>
+                </p>
+
+                <div ng-if="isEditor && !isAdmin && message.status == 'VERIFIED' && !message.publishDateFrom">
+                    <button href class="btn btn-primary btn-sm message-status-action"
+                            alt="Editors cannot publish NW or NM's"
+                            data-toggle="tooltip" data-placement="left" title="Editors cannot publish NW or NM's"
+                            ng-disabled="true"
+                            ng-click="publish()">
+                        <span class="glyphicon glyphicon-send"></span>
+                        <span translate>editor.status.publish_msg</span>...
+                    </button>
+                    <p>Editors cannot publish NW or NM's. You need to be an admin.</p>
+                </div>
+
+                <div ng-if="isAdmin && message.status == 'VERIFIED' && !message.publishDateFrom">
+                    <button href class="btn btn-primary btn-sm message-status-action"
+                            ng-disabled="canSaveMessage"
+                            ng-click="publish()">
+                        <span class="glyphicon glyphicon-send"></span>
+                        <span translate>editor.status.publish_msg</span>...
+                    </button>
+                </div>
+                <div ng-if="isEditor && message.status == 'VERIFIED' && message.publishDateFrom"
+                    style="font-size: 11px; margin-bottom: 10px">
+                    <span translate>editor.status.publish</span>:
+                    {{message.publishDateFrom | formatDate:'lll'}}
+                </div>
+                <div ng-if="isEditor && message.status == 'DRAFT'">
+                    <button href class="btn btn-primary btn-sm message-status-action"
+                            ng-disabled="canSaveMessage"
+                            ng-click="verify()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                        <span translate>editor.status.verify_msg</span>...
+                    </button>
+                </div>
+                <div ng-if="isEditor && (message.status == 'DRAFT' || message.status == 'VERIFIED')">
+                    <button href class="btn btn-default btn-sm message-status-action"
+                            ng-disabled="canSaveMessage"
+                            ng-click="deleteDraft()">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <span translate>editor.status.delete_msg</span>...
+                    </button>
+                </div>
+                <div ng-if="isEditor && message.status == 'PUBLISHED'">
+                    <button href class="btn btn-default btn-sm message-status-action"
+                            ng-disabled="canSaveMessage"
+                            ng-click="cancel()">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <span translate>editor.status.cancel_msg</span>...
+                    </button>
+                </div>
+                <div ng-if="isEditor">
+                    <button href class="btn btn-default btn-sm message-status-action"
+                            ng-disabled="canSaveMessage"
+                            ng-click="copy()">
+                        <span class="glyphicon glyphicon-duplicate"></span>
+                        <span translate>editor.status.copy_msg</span>...
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Cancel Message dialog -->
+<script type="text/ng-template" id="cancelMessage.html">
+    <form name="copy_form">
+        <p>Please confirm cancellation</p>
+        <div ng-if="modalOptions.message.mainType == 'NM'">
+            <input type="checkbox" ng-model="modalOptions.cancelOptions.createCancelMessage"> Create cancellation message
+        </div>
+    </form>
+</script>
+
+<!-- Publish Message dialog -->
+<script type="text/ng-template" id="publishMessage.html">
+    <form name="copy_form">
+        <p>Please confirm publication</p>
+        <div ng-if="modalOptions.publishOptions.referencedMessages.length > 0">
+            <input type="checkbox" ng-model="modalOptions.publishOptions.cancelReferencedMessage">
+            Also cancel referenced messages:
+            <span ng-repeat="msg in modalOptions.publishOptions.referencedMessages">
+                <message-id-badge msg="msg" show-blank="true"></message-id-badge><span ng-if="!$last">, </span>
+            </span>
+        </div>
+    </form>
+</script>
