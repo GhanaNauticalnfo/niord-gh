@@ -42,15 +42,11 @@ angular.module('niord.home')
                 // Load the verified message lists that need to be published
                 MessageService.search('&status=VERIFIED')
                     .success(function (result) {
-                        console.log("searching for verified");
                         $scope.verifiedMessagesList.length = 0;
 
                         for (var x = 0; x < result.data.length; x++) {
                             $scope.verifiedMessagesList.push(result.data[x]);
                         }
-                        console.log("$scope.verifiedMessagesList.length=" + $scope.verifiedMessagesList.length);
-                        console.log("$scope.verifiedMessagesList=" + $scope.verifiedMessagesList);
-                        $scope.totalMessageNo = result.total;
                         $scope.totalVerifiedMessageNo = result.total;
                     });
 
