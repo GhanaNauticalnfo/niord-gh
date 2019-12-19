@@ -58,7 +58,7 @@ services:
 
 
   niord-appsrv:
-    image: ghananauticalinfo/niord-gh-appsrv:${NIORD_GH_VERSION:-1.0.1}
+    image: ghananauticalinfo/niord-gh-appsrv:${NIORD_GH_VERSION:-1.0.3_verified_messages}
     container_name: niord-appsrv
     restart: unless-stopped
     environment:
