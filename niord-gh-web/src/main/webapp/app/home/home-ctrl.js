@@ -18,13 +18,15 @@
  * The home controller
  */
 angular.module('niord.home')
-    .controller('HomeCtrl', ['$scope', '$timeout', '$stateParams', 'MessageService', 'VersionService',
-        function ($scope, $timeout, $stateParams, MessageService, VersionService) {
+    .controller('HomeCtrl', ['$scope', '$rootScope', '$timeout', '$stateParams', 'MessageService', 'VersionService',
+        function ($scope, $rootScope, $timeout, $stateParams, MessageService, VersionService) {
             'use strict';
             $scope.verifiedMessagesList = [];
             $scope.messageList = [];
             $scope.serverBuildVersion = undefined;
             $scope.webBuildVersion = '25-10-2019 09:19 UTC';
+            $scope.isEditor = $rootScope.hasRole('editor');
+            $scope.isAdmin = $rootScope.hasRole('admin');
 
             $scope.init = function () {
 
@@ -32,24 +34,23 @@ angular.module('niord.home')
                 MessageService.search('')
                     .success(function (result) {
                         $scope.messageList.length = 0;
-
                         for (var x = 0; x < result.data.length; x++) {
                             $scope.messageList.push(result.data[x]);
                         }
                         $scope.totalMessageNo = result.total;
                     });
 
-                // Load the verified message lists that need to be published
-                MessageService.search('&status=VERIFIED')
-                    .success(function (result) {
-                        $scope.verifiedMessagesList.length = 0;
-
-                        for (var x = 0; x < result.data.length; x++) {
-                            $scope.verifiedMessagesList.push(result.data[x]);
-                        }
-                        $scope.totalVerifiedMessageNo = result.total;
-                    });
-
+                if($scope.isAdmin || $scope.isEditor){
+                    // Load the verified message lists that need to be published
+                    MessageService.search('&status=VERIFIED')
+                        .success(function (result) {
+                            $scope.verifiedMessagesList.length = 0;
+                            for (var x = 0; x < result.data.length; x++) {
+                                $scope.verifiedMessagesList.push(result.data[x]);
+                            }
+                            $scope.totalVerifiedMessageNo = result.total;
+                        });
+                }
 
                 // Load the back-end build version
                 VersionService.buildVersion()
