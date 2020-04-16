@@ -24,7 +24,7 @@ angular.module('niord.home')
             $scope.verifiedMessagesList = [];
             $scope.messageList = [];
             $scope.serverBuildVersion = undefined;
-            $scope.webBuildVersion = '25-10-2019 09:19 UTC';
+            $scope.webBuildVersion = '${timestamp}';
             $scope.isEditor = $rootScope.hasRole('editor');
             $scope.isAdmin = $rootScope.hasRole('admin');
 
