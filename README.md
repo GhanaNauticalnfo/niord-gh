@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/GhanaNauticalnfo/niord-gh.svg?branch=master)](https://travis-ci.com/GhanaNauticalnfo/niord-gh)
 # niord-gh
 
 The niord-gh project contains Ghana-specific extensions for the   
