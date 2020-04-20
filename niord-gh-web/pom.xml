@@ -1,25 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.niord</groupId>
         <artifactId>niord-gh-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <artifactId>niord-gh-web</artifactId>
     <name>Niord Ghana web application</name>
     <packaging>war</packaging>
-
     <properties>
         <tika.version>1.11</tika.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>dd-MM-yyyy HH:mm 'UTC'</maven.build.timestamp.format>
         <niord-core.jar>niord-core-${project.version}.jar</niord-core.jar>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>org.niord</groupId>
@@ -32,13 +30,9 @@
             <version>1.0-SNAPSHOT</version>
             <type>war</type>
         </dependency>
-
         <!-- Ghana dependencies -->
-
     </dependencies>
-
     <build>
-
         <!-- Update the jar-file versions in persistence.xml -->
         <resources>
             <resource>
@@ -60,14 +54,12 @@
                 </excludes>
             </resource>
         </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.0.2.Final</version>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -84,8 +76,6 @@
             </plugin>
         </plugins>
     </build>
-
-
     <!-- ********************************************************************** -->
     <!-- ** The "dist" profile will create a war where CSS and JavaScript files -->
     <!-- ** have been merged, and include an HTML5 app cache file as well       -->
@@ -95,7 +85,6 @@
             <id>dist</id>
             <build>
                 <plugins>
-
                     <!-- Compress jS and CSS files -->
                     <plugin>
                         <groupId>com.samaxes.maven</groupId>
@@ -105,10 +94,8 @@
                             <execution>
                                 <id>default-minify</id>
                                 <configuration>
-
                                     <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
                                     <webappTargetDir>${project.build.directory}/${project.build.finalName}</webappTargetDir>
-
                                     <!-- CSS files: NB site.css must be last to facilitate war project overlays -->
                                     <cssSourceFiles>
                                         <cssSourceFile>app.css</cssSourceFile>
@@ -121,7 +108,6 @@
                                         <cssSourceFile>site.css</cssSourceFile>
                                     </cssSourceFiles>
                                     <cssFinalFile>niord-all.css</cssFinalFile>
-
                                     <!-- JavaScript files: NB niord-app.js first -->
                                     <jsSourceDir>app</jsSourceDir>
                                     <jsEngine>CLOSURE</jsEngine>
@@ -132,7 +118,6 @@
                                         <jsSourceInclude>**/*.js</jsSourceInclude>
                                     </jsSourceIncludes>
                                     <jsFinalFile>niord-all.js</jsFinalFile>
-
                                 </configuration>
                                 <phase>package</phase>
                                 <goals>
@@ -141,8 +126,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
-
                     <!-- Move index-prod.html to index.html -->
                     <plugin>
                         <groupId>com.coderplus.maven.plugins</groupId>
@@ -162,8 +145,6 @@
                             </execution>
                         </executions>
                     </plugin>
-
-
                     <!-- Generate a HTML5 application cache manifest -->
                     <plugin>
                         <groupId>com.github.cameroncan</groupId>
@@ -187,22 +168,20 @@
                                 <include>app/**/*.html</include>
                                 <include>css/niord-all.css</include>
                                 <include>css/niord-all.min.css</include>
-                                <include>css/messages.css</include> <!-- loaded by TinyMCS -->
+                                <include>css/messages.css</include>
+                                <!-- loaded by TinyMCS -->
                                 <include>css/templates/*.css</include>
                                 <include>ext/**</include>
                                 <include>img/**</include>
                                 <include>*.html</include>
                             </includes>
-                            <additionals>
-                            </additionals>
+                            <additionals></additionals>
                             <networkResources>
                                 <networkResource>*</networkResource>
                             </networkResources>
                             <fallback>/index.html /index.html</fallback>
                         </configuration>
                     </plugin>
-
-
                     <!-- Update war with changed files -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
@@ -218,8 +197,7 @@
                                             <dirset dir="${project.build.directory}" includes="${project.build.finalName}.war" />
                                         </delete>
                                         <zip basedir="${project.build.directory}/${project.build.finalName}"
-                                             destfile="${project.build.directory}/${project.build.finalName}.war">
-                                        </zip>
+                                             destfile="${project.build.directory}/${project.build.finalName}.war"></zip>
                                     </target>
                                 </configuration>
                                 <goals>
@@ -228,10 +206,32 @@
                             </execution>
                         </executions>
                     </plugin>
-
                 </plugins>
             </build>
         </profile>
     </profiles>
-
+    <repositories>
+        <repository>
+            <id>osgeo</id>
+            <name>OSGeo Release Repository</name>
+            <url>https://repo.osgeo.org/repository/release/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>osgeo-snapshot</id>
+            <name>OSGeo Snapshot Repository</name>
+            <url>https://repo.osgeo.org/repository/snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
 </project>
