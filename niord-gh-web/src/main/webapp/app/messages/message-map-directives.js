@@ -50,9 +50,6 @@ angular.module('niord.messages')
                 scope.noPosMessages = []; // Messages with no geometry
                 // scope.verifiedMessages = []; // messages awaiting to be published by an admin.
                 scope.language = $rootScope.language;
-                    var audio = new Audio('got-it-done.mp3');
-                   // audio.play();
-
 
                 olScope.getMap().then(function(map) {
 
@@ -162,8 +159,6 @@ angular.module('niord.messages')
                                                 olFeature.setGeometry(new ol.geom.Point(point));
                                             }
                                         }
-                                        console.log("en ny besked " + message.id);
-                                        audio.play();
                                         olLayer.getSource().addFeature(olFeature);
                                     });
                                 } else if (scope.showNoPos === 'true') {

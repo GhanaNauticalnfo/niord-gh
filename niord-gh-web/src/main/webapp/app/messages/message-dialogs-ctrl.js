@@ -34,9 +34,6 @@ angular.module('niord.messages')
                 audio.play();
             };
 
-            growl.info("growl test", { ttl: 5000 });
-            console.log("Rettelse");
-
             $scope.warning = undefined;
             $scope.messages = messages;
             $scope.pushedMessageIds = [];
