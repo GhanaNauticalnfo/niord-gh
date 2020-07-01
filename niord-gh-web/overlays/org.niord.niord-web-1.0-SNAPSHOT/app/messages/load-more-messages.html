@@ -1,7 +1,0 @@
-<div ng-if="messageList.length < totalMessageNo" class="center" style="text-align: center">
-    <button class="btn btn-primary load-more-btn" ng-click="loadMoreMessages()">
-        {{ 'msg.list.load_more' | translate : '{fromMessageNo : "' + fromMessageNo()
-            + '", toMessageNo: "' + toMessageNo()
-            + '", totalMessageNo: "' + total() + '"}' }}
-    </button>
-</div>
