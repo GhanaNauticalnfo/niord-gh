@@ -1,0 +1,38 @@
+
+<admin-page admin-page-title="Publications">
+
+    <p>Add, modify and manage publications, publications templates and publication categories.</p>
+
+    <uib-tabset class="framed-tabs">
+
+        <!-- Publications -->
+        <uib-tab active="true">
+            <tab-heading>
+                Publications
+            </tab-heading>
+            <div ng-include="'/app/admin/admin-page-publication-pubs.html'"
+                 ng-controller="PublicationsAdminCtrl" ng-init="init('PUBLICATION')"></div>
+        </uib-tab>
+
+        <!-- Templates -->
+        <uib-tab>
+            <tab-heading>
+                Publication Templates
+            </tab-heading>
+            <div ng-include="'/app/admin/admin-page-publication-pubs.html'"
+                 ng-controller="PublicationsAdminCtrl" ng-init="init('TEMPLATE')"></div>
+        </uib-tab>
+
+        <!-- Categories -->
+        <uib-tab>
+            <tab-heading>
+                Publication Categories
+            </tab-heading>
+            <div ng-include="'/app/admin/admin-page-publication-categories.html'"
+                 ng-controller="PublicationCategoriesAdminCtrl"></div>
+        </uib-tab>
+
+    </uib-tabset>
+
+</admin-page>
+

@@ -1,0 +1,240 @@
+
+<admin-page admin-page-title="Domains" parent-page="sysadmin" parent-page-title="Sysadmin">
+
+    <div ng-controller="DomainAdminCtrl" ng-init="loadDomains()">
+
+        <p>Add, modify and manage domains.</p>
+
+        <!-- Add/edit domain -->
+        <div ng-if="domain !== undefined" style="margin-top: 20px">
+            <form name="edit_form" class="form-horizontal">
+
+                <div class="row">
+                    <div class="form-controls col-sm-12 col-md-6 col-lg-8">
+
+                        <div class="form-group">
+                            <label for="domainId" class="col-sm-4">Keycloak ID</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="domainId" name="domainId" class="form-control input-sm"
+                                       focus="focusMe" ng-model="domain.domainId" ng-disabled="editMode == 'edit'"
+                                       autocapitalize="off" autocorrect="off" autocomplete="off" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Active</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" ng-model="domain.active">
+                                Domain is active
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Sort Order</label>
+                            <div class="col-sm-8">
+                                <input type="number" step="1" ng-model="domain.sortOrder" style="width: 200px">
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="editMode == 'edit'">
+                            <label for="keycloak" class="col-sm-4">Keycloak Status</label>
+                            <div class="col-sm-8">
+                                <span ng-if="domain.inKeycloak"><i>Client "{{domain.domainId}}" exists in Keycloak</i></span>
+                                <button ng-if="!domain.inKeycloak" id="keycloak" class="btn btn-default btn-sm" ng-click="createInKeycloak(domain)">
+                                    Create in Keycloak
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-4">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" id="name" name="name" class="form-control input-sm"
+                                       ng-model="domain.name"
+                                       autocapitalize="off" autocorrect="off" autocomplete="off"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeZone" class="col-sm-4">Time Zone</label>
+                            <div class="col-sm-8">
+                                <select id="timeZone" name="timeZone" class="form-control input-sm"
+                                       ng-model="domain.timeZone" ng-options="tz for tz in timeZones">
+                                    <option style="display:none" value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Map Center</label>
+                            <div class="col-sm-8">
+                                <position-input lat="domain.lat" lon="domain.lon" decimals="2"></position-input>
+                                <input type="number" min="3" max="15" step="1" ng-model="domain.zoomLevel" placeholder="Zoom Level"
+                                       class="form-control form-control-inline input-sm" style="width: 100px; margin-top: 5px">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="timeZone" class="col-sm-4">Message Sort Order</label>
+                            <div class="col-sm-8">
+                                <select id="sortOrder" name="sortOrder" class="form-control input-sm"
+                                        style="width: 210px"
+                                        ng-model="domain.messageSortOrder">
+                                    <option value="AREA ASC">Area - ascending</option>
+                                    <option value="AREA DESC">Area - descending</option>
+                                    <option value="ID ASC">ID - ascending</option>
+                                    <option value="ID DESC">ID - descending</option>
+                                    <option value="DATE ASC">Date - ascending</option>
+                                    <option value="DATE DESC">Date - descending</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">HTML Color</label>
+                            <div class="col-sm-8">
+                                <input type="text" ng-model="domain.color" style="width: 200px">
+                                <div ng-if="domain.color" class="domain-color-badge"
+                                     ng-style="{ 'background-color': domain.color }">&nbsp;</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Areas</label>
+                            <div class="col-sm-8">
+                                <areas-field id="areas" area-data="domain" multiple="true"></areas-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Categories</label>
+                            <div class="col-sm-8">
+                                <categories-field id="categories" category-data="domain" multiple="true"></categories-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Message Series</label>
+                            <div class="col-sm-8">
+                                <message-series-field id="messageSeries" series-data="domain" multiple="true"></message-series-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="publish" class="col-sm-4">Publish</label>
+                            <div class="col-sm-8" style="vertical-align: middle">
+                                <input type="checkbox" id="publish" name="publish"
+                                       ng-model="domain.publish">&nbsp;Promulgate messages by default
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="atons" class="col-sm-4">AtoNs</label>
+                            <div class="col-sm-8" style="vertical-align: middle">
+                                <input type="checkbox" id="atons" name="atons"
+                                       ng-model="domain.atons">&nbsp;Integrate with AtoN module
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="templates" class="col-sm-4">Templates</label>
+                            <div class="col-sm-8" style="vertical-align: middle">
+                                <input type="checkbox" id="templates" name="templates"
+                                       ng-model="domain.templates">&nbsp;Support message template execution
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;" class="row">
+                    <div class="col-sm-offset-4">
+                        <button type="submit" class="btn btn-default btn-sm" ng-click="loadDomains()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-sm" ng-click="saveDomain(domain)">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Save Domain
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- List domains -->
+        <div ng-show="domain === undefined">
+            <div class="row">
+                <div class="col-xs-8 col-sm-6 col-md-4">
+                    <input class="form-control input-sm col-sm-2" ng-model="search" type="text" placeholder="Filter">
+                    <span class="glyphicon glyphicon-remove clear-input" style="right: 22px"
+                          ng-click="search = ''" ng-show="search != ''"></span>
+                </div>
+                <div class="col-xs-4 col-sm-6 col-md-8">
+                    <button type="submit" class="btn btn-primary btn-sm" ng-click="addDomain()">
+                        <span class="glyphicon glyphicon-plus"></span> New domain
+                    </button>
+
+                    <a ng-href="{{keycloakUrl}}" target="_blank" class="btn btn-primary btn-sm" style="margin-left: 5px;">
+                        Keycloak...
+                    </a>
+
+                    <span class="btn-group" style="margin-left: 5px;" uib-dropdown>
+                        <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                            <span class="glyphicon glyphicon-cog"></span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a href="/rest/domains/all" target="_blank">Export...</a></li>
+                            <li role="menuitem"><a href ng-click="uploadDomainsDialog()">Import...</a></li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 20px;">
+                <div class="col-sm-12 col-md-12">
+                    <table class='table table-condensed table-hover'>
+                        <tr>
+                            <th>Active</th>
+                            <th>Order</th>
+                            <th>Keycloak ID</th>
+                            <th>Name</th>
+                            <th>Time Zone</th>
+                            <th>Areas</th>
+                            <th>Categories</th>
+                            <th>Message Series</th>
+                            <th></th>
+                        </tr>
+                        <tr ng-repeat="domain in domains">
+                            <td><input type="checkbox" ng-model="domain.active" disabled="disabled"></td>
+                            <td>{{domain.sortOrder}}</td>
+                            <td><input type="checkbox" ng-model="domain.inKeycloak" disabled="disabled"> {{domain.domainId}}</td>
+                            <td>{{domain.name}}</td>
+                            <td>{{domain.timeZone}}</td>
+                            <td>
+                                <div ng-repeat="area in domain.areas">{{area.descs[0].name}}</div>
+                            </td>
+                            <td>
+                                <div ng-repeat="category in domain.categories">{{category.descs[0].name}}</div>
+                            </td>
+                            <td>
+                                <div ng-repeat="series in domain.messageSeries">{{series.seriesId}}</div>
+                            </td>
+                            <td nowrap align="right">
+                                <a href ng-click="editDomain(domain);" title="Edit Domain"><i class="glyphicon glyphicon-pencil"></i></a>
+                                &nbsp;
+                                <a href ng-click="copyDomain(domain);" title="Copy Domain"><i class="glyphicon glyphicon-duplicate"></i></a>
+                                &nbsp;
+                                <a href ng-click="deleteDomain(domain);" title="Delete Domain"><i class="glyphicon glyphicon-trash"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</admin-page>
+

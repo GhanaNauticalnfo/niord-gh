@@ -1,0 +1,94 @@
+
+<style ng-if="domain && domain.color">
+    .navbar {
+        border-bottom: 1px solid {{domain.color}};
+    }
+</style>
+
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href ui-sref="home">
+                <img src="/img/niord_white.png" height="40" style="margin-top: -10px;position: absolute;">
+                <span class="mode-flag" ng-if="mode == 'development'">DEV</span>
+                <span class="mode-flag" ng-if="mode == 'test'">TEST</span>
+                <span style="padding-left: 60px;"></span>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li ui-sref-active="active"><a href ui-sref="messages" translate>menu.messages</a></li>
+                <li ng-if="domain && domain.atons" ui-sref-active="active"><a href ui-sref="atons" translate>menu.atons</a></li>
+                <li ng-if="hasRole('user')" ui-sref-active="active"><a href ui-sref="editor" translate>menu.editor</a></li>
+                <li ng-if="isLoggedIn && domain && domain.firingSchedule" ui-sref-active="active"><a href ui-sref="schedule" translate>menu.schedule</a></li>
+                <li ng-if="hasRole('admin')" ui-sref-active="active"><a href ui-sref="admin" translate>menu.admin</a></li>
+                <li ng-if="hasRole('sysadmin')" ui-sref-active="active"><a href ui-sref="sysadmin" translate>menu.sysadmin</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown" ng-controller="DomainCtrl">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span ng-if="domain">
+                            <div ng-if="domain.color" class="domain-color-badge"
+                                  ng-style="{ 'background-color': domain.color }">&nbsp;</div>
+                            {{domain.name}}
+                        </span>
+                        <span ng-if="!domain" style="font-style: italic;">none</span>
+                        <span ng-if="domains.length" class="caret"></span>
+                    </a>
+                    <ul ng-if="domains.length" class="dropdown-menu">
+                        <li ng-repeat="d in domains">
+                            <a href ng-click="changeDomain(d)" style="white-space: normal">
+                                <span class="glyphicon"
+                                      ng-class="{ 'glyphicon-ok': d.domainId == domain.domainId, 'glyphicon-none': d.domainId != domain.domainId }"></span>
+                                {{d.name}}&nbsp;
+                                <span class="glyphicon pull-right" style="color: gray"
+                                      ng-class="{ 'glyphicon-pencil': d.editable, 'glyphicon-eye-open': !d.editable }"></span></span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-if="!isLoggedIn">
+                    <a ng-click="login()" href translate>menu.login</a>
+                </li>
+
+                <li ng-if="isLoggedIn">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="glyphicon glyphicon-user"></span> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href ng-click="accountManagement()">{{'view_mode.edit' | translate}} "{{userName}}"</a>
+                        </li>
+                        <li>
+                            <a ng-click="logout()" href translate>menu.logout</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-if="siteLanguages.length > 1" class="dropdown" ng-controller="LangCtrl">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <flag lang="language" style="opacity: 0.5"></flag> <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li ng-repeat="lang in siteLanguages">
+                            <a href ng-click="changeLanguage(lang)"><flag lang="lang"></flag> &nbsp; {{'lang.' + lang | translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<help type="auto" section="home" class="auto-help-link"></help>

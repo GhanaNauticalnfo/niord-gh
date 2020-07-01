@@ -1,0 +1,111 @@
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Format Message Locations</h3>
+        <help section="insert-locations" class="dialog-help-link"></help>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-6 col-lg-4 format-locations-selection">
+
+                <table ng-if="message.parts.length > 1" style="width: 100%; margin-right: 10px; margin-bottom: 20px">
+                    <tr>
+                        <th width="120">Message Part</th>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-default btn-xs" ng-repeat="part in message.parts"
+                                        ng-model="partIndexData.partIndex" uib-btn-radio="$index"
+                                        ng-change="messagePartSelectionChanged(true)">#{{$index + 1}}</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; margin-right: 10px">
+                    <tr style="border-bottom: 1px solid lightgray">
+                        <th colspan="2">Features</th>
+                        <td class="pull-right" style="font-size: 11px; padding-top: 3px;">
+                            Select&nbsp;
+                            <a href ng-click="selectFeatures(true)">all</a>&nbsp;/&nbsp;<a href ng-click="selectFeatures(false)">none</a>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="feature in featureCollection.features">
+                        <td width="20">
+                            <input type="checkbox" ng-model="feature.selected" ng-change="featureSelectionChanged()">
+                        </td>
+                        <td width="20">
+                            #{{$index + 1}}
+                        </td>
+                        <td>
+                            {{feature.geometry.type}}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-8">
+                <ol-map class="osm-water-bg format-locations-map">
+                    <map-tile-layer name="OSM" visible="true" layer-switcher="false" source="OSM"></map-tile-layer>
+                    <map-tile-layer name="WMS" visible="false" layer-switcher="wmsLayerEnabled" source="WMS"
+                                    source-properties="{ url: '/wms/', params: {'LAYERS': 'cells', 'TRANSPARENT': 'TRUE'}, crossOrigin: ''}"></map-tile-layer>
+                    <map-open-sea-map-layer name="OpenSeaMap" visible="false" layer-switcher="openSeaMapLayerEnabled"></map-open-sea-map-layer>
+                    <map-aton-layer name="AtoN" visible="false" layer-switcher="true"></map-aton-layer>
+                    <map-gj-layer name="Locations" visible="true" layer-switcher="false" feature-collection="selectedFeatures"
+                                  fit-extent="true" max-zoom="10"></map-gj-layer>
+                    <map-layer-switcher></map-layer-switcher>
+                </ol-map>
+            </div>
+
+        </div>
+
+        <div class="row" style="margin-top:20px">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <table style="width: 100%">
+                    <tr style="border-bottom: 1px solid lightgray">
+                        <th colspan="2">Layout</th>
+                    </tr>
+                    <tr>
+                        <td width="20"><input type="radio" ng-model="params.template" value="numbered-list"></td>
+                        <td>List (numbered)</td>
+                    </tr>
+                    <tr>
+                        <td width="20"><input type="radio" ng-model="params.template" value="bullet-list"></td>
+                        <td>List (bullet)</td>
+                    </tr>
+                    <tr>
+                        <td width="20"><input type="radio" ng-model="params.template" value="table"></td>
+                        <td>Table</td>
+                    </tr>
+                    <tr>
+                        <td width="20"><input type="radio" ng-model="params.template" value="from-to-table"></td>
+                        <td>From-to Table</td>
+                    </tr>
+                    <tr>
+                        <td width="20"><input type="radio" ng-model="params.template" value="text"></td>
+                        <td>Text</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <select class="form-control input-sm" style="width: 100px; margin-top: 10px"
+                                    ng-model="params.format"
+                                    ng-options="format.value as format.name for format in formats">
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-8">
+                <div style="font-weight: bold; font-size: 14px;">Result</div>
+                <div ng-bind-html="data.result" class="format-locations-result message-description"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="$dismiss('aborted')">Cancel</button>
+        <button class="btn btn-primary" ng-click="insert()">Insert</button>
+    </div>
+</div>

@@ -1,0 +1,491 @@
+
+<div class="row" ng-controller="TemplateExecutionDialogCtrl">
+
+    <div class="col-sm-12 col-md-7">
+
+
+        <form method="post" name="editForm" id="editForm">
+            <div class="editor-fields" style="margin-bottom: 0; padding-top: 0">
+
+                <!-- ******************************************** -->
+                <!-- ** >>>> Message Preamble Header           ** -->
+                <!-- ******************************************** -->
+                <div class="row template-dialog-param-group" style="margin-top: 0;">
+                    <div class="col-sm-12" translate>template.general</div>
+                </div>
+
+                <!-- ********************* -->
+                <!-- ** Type            ** -->
+                <!-- ********************* -->
+                <template-dialog-param-field field-title-key="msg.field.type" ng-if="showStdTemplateField('type')">
+
+                    <div class="btn-group" ng-if="message.mainType == 'NW'">
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'LOCAL_WARNING'"
+                                ng-if="validTypes['NW']['LOCAL_WARNING']" ng-change="typeSelected()"
+                                translate>msg.type.LOCAL_WARNING</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'COASTAL_WARNING'"
+                                ng-if="validTypes['NW']['COASTAL_WARNING']" ng-change="typeSelected()"
+                                translate>msg.type.COASTAL_WARNING</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'SUBAREA_WARNING'"
+                                ng-if="validTypes['NW']['SUBAREA_WARNING']" ng-change="typeSelected()"
+                                translate>msg.type.SUBAREA_WARNING</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'NAVAREA_WARNING'"
+                                ng-if="validTypes['NW']['NAVAREA_WARNING']" ng-change="typeSelected()"
+                                translate>msg.type.NAVAREA_WARNING</button>
+                    </div>
+                    <div class="btn-group" ng-if="message.mainType == 'NM'">
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'TEMPORARY_NOTICE'"
+                                ng-if="validTypes['NM']['TEMPORARY_NOTICE']" ng-change="typeSelected()"
+                                translate>msg.type.TEMPORARY_NOTICE</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'PRELIMINARY_NOTICE'"
+                                ng-if="validTypes['NM']['PRELIMINARY_NOTICE']" ng-change="typeSelected()"
+                                translate>msg.type.PRELIMINARY_NOTICE</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'PERMANENT_NOTICE'"
+                                ng-if="validTypes['NM']['PERMANENT_NOTICE']" ng-change="typeSelected()"
+                                translate>msg.type.PERMANENT_NOTICE</button>
+                        <button class="btn btn-default btn-sm" ng-model="message.type" uib-btn-radio="'MISCELLANEOUS_NOTICE'"
+                                ng-if="validTypes['NM']['MISCELLANEOUS_NOTICE']" ng-change="typeSelected()"
+                                translate>msg.type.MISCELLANEOUS_NOTICE</button>
+                    </div>
+                </template-dialog-param-field>
+
+
+                <!-- ********************* -->
+                <!-- ** Promulgation    ** -->
+                <!-- ********************* -->
+                <template-dialog-param-field field-title-key="msg.field.promulgation" ng-if="showStdTemplateField('promulgation')">
+
+                    <span ng-repeat="promulgation in message.promulgations" style="margin-right: 20px">
+                        <input type="checkbox"
+                               ng-model="promulgation.promulgate"
+                               ng-disabled="promulgation.type.requirement == 'MANDATORY' && promulgation.promulgate"
+                               ng-click="promulgationSelection(promulgation)">
+                        {{promulgation.type.name}}
+                    </span>
+
+                </template-dialog-param-field>
+
+
+                <!-- ********************* -->
+                <!-- ** Message ID      ** -->
+                <!-- ********************* -->
+                <template-dialog-param-field field-title-key="msg.field.id" ng-if="showStdTemplateField('id')">
+
+                    <table class="editor-field-value-table">
+                        <tr>
+                            <th>Message series</th>
+                            <td>
+                                <select class="form-control input-sm" style="width: 200px"
+                                        ng-model="message.messageSeries"
+                                        ng-options="series.seriesId for series in messageSeries">
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+
+                </template-dialog-param-field>
+
+
+                <!-- ********************* -->
+                <!-- ** Publish Date    ** -->
+                <!-- ********************* -->
+                <template-dialog-param-field field-title-key="msg.field.publish_date" ng-if="showStdTemplateField('publish_date')">
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <date-time-picker ng-model="message.publishDateFrom" placeholder="Publish From" format="'lll z'"
+                                              readonly="message.status != 'DRAFT' && message.status != 'VERIFIED'">
+                            </date-time-picker>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <date-time-picker ng-model="message.publishDateTo" placeholder="Publish To" format="'lll z'"
+                                              readonly="message.status != 'DRAFT' && message.status != 'VERIFIED'  && message.status != 'PUBLISHED'">
+                            </date-time-picker>
+                        </div>
+                    </div>
+
+                </template-dialog-param-field>
+
+
+                <!-- ********************* -->
+                <!-- ** Areas           ** -->
+                <!-- ********************* -->
+                <template-dialog-param-field field-title-key="msg.field.areas" ng-if="showStdTemplateField('areas')">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <areas-field id="areas" area-data="message" multiple="true" domain="domain"></areas-field>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-sm-6" ng-repeat="desc in message.descs">
+                            <input class="form-control input-sm" placeholder="Vicinity" type="text"
+                                   ng-model="desc.vicinity" bg-flag="desc.lang"
+                                   ng-focus="checkCopyVicinity(desc.lang)"
+                                   ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
+                        </div>
+                    </div>
+
+                </template-dialog-param-field>
+
+
+
+                <!-- ******************************************** -->
+                <!-- ** >>>> Templates                         ** -->
+                <!-- ******************************************** -->
+                <div ng-repeat="template in templates" ng-init="templateIndex = $index">
+
+                    <div class="row template-dialog-param-group">
+                        <div class="col-sm-12">{{template.descs[0].name}}</div>
+                    </div>
+
+
+                    <!-- ********************* -->
+                    <!-- ** Event dates     ** -->
+                    <!-- ********************* -->
+                    <template-dialog-param-field field-title-key="msg.field.event_dates" ng-if="showStdTemplateField('event_dates', template)">
+
+                        <div class="row" ng-init="checkAddPartEventDate(message.parts[templateIndex])">
+                            <div class="col-sm-12">
+                                <table class="table table-condensed editor-date-interval-table">
+                                    <tr>
+                                        <th>All-day</th>
+                                        <th>Start</th>
+                                        <th>End</th>
+                                        <th>
+                                            <div class="pull-right">
+                                                <button ng-click="addPartEventDate(message.parts[templateIndex], true)" class="btn btn-default btn-xs">
+                                                    <span class="glyphicon glyphicon-plus"></span> Add
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="di in message.parts[templateIndex].eventDates" class="evt-date" >
+                                        <td width="60" style="padding-top: 10px" align="center">
+                                            <input type="checkbox" ng-model="di.allDay">
+                                        </td>
+                                        <td width="220">
+                                            <date-time-picker ng-model="di.fromDate" placeholder="From date"
+                                                              time="di.allDay ? '00:00:00' : undefined" format="di.allDay ? 'll' : 'lll z'"></date-time-picker>
+                                        </td>
+                                        <td width="220">
+                                            <date-time-picker ng-model="di.toDate" placeholder="To date"
+                                                              time="di.allDay ? '23:59:59' : undefined" format="di.allDay ? 'll' : 'lll z'"></date-time-picker>
+                                        </td>
+                                        <td width="*" style="padding-top: 12px" nowrap>
+                                            <a href ng-click="deletePartEventDate(message.parts[templateIndex], di);"
+                                               title="Delete Interval"><span class="glyphicon glyphicon-trash"></span></a>
+                                            &nbsp;
+                                            <a href ng-click="copyPartEventDate(message.parts[templateIndex], di, 0);"
+                                               title="Duplicate Interval"><span class="glyphicon glyphicon-duplicate"></span></a>
+                                            &nbsp;
+                                            <a href ng-click="copyPartEventDate(message.parts[templateIndex], di, 1);"
+                                               title="Duplicate Interval + 1 day"><span class="glyphicon glyphicon-duplicate">+</span></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </template-dialog-param-field>
+
+
+                    <!-- ********************* -->
+                    <!-- ** Positions       ** -->
+                    <!-- ********************* -->
+                    <template-dialog-param-field field-title-key="msg.field.positions" ng-if="showStdTemplateField('positions', template)">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <gj-editor id="position-editor"
+                                           class="template-message-map"
+                                           edit-type="message"
+                                           feature-collection="message.parts[$index].geometry"
+                                           show-wms-layer="showWmsLayer"
+                                           on-save="updateTemplatePositionData()">
+
+                                    <select class="input-sm" style="margin-left: 10px; opacity: 0.5"
+                                            ng-model="templateData[templateIndex].posDecimals">
+                                        <option value="3">3 decimals</option>
+                                        <option value="2">2 decimals</option>
+                                        <option value="1">1 decimal</option>
+                                    </select>
+
+                                </gj-editor>
+                            </div>
+                        </div>
+
+                    </template-dialog-param-field>
+
+                    <!-- ********************* -->
+                    <!-- ** Template Params ** -->
+                    <!-- ********************* -->
+                    <template-dialog-param-field ng-repeat="param in template.templateParams"
+                                                 field-title="{{param.descs[0].name}}"
+                                                 mandatory="param.mandatory">
+
+                        <div ng-if="!param.positionList" class="row">
+                            <div class="col-sm-12">
+                                <template-input-field
+                                        template-param="param"
+                                        template-data="templateData[templateIndex]"
+                                        param-type-map="paramTypeMap"
+                                        nested="false">
+                                </template-input-field>
+                            </div>
+                        </div>
+
+                        <div ng-if="param.positionList"
+                             ng-repeat="pos in templateData[templateIndex].positions"
+                             class="row"
+                             ng-class="{ 'template-dialog-param-field-divider' : !$first }">
+                            <div class="col-sm-1" style="margin-top: 5px; color: gray; white-space: nowrap">
+                                <span class="glyphicon glyphicon-map-marker"></span>{{$index + 1}}
+                            </div>
+                            <div class="col-sm-11">
+                                <template-input-field
+                                        template-param="param"
+                                        template-data="pos"
+                                        param-type-map="paramTypeMap"
+                                        nested="false">
+                                </template-input-field>
+                            </div>
+                        </div>
+
+                    </template-dialog-param-field>
+
+
+                    <!-- ********************* -->
+                    <!-- ** Work Vessel     ** -->
+                    <!-- ********************* -->
+                    <template-dialog-param-field field-title-key="template.vessel.title"
+                                                 ng-if="showStdTemplateField('work_vessel', template)">
+
+                        <div ng-init="templateData[templateIndex].vessel = { contact: true, minDistType: 'm' }">
+                            <div class="row">
+                                <div class="col-sm-3" style="margin-top: 5px;" translate>term.name</div>
+                                <div class="col-sm-5">
+                                    <input type="text"
+                                           class="form-control input-sm"
+                                           ng-model="templateData[templateIndex].vessel.name">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-sm-3" style="margin-top: 5px;" translate>term.call_sign</div>
+                                <div class="col-sm-5">
+                                    <input type="text"
+                                           class="form-control input-sm"
+                                           style="text-transform:uppercase"
+                                           ng-model="templateData[templateIndex].vessel.callSign"
+                                           ng-remote-validate="/rest/templates/validate-call-sign"
+                                           ng-remote-method="POST">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-sm-3" style="margin-top: 5px;" translate>term.contact</div>
+                                <div class="col-sm-9 inline">
+                                    <input type="checkbox"
+                                           ng-model="templateData[templateIndex].vessel.contact">
+                                    {{'template.vessel.contact' | translate}}
+                                    <input type="number" step="any"
+                                           ng-disabled="!templateData[templateIndex].vessel.contact"
+                                           style="width: 60px"
+                                           ng-model="templateData[templateIndex].vessel.channel">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-sm-3" style="margin-top: 5px;" translate>template.vessel.guard_vessels</div>
+                                <div class="col-sm-9 inline">
+                                    <input type="checkbox"
+                                           ng-model="templateData[templateIndex].vessel.guardVessels">
+                                    {{'template.vessel.guard_vessels_in_area' | translate}}
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-sm-3" style="margin-top: 5px;" translate>template.caution.title</div>
+                                <div class="col-sm-9 inline">
+                                    {{'template.caution.min_dist' | translate}}
+                                    <input type="number" step="any"
+                                           style="width: 60px"
+                                           ng-model="templateData[templateIndex].vessel.minDist">
+                                    <span class="btn-group">
+                                        <label class="btn btn-default btn-xs"
+                                               ng-model="templateData[templateIndex].vessel.minDistType"
+                                               uib-btn-radio="'nm'">nm</label>
+                                        <label class="btn btn-default btn-xs"
+                                               ng-model="templateData[templateIndex].vessel.minDistType"
+                                               uib-btn-radio="'m'">m</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </template-dialog-param-field>
+
+
+                    <!-- ********************* -->
+                    <!-- ** Markings        ** -->
+                    <!-- ********************* -->
+                    <template-dialog-param-field field-title-key="template.markings.title"
+                                 ng-if="showStdTemplateField('markings', template) && paramTypeMap['marking_type_list'] && paramTypeMap['marking_bearing']">
+
+                        <div class="row" ng-init="templateData[templateIndex].markings = []; templateData[templateIndex].markingType = 'unmarked'">
+
+                            <div class="col-sm-4" style="margin-top: 5px;" translate>template.markings.type</div>
+                            <div class="col-sm-8">
+                                <div class="btn-group" style="text-align: center;">
+                                    <button class="btn btn-default btn-sm" ng-model="templateData[templateIndex].markingType"
+                                            ng-click="resetMarkings(templateData[templateIndex].markings)"
+                                            uib-btn-radio="'unmarked'" translate>template.markings.type.unmarked</button>
+                                    <button class="btn btn-default btn-sm" ng-model="templateData[templateIndex].markingType"
+                                            ng-click="resetMarkings(templateData[templateIndex].markings, true)"
+                                            uib-btn-radio="'buoy'" translate>template.markings.type.bouys</button>
+                                    <button class="btn btn-default btn-sm" ng-model="templateData[templateIndex].markingType"
+                                            ng-click="resetMarkings(templateData[templateIndex].markings, true)"
+                                            uib-btn-radio="'marking'" translate>template.markings.type.other_markings</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <table  ng-if="templateData[templateIndex].markingType == 'buoy'"
+                                        class="table table-condensed editor-date-interval-table"
+                                        style="margin-top: 10px">
+                                    <tr>
+                                        <th translate>template.aton.type</th>
+                                        <th>
+                                            <span translate>template.markings.light_char</span>
+                                            <a ng-href="{{$root.lightCharacterUrl}}" target="_blank">
+                                                <span class="glyphicon glyphicon-question-sign"></span>
+                                            </a>
+                                        </th>
+                                        <th translate>template.markings.dist</th>
+                                        <th colspan="2">
+                                            {{'template.markings.bearing' | translate}}
+                                            <div class="pull-right">
+                                                <button ng-click="addMarking(templateData[templateIndex].markings)" class="btn btn-default btn-xs">
+                                                    <span class="glyphicon glyphicon-plus"></span> {{'term.add' | translate}}
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="m in templateData[templateIndex].markings">
+                                        <td>
+                                            <select class="form-control input-sm"
+                                                    ng-model="m.type"
+                                                    ng-options="val as val.descs[0].value for val in paramTypeMap['marking_type_list'].values"
+                                                    required>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control input-sm" style="width: 100px"
+                                                   ng-model="m.lightCharacter"
+                                                   ng-remote-validate="/rest/templates/validate-light-character"
+                                                   ng-remote-method="POST"
+                                                   ng-disabled="!m.type || m.type.key.indexOf('light') == -1">
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" class="form-control input-sm" style="width: 60px"
+                                                   ng-model="m.distance">
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm"  style="width: 50px"
+                                                    ng-model="m.bearing"
+                                                    ng-options="val as val.descs[0].value for val in paramTypeMap['marking_bearing'].values">
+                                            </select>
+                                        </td>
+                                        <td width="*" style="padding-top: 12px">
+                                            <a href ng-click="deleteMarking(templateData[templateIndex].markings, m);"
+                                               title="Delete Interval"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table  ng-if="templateData[templateIndex].markingType == 'marking'"
+                                        class="table table-condensed editor-date-interval-table"
+                                        style="margin-top: 10px">
+                                    <tr>
+                                        <th translate>term.color</th>
+                                        <th translate>template.aton.type</th>
+                                        <th translate>template.markings.dist</th>
+                                        <th colspan="2">
+                                            {{'template.markings.bearing' | translate}}
+                                            <div class="pull-right">
+                                                <button ng-click="addMarking(templateData[templateIndex].markings)" class="btn btn-default btn-xs">
+                                                    <span class="glyphicon glyphicon-plus"></span> {{'term.add' | translate}}
+                                                </button>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                    <tr ng-repeat="m in templateData[templateIndex].markings">
+                                        <td>
+                                            <select class="form-control input-sm"
+                                                    ng-model="m.color"
+                                                    ng-options="val as val.descs[0].value for val in paramTypeMap['other_marking_color_list'].values"
+                                                    required>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm"
+                                                    ng-model="m.type"
+                                                    ng-options="val as val.descs[0].value for val in paramTypeMap['other_marking_type_list'].values"
+                                                    required>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" step="any" class="form-control input-sm" style="width: 60px"
+                                                   ng-model="m.distance">
+                                        </td>
+                                        <td>
+                                            <select class="form-control input-sm"  style="width: 50px"
+                                                    ng-model="m.bearing"
+                                                    ng-options="val as val.descs[0].value for val in paramTypeMap['marking_bearing'].values">
+                                            </select>
+                                        </td>
+                                        <td width="*" style="padding-top: 12px">
+                                            <a href ng-click="deleteMarking(templateData[templateIndex].markings, m);"
+                                               title="Delete Interval"><span class="glyphicon glyphicon-trash"></span></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </template-dialog-param-field>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="col-sm-12 col-md-5">
+        <div class="message-status-lang" style="text-align: center;">
+            <span style="text-align: left">
+                <span style="font-weight: bold; color: white">Preview</span> &nbsp;
+                <span ng-repeat="lang in modelLanguages" ng-click="previewLanguage(lang)"
+                      style="padding-top: 4px; padding-bottom: 4px"
+                      class="message-status-lang-btn pointer"
+                      ng-class="{'preview-lang-selected' : previewLang == lang}">
+                    <img ng-src="/img/flags/{{lang}}.png" height="14"/>
+                    {{'lang.' + lang | translate}}
+                </span>
+            </span>
+        </div>
+
+        <table ng-if="previewMessage" class='table table-condensed'>
+            <tr render-message-details
+                msg="previewMessage"
+                language="previewLang"
+                format="details"
+                show-promulgation="true"
+                show-details-menu="false"></tr>
+        </table>
+
+        <div class="template-buttons" style="border-top: 1px solid lightgray">
+            <button class="btn btn-success btn-sm"
+                    ng-click="executeTemplates()" ng-disabled="!categoriesSelected()">
+                <span class="glyphicon glyphicon-refresh"></span>
+                <span>Refresh Preview</span>
+            </button>
+        </div>
+    </div>
+</div>

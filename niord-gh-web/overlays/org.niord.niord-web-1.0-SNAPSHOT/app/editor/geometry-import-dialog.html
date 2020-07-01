@@ -1,0 +1,101 @@
+<div>
+
+    <div class="modal-header" style="text-align: center; padding: 5px 15px">
+        <button type="button" class="close" ng-click="$dismiss('aborted')">x</button>
+        <h4>Import Geometry</h4>
+    </div>
+
+    <div class="modal-body print" style="padding-bottom: 0">
+
+        <uib-tabset class="framed-tabs">
+            <uib-tab active="true">
+                <tab-heading>
+                    From Area
+                </tab-heading>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-12">Select area with a geometry</label>
+                        <div class="col-sm-12">
+                            <areas-field id="area" area-data="data" multiple="false" domain="domain" geometry="true"
+                                area-changed="areaSelected()">
+                            </areas-field>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+
+            <uib-tab>
+                <tab-heading>
+                    From Text
+                </tab-heading>
+
+                <div class="row">
+                    <div class="col-sm-12" style="padding: 10px 20px;">
+                        This editor allows you to import a subset of GeoJSON as plain text.
+                        <div ng-if="!data.showExamples" ><a href ng-click="data.showExamples = true">Show Examples</a></div>
+                        <div ng-if="data.showExamples" ><a href ng-click="data.showExamples = false">Hide Examples</a></div>
+                        <div ng-if="data.showExamples" style="border: 1px solid lightgray; margin: 20px; padding: 5px 10px; font-size: 11px">
+                            Simple point:
+                            <pre style="font-size: 11px">56N 11 30.23E</pre>
+                            Named polygon + line-string with named coordinates:
+                            <pre style="font-size: 11px">Polygon, da: ES D 139 Bornholm Ø., en: ES D 139 Bornholm E.<br>54° 54.967'N 015° 49.961'E<br>54° 54.969'N 015° 15.029'E<br>55° 03.006'N 015° 15.029'E<br>55° 19.930'N 015° 49.942'E<br>54° 54.967'N 015° 49.961'E
+                            <br>LineString<br>1) 54° 53.397'N 009° 53.071'E, da: kyst, en: coast<br>2) 54° 53.982'N 009° 52.170'E, da: kyst, en: coast</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <textarea ng-model="data.geometryText" class="form-control input-sm geometry-text-editor"  wrap="off"
+                                  ng-class="{ 'geometry-text-invalid': !geometryTextValid() }"
+                                  ng-change="geometryTextChanged()"
+                                  ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
+                        </textarea>
+                    </div>
+                </div>
+            </uib-tab>
+
+            <uib-tab>
+                <tab-heading>
+                    From UTM
+                </tab-heading>
+
+                <div class="row">
+                    <div class="col-sm-12" style="padding: 10px 20px;">
+                        This editor allows you to import a list of UTM coordinates.
+                        <div ng-if="!data.showUTMExamples" ><a href ng-click="data.showUTMExamples = true">Show Examples</a></div>
+                        <div ng-if="data.showUTMExamples" ><a href ng-click="data.showUTMExamples = false">Hide Examples</a></div>
+                        <div ng-if="data.showUTMExamples" style="border: 1px solid lightgray; margin: 20px; padding: 5px 10px; font-size: 11px">
+                            The format of an UTM position is given by the UTM zone number and the easting and northing planar coordinate pair in that zone.
+                            Example:
+                            <pre style="font-size: 11px; margin-top:5px">32V 624726.15 6207884.60</pre>
+                            NB: The UTM zones can be found
+                            <a href="https://upload.wikimedia.org/wikipedia/commons/9/9e/LA2-Europe-UTM-zones.png"
+                               target="_blank">here</a>.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <textarea ng-model="data.utmText" class="form-control input-sm geometry-text-editor"  wrap="off"
+                                  ng-class="{ 'geometry-text-invalid': !utmTextValid() }"
+                                  ng-change="utmTextChanged()"
+                                  ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
+                        </textarea>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+
+        <div class="row" style="margin-top: 24px;">
+            <div class="form-group col-xs-12" style="text-align: right">
+                <button class="btn btn-default btn-sm" ng-click="$dismiss('aborted')">Cancel</button>
+                &nbsp;
+                <button id="printBtn" class="btn btn-primary btn-sm" ng-click="importGeometry()"
+                        ng-disabled="featureCollection.features.length == 0">Import</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,146 @@
+<div>
+
+    <div class="modal-header" style="text-align: center; padding: 5px 15px">
+        <button type="button" class="close" ng-click="$dismiss('aborted')">x</button>
+        <h4>Import Messages</h4>
+        <help section="import-action" class="dialog-help-link"></help>
+    </div>
+
+    <div class="modal-body print" style="padding-bottom: 0">
+
+        <div class="row">
+            <div class="col-sm-12">
+
+                <file-upload url="importUrl"
+                             drop-text="or drop messages Zip archive here"
+                             upload-text="Import messages"
+                             remove-text="Remove Zip file"
+                             multiple="false"
+                             file-types="'zip'"
+                             auto-upload="false"
+                             remove-after-upload="true"
+                             data="data"
+                             success="fileUploaded(result)"
+                             error="fileUploadError(status, statusText)">
+
+                    <div class="form-group row" style="margin-top: 20px">
+                        <label for="newUids" class="col-sm-6 col-md-4 control-label" style="text-align: right">
+                            UID Handling
+                        </label>
+                        <div class="col-sm-6 col-md-8" >
+                            <div>
+                                <input id="newUids" type="radio" ng-model="data.assignNewUids" ng-value="false">
+                                &nbsp;Ignore messages with existing UIDs
+                            </div>
+                            <div>
+                                <input type="radio" ng-model="data.assignNewUids" ng-value="true">
+                                &nbsp;Assign new UIDs to all messages
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="preserveStatus" class="col-sm-6 col-md-4 control-label" style="text-align: right">
+                            Status handling
+                        </label>
+                        <div class="col-sm-6 col-md-8">
+                            <div>
+                                <input id="preserveStatus" type="radio" ng-model="data.preserveStatus" ng-value="false">
+                                &nbsp;Assign DRAFT status to all messages
+                            </div>
+                            <div>
+                                <input type="radio" ng-model="data.preserveStatus" ng-value="true">
+                                &nbsp;Preserve status for messages
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="createBaseData" class="col-sm-6 col-md-4 control-label" style="text-align: right">
+                            Base data handling
+                        </label>
+                        <div class="col-sm-6 col-md-8">
+                            <div>
+                                <input id="createBaseData" type="radio" ng-model="data.createBaseData" ng-value="false">
+                                &nbsp;Ignore non-existing areas, categories and charts
+                            </div>
+                            <div>
+                                <input type="radio" ng-model="data.createBaseData" ng-value="true">
+                                &nbsp;Create non-existing areas, categories and charts
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="assignMessageSeries" class="col-sm-6 col-md-4 control-label" style="text-align: right">
+                            Msg. series handling
+                        </label>
+                        <div class="col-sm-6 col-md-8">
+                            <div>
+                                <input id="assignMessageSeries" type="radio" ng-model="data.assignDefaultSeries" ng-value="false">
+                                &nbsp;If valid, preserve associated message series
+                            </div>
+                            <div>
+                                <input type="radio" ng-model="data.assignDefaultSeries" ng-value="true">
+                                &nbsp;Always assign the default message series below
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="importMessageSeries" class="col-sm-6 col-md-4 control-label" style="text-align: right"
+                               uib-tooltip="The default messages series is assigned to imported messages with no valid message series.">
+                            Default msg. Series
+                        </label>
+                        <div class="col-sm-6 col-md-8">
+                            <select id="importMessageSeries" class="form-control input-sm" required
+                                    ng-model="data.seriesId" ng-options="seriesId for seriesId in messageSeriesIds" >
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="importTag" class="col-sm-6 col-md-4 control-label" style="text-align: right"
+                               uib-tooltip="All imported messages will be assigned to the specified tag.">
+                            Tag
+                        </label>
+                        <div class="col-sm-6 col-md-8">
+                            <div class="input-group">
+                                <ui-select ng-model="tagData.tag" id="importTag">
+                                    <ui-select-match placeholder="Select tag">
+                                        {{tagData.tag.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="tag in tags"
+                                                       refresh="refreshTags($select.search)"
+                                                       refresh-delay="100">
+                                        <div>
+                                            <span ng-bind-html="tag.name | highlight: $select.search"></span>
+                                        </div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="input-group-addon clickable" ng-click="openTagsDialog()"><span class="glyphicon glyphicon-tags"></span></span>
+                                <span class="input-group-addon clickable" ng-click="removeTag()"><span class="glyphicon glyphicon-trash"></span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </file-upload>
+
+                <div class="row">
+                    <div class="col-sm-12" style="margin-top: 20px">
+                        <label class="control-label" for="result">Result</label>
+                        <textarea ng-model="result" id="result" class="form-control input-sm" style="font-size: 10px;" rows="3" readonly></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="form-group col-xs-12" style="text-align: right">
+                <button class="btn btn-primary btn-sm" ng-click="$dismiss('aborted')">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,649 @@
+
+.messages {
+    background-color: #eee;
+}
+
+.message-list-area-heading {
+    color: #8f2f7b;
+}
+
+.sort-by-area {
+    font-size: 11px;
+    font-weight: normal;
+    color: lightgray;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.load-more-btn {
+    min-width: 300px;
+}
+
+.message-tags-table {
+    width: 100%;
+    min-height: 200px;
+    max-height: 300px;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.append-dot::after {
+    content: ".";
+}
+
+.label-message-id {
+    font-size: 10px;
+    display: inline-block;
+    margin-bottom: 4px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.status-btn {
+    margin-bottom: 0;
+}
+
+.status-PUBLISHED {
+    background-color: #559955;
+}
+.status-DRAFT {
+    background-color: #5555CC;
+}
+.status-VERIFIED {
+    background-color: #5555CC;
+}
+.status-VERIFIED:after {
+    content: "\2713";
+    color: #8f8;
+    padding-left: 3px;
+}
+.status-DELETED {
+    background-color: #333333;
+}
+.status-EXPIRED {
+    background-color: #999999;
+}
+.status-CANCELLED {
+    background-color: #999999;
+}
+.status-PUBLISHED-outline {
+    background-color: white;
+    color: #559955;
+    border: 1px solid #559955;
+}
+.status-DRAFT-outline {
+    background-color: white;
+    color: #5555CC;
+    border: 1px solid #5555CC;
+}
+.status-VERIFIED-outline {
+    background-color: white;
+    color: #5555CC;
+    border: 1px solid #5555CC;
+}
+.status-VERIFIED-outline:after {
+    content: "\2713";
+    color: #3a3;
+    padding-left: 3px;
+}
+.status-DELETED-outline {
+    background-color: white;
+    color: #333333;
+    border: 1px solid #333333;
+}
+.status-EXPIRED-outline {
+    background-color: white;
+    color: #999999;
+    border: 1px solid #999999;
+}
+.status-CANCELLED-outline {
+    background-color: white;
+    color: #999999;
+    border: 1px solid #999999;
+}
+
+
+/** View mode -> Grid **/
+
+.messages-list-grid {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item {
+    border: 2px solid #fff;
+    position: relative;
+    margin: 1px;
+    width: 260px;
+    height: 260px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.grid-item:hover {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.grid-map-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 256px;
+    height: 256px;
+}
+
+.grid-map-image-header {
+    background-color: rgba(247, 247, 247, 0.8);
+    font-size: 12px;
+    line-height: 15px;
+    position: absolute;
+    top: 0;
+    padding: 5px 8px 5px 5px;
+}
+
+.grid-map-image-details {
+    background-color: rgba(121, 171, 181, 0.8);
+    color: rgb(30, 30, 30);
+    display: block;
+    font-size: 12px;
+    height: 65px;
+    line-height: 15px;
+    opacity: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px 8px 5px 8px;
+}
+
+.grid-map-image-menu {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.grid-item .message-description {
+    font-size: 11px;
+}
+
+.grid-item table.positions td:nth-child(1) {
+    color: #333;
+}
+
+
+/** View mode -> Details **/
+
+.message-list-details {
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+tr.message-list-details-border > td {
+    border-bottom: 1px dotted lightgray!important;
+    padding: 20px 0;
+}
+
+
+/** View mode -> Table **/
+
+.message-list-table {
+    font-size: 12px;
+    margin: 0 auto;
+    padding: 20px 30px;
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.message-list-table-action div {
+    margin: -6px 0 -6px 0;
+}
+
+/** View mode -> Map **/
+
+.message-list-map {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #b5d0d0;
+}
+
+.message-list-map .ol-zoom {
+    top: auto;
+    bottom: 20px;
+}
+
+
+img.map-general-message-icon {
+    margin: 2px 5px 0 0;
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+    display: none;
+}
+
+@media (min-width: 600px) {
+    img.map-general-message-icon { display: block; }
+}
+
+.map-no-pos-messages {
+    z-index: 1100;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    background-color: rgba(255,255,255,0.6);
+    font-size: 10px;
+    padding: 5px 20px 0 10px;
+    max-height: 400px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+@media (min-width: 600px) {
+    .map-no-pos-messages {
+        width: 300px;
+        left: auto;
+        right: 10px;
+        border-radius:5px;
+    }
+}
+
+.messages .selection-panel {
+    position: relative;
+    z-index: 100;
+    width: 100%;
+    background-color: lightgray;
+}
+
+.messages .selection-panel-header {
+    text-align: center;
+    font-size: 12px;
+    line-height: 24px;
+    background-color: #666;
+    height: 34px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(50, 50, 50, 0.5);
+}
+
+.messages .selection-panel-messages {
+    font-size: 11px;
+    -webkit-padding-end: 15px; /** NB: Only safari needs this, not chrome **/
+    max-height: 300px;
+    overflow-y: scroll;
+    box-shadow: 0 2px 4px rgba(50, 50, 50, 0.5);
+}
+
+.messages .selection-panel-messages table tr td {
+    border: none;
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+
+.messages .load-more-messages {
+    box-shadow: 0 2px 4px rgba(50, 50, 50, 0.5);
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media (min-width: 600px) {
+    .messages .selection-panel {
+        width: 340px;
+        margin: 10px 0 0 10px;
+    }
+
+    .messages .selection-panel-messages {
+        max-height: 500px;
+    }
+}
+
+/**
+ * Message details styles
+ */
+
+.message-details-map {
+    width: 100%;
+    height: 200px;
+    border: 1px solid lightgray;
+    margin-bottom: 20px;
+    background-color: #b5d0d0;
+}
+
+@media (min-width: 800px) {
+    .message-details-map {
+        height: 300px;
+    }
+}
+
+.message-details-map .ol-zoom {
+    top: auto;
+    bottom: 10px;
+}
+
+.message-details-close-btn {
+    float: right;
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    z-index: 2000;
+}
+
+.message-details-menu a {
+    font-size: 10px;
+}
+
+/** If the parent element has this class, the menu is only displayed when the mouse is over the parent */
+.message-details-menu-parent .message-details-menu {
+    display: none;
+}
+
+.message-details-menu-parent:hover .message-details-menu {
+    display: block;
+}
+
+.message-details-image {
+    padding: 10px!important;
+    position: relative;
+}
+
+.message-details-image div {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    border: 2px solid #fff;
+    display: none;
+}
+
+.message-details-image div:hover {
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+}
+
+.message-details-image div img {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 500px) {
+    .message-details-image {
+        width: 140px;
+    }
+    .message-details-image div {
+        display: block;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 10px;
+    }
+}
+@media (min-width: 800px) {
+    .message-details-image {
+        width: 220px;
+    }
+    .message-details-image div {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.message-details-item {
+    padding: 10px!important;
+    font-size: 11px;
+}
+
+table.message-details-item-fields {
+    width: 100%;
+}
+
+table.message-details-item-fields th {
+    width: 85px;
+    max-width: 85px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    color: gray;
+    padding-top: 5px;
+}
+
+table.message-details-item-fields td {
+    padding-top: 5px;
+}
+
+.message-details-position-names {
+    margin-top: 10px;
+    text-decoration: underline;
+}
+
+ol.message-details-positions {
+    padding-left: 0;
+    margin-left: 20px;
+    margin-bottom: 0;
+    color: darkgray;
+}
+
+ol.message-details-positions li span {
+    color:#333;
+}
+
+/** For tables in the message rich text description field **/
+.message-description table {
+    border-collapse: collapse;
+    border: 1px solid #999;
+}
+
+.message-description table td, .message-description table th {
+    vertical-align: top;
+    border: 1px solid #999;
+    padding: 3px;
+}
+
+.message-description ol, .message-description ul {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.message-description ol li, .message-description ul li {
+    margin-bottom: 3px;
+}
+
+.message-description ol li:last-child, .message-description ul li:last-child {
+    margin-bottom: 0;
+}
+
+.message-description p, .message-description p {
+    margin: 0 0 3px 0;
+}
+
+.message-description ol li p:last-child, .message-description ul li p:last-child {
+    padding: 0;
+    margin: 0;
+}
+
+table.no-border {
+    border: 0;
+}
+
+table.no-border td, table.no-border th {
+    border: 0;
+}
+
+table.condensed {
+    padding: 0;
+}
+
+table.condensed td, table.condensed th {
+    padding: 0;
+}
+
+tr.underline td {
+    border-bottom: 1px solid #999;
+}
+
+td.underline {
+    border-bottom: 1px solid #999;
+}
+
+table.positions {
+    border: 0;
+    margin-bottom: 1mm;
+}
+
+table.positions td, table.positions th {
+    color: #333;
+    border: 0;
+    padding: 0 3mm 0 0;
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.positions td:nth-child(1) {
+    text-align: right;
+    color: darkgray;
+}
+
+ul.positions li {
+    margin-bottom: 0;
+}
+
+table.position-table td.pos-col {
+    padding-left: 5px;
+    padding-right: 5px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+table.position-table td.pos-index {
+    min-width: 25px;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.message-publication a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.message-publication a:hover {
+    text-decoration: underline;
+}
+
+/**
+ * Message selection styles
+ */
+
+.message-selector-parent {
+    position: relative;
+}
+
+.message-selector-parent .select-btn {
+    display: none;
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left: -20px;
+    margin-top: -20px;
+    padding-top: 12px;
+    font-size: 12px;
+    vertical-align: middle;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    border-radius:5px;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.message-selector-parent:hover .select-btn {
+    display: block;
+}
+
+.message-selected {
+    display: block!important;
+    color: white;
+    background-color: darkred!important;
+}
+
+.message-row-selected {
+    color: white;
+    background-color: darkred!important;
+}
+
+
+/**
+ * Attachments
+ */
+
+.attachment {
+    text-align: center;
+    position: relative;
+}
+
+.attachment-image {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.attachment-image-shadow img {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.attachment-label {
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 10px;
+}
+
+.attachment-list {
+    display: inline-block;
+    margin: 4px;
+    vertical-align: top;
+}
+
+.size-32 {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+}
+
+.size-64 {
+    width: 64px;
+    height: 64px;
+    line-height: 64px;
+}
+
+.size-128 {
+    width: 128px;
+    height: 128px;
+    line-height: 128px;
+}
+
+/** Message sort dialog **/
+
+.message-list-sort-table {
+    font-size: 12px;
+    margin: 0 auto;
+    background-color: white;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+/** Message bulk-status-update dialog **/
+
+.update-status-message-list {
+    font-size: 12px;
+    margin: 20px auto;
+    padding-right: 20px;
+    background-color: white;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+

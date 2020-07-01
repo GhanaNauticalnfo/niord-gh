@@ -1,0 +1,58 @@
+<div>
+
+    <div class="modal-header" style="text-align: center; padding: 5px 15px">
+        <button type="button" class="close" ng-click="$dismiss('aborted')">x</button>
+        <h4>Update Message Publication</h4>
+    </div>
+
+    <div class="modal-body print" style="padding-bottom: 0">
+
+        <div class="row">
+            <div class="col-sm-12" style="padding: 10px 20px;">
+
+                <table class="table borderless-table">
+                    <tr>
+                        <td width="240">
+                            <publication-field class="pub-field"
+                                               publication-data="pub"
+                                               message-publication="messagePublication"
+                                               main-type="PUBLICATION"
+                                               status="ACTIVE"
+                                               init-ids="publicationIds">
+
+                            </publication-field>
+                        </td>
+                        <td width="*">
+                            <div>
+                                <input ng-if="hasPublicationParams(pub)" id="pub-param"
+                                       class="form-control input-sm" placeholder="Comma-separated parameters" type="text"
+                                       ng-model="pub.parameters"/>
+                            </div>
+                            <div ng-if="showLink(pub)" class="input-group" style="margin-top: 10px">
+                                <span class="input-group-addon input-sm">
+                                    <i class="glyphicon glyphicon-link"></i> Link
+                                </span>
+                                <input class="form-control input-sm" type="text"
+                                       ng-model="pub.link"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-top: 10px;">
+            <div class="form-group col-xs-12" style="text-align: right">
+                <button class="btn btn-default btn-sm" ng-click="$dismiss('aborted')">Cancel</button>
+                <button class="btn btn-primary btn-sm"
+                        ng-disabled="!pub.publication" ng-click="updatePublications(true)">Update Publications</button>
+                <button class="btn btn-primary btn-sm"
+                        ng-disabled="!pub.publication" ng-click="updatePublications(false)">
+                        Update {{'lang.' +  language | translate}} Only
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+
+<admin-page admin-page-title="Batch Jobs" parent-page="sysadmin" parent-page-title="Sysadmin">
+
+    <div ng-controller="BatchAdminCtrl" ng-init="loadBatchStatus()">
+        <p style="margin-bottom: 20px">
+            Manage and monitoring of batch jobs
+            <button class="pull-right btn btn-sm btn-default"
+                    ng-if="hasRole('sysadmin')" ng-click="uploadBatchSet()">Upload batch set...</button>
+            <button class="pull-right btn btn-sm btn-default" style="margin-right: 5px"
+                    ng-if="hasRole('sysadmin')" ng-click="executeJavaScript()">Execute JavaScript...</button>
+        </p>
+
+        <div class="row">
+
+            <!-- List of batch types -->
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                <div class="batch-types">
+                    <div ng-repeat="batchType in batchStatus.types" class="batch-type"
+                         ng-class="{'batch-type-selected' : batchType.name == batchName}"
+                         ng-click="selectBatchType(batchType.name)">
+                        <div style="font-weight: bold">{{batchType.name}}</div>
+                        <div>
+                            <small>{{batchType.instanceCount}} executions</small>
+                            <small class="pull-right" ng-if="batchType.runningExecutions > 0">{{batchType.runningExecutions}} running</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- List of batch type instances -->
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8 batch-instances">
+                <table class='table table-condensed'>
+                    <tr>
+                        <th>Instance</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr ng-repeat-start="execution in executions" ng-if="execution.instance" class="batch-instance-row">
+                        <td>{{execution.instance.jobNo}}</td>
+                        <td>{{execution.instance.user}}</td>
+                        <td colspan="3">
+                            <a ng-if="execution.instance.fileName"
+                               class="batch-instance-download" target="_blank"
+                               href ng-click="download(execution.instance)">
+                                <img ng-src="/rest/batch/instance/{{execution.instance.instanceId}}/thumbnail.png" width="16" height="16">
+                                {{execution.instance.fileName}}
+                            </a>
+                            &nbsp;
+                            <a href ng-click="showLogFiles(execution.instance.instanceId)">logs...</a>
+                        </td>
+                    </tr>
+                    <tr ng-repeat-end class="batch-execution-row">
+                        <td></td>
+                        <td>{{execution.startTime | formatDate}}</td>
+                        <td>
+                            <span ng-if="execution.batchStatus != 'STARTED'">{{execution.endTime | formatDate}}</span>
+                            <span ng-if="execution.batchStatus == 'STARTED' && execution.instance.progress">
+                                <uib-progressbar value="execution.instance.progress"></uib-progressbar>
+                            </span>
+                        </td>
+                        <td>
+                            <span class="label" ng-class="statusColor(execution)">
+                                {{execution.batchStatus | lowercase}}
+                            </span>
+                        </td>
+                        <td>
+                            <button ng-if="execution.stoppable" class="btn btn-danger btn-xs"
+                                    ng-click="stop(execution)">
+                                stop
+                            </button>
+                            <button ng-if="execution.restartable" class="btn btn-primary btn-xs"
+                                    ng-click="restart(execution)">
+                                restart
+                            </button>
+                            <button ng-if="execution.abandonable" class="btn btn-default btn-xs"
+                                    ng-click="abandon(execution)">
+                                abandon
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+                <uib-pagination total-items="searchResult.total" items-per-page="pageSize" max-size="10"
+                            ng-show="searchResult.total > pageSize"
+                            ng-model="currentPage" ng-change="loadBatchInstances()"
+                            class="pagination pagination-sm" previous-text="&lsaquo;"  next-text="&rsaquo;"
+                            boundary-links="true" first-text="&laquo;" last-text="&raquo;">
+                </uib-pagination>
+            </div>
+
+        </div>
+    </div>
+
+</admin-page>
+
+
+<!-- ************************************************** -->
+<!-- Dialog for submitting a back-end JavaScript        -->
+<!-- ************************************************** -->
+<script type="text/ng-template" id="javaScriptBatchJobDialog.html">
+    <div class="modal-header">
+        <h4 class="modal-title">Back-End JavaScript Editor</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div ui-ace="jsEditorOptions" ng-model="javaScript" class="batch-javascript-editor"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="$dismiss('aborted')">Cancel</button>
+        <button class="btn btn-primary" ng-click="$close(javaScript)">Execute</button>
+    </div>
+</script>

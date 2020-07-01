@@ -1,0 +1,86 @@
+
+<div class="message-list-table container">
+    <div class="row">
+        <div ng-if="messageList.length == 0">
+            <div ng-include="'/app/messages/messages-empty-search-result.html'"></div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 10px" ng-if="messageList.length < totalMessageNo"
+         load-more-messages="messageList" total-message-no="totalMessageNo" max-size="maxSize" load-more="loadMore()" >
+    </div>
+
+    <table class='table table-condensed' ng-if="messageList.length > 0">
+        <tr style="background-color: lightgray">
+            <th ng-click="toggleSortOrder('ID')" class="clickable">
+                <span translate>msg.field.id</span>
+                <span ng-if="state.sortBy == 'ID'"><small ng-bind-html="sortIndicator('ID')"></small></span>
+            </th>
+            <th>
+                <div class="btn-group no-wrap-btn-group" uib-dropdown>
+                    <button id="split-button" type="button" class="btn btn-default btn-xs" style="font-size: 11px"
+                            ng-click="toggleSortOrder(dateColumnType)">
+                        <strong ng-if="dateColumnType == 'DATE'" translate>msg.field.event_dates</strong>
+                        <strong ng-if="dateColumnType == 'PUBLISH_DATE'" translate>msg.field.publish_date</strong>
+                        <strong ng-if="dateColumnType == 'FOLLOW_UP_DATE'" translate>msg.field.follow_up_date</strong>
+                        <span ng-if="state.sortBy == dateColumnType"><small ng-bind-html="sortIndicator(dateColumnType)"></small></span>
+                    </button>
+                    <button type="button" class="btn btn-default btn-xs" style="font-size: 11px" uib-dropdown-toggle>
+                        &hellip;
+                    </button>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu">
+                        <li role="menuitem"><a href ng-click="setDateColumnType('DATE')" translate>msg.field.event_dates</a></li>
+                        <li role="menuitem"><a href ng-click="setDateColumnType('PUBLISH_DATE')" translate>msg.field.publish_date</a></li>
+                        <li role="menuitem"><a href ng-click="setDateColumnType('FOLLOW_UP_DATE')" translate>msg.field.follow_up_date</a></li>
+                    </ul>
+                </div>
+            </th>
+            <th>
+                <span translate>msg.field.title</span>
+            </th>
+            <th ng-click="toggleSortOrder('AREA')" class="clickable">
+                <span translate>msg.field.areas</span>
+                <span ng-if="state.sortBy == 'AREA'"><small ng-bind-html="sortIndicator('AREA')"></small></span>
+            </th>
+            <th><span class="glyphicon glyphicon-cog"></span></th>
+            <th><span class="glyphicon glyphicon-star" ng-click="toggleSelectAll()"></span></th>
+        </tr>
+        <tr ng-repeat-start="message in messageList" ng-if="message.areaHeading">
+            <td colspan="6">
+                <h4 class="message-list-area-heading">
+                    <span render-areas="[message.areaHeading]"></span>
+                    <span ng-if="canSortAreaMessages(message.areaHeading)" class="sort-by-area"
+                          ng-click="sortAreaMessages(message.areaHeading)">sort...</span>
+                </h4>
+            </td>
+        </tr>
+        <tr ng-repeat-end ng-class="{ 'message-row-selected' : isSelected(message) }">
+            <td nowrap><message-id-badge msg="message" show-blank="true"></message-id-badge></td>
+            <td nowrap>
+                <render-message-dates msg="message" type="dateColumnType" first-line="true"></render-message-dates>
+            </td>
+            <td message-details-link="message.id" message-list="messageList"  selection="selection">
+                <span class="glyphicon glyphicon-new-window"></span>&nbsp;
+                {{message.descs[0].title}}
+            </td>
+            <td><span render-areas="message.areas"></span></td>
+            <td  class="message-list-table-action" width="50" nowrap>
+                <message-details-menu message-id="message.id" msg="message" messages="messageList" size="xs"
+                                      style="float: right;"></message-details-menu>
+            </td>
+            <td>
+                <div >
+                    <span class="select-btn" ng-click="toggleSelectMessage(message)">
+                        <span class="glyphicon glyphicon-star"></span>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="row" ng-if="messageList.length < totalMessageNo"
+         load-more-messages="messageList" total-message-no="totalMessageNo" max-size="maxSize" load-more="loadMore()" >
+    </div>
+</div>
+
+<div ng-include="'/app/layout/footer.html'"></div>

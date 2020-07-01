@@ -1,0 +1,229 @@
+
+<div class="view-mode-menu">
+    <ul style="padding-left: 0">
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="messages.table" ui-sref-active="active">
+                <span class="glyphicon glyphicon-align-justify"></span> <span class="view-mode-menu-text" translate>view_mode.table</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="messages.grid" ui-sref-active="active">
+                <span class="glyphicon glyphicon-th"></span> <span class="view-mode-menu-text" translate>view_mode.grid</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="messages.details" ui-sref-active="active">
+                <span class="glyphicon glyphicon-th-list"></span> <span class="view-mode-menu-text" translate>view_mode.details</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="messages.map" ui-sref-active="active">
+                <span class="glyphicon glyphicon-globe"></span> <span class="view-mode-menu-text" translate>view_mode.map</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="messages.selected" ui-sref-active="active">
+                <span class="glyphicon glyphicon-star"></span>
+                <span class="view-mode-menu-text" translate>view_mode.selection</span>
+                <span class="badge" ng-if="selection.size() > 0">
+                    {{selection.size() | numeral}}
+                    <span ng-click="clearSelection();$event.stopPropagation();" class="glyphicon glyphicon-remove clear-selection"></span></span>
+            </span>
+        </li>
+
+
+        <!-- Filter Menu -->
+        <li class="dropdown view-mode-menu-btn" style="padding: 0 10px">
+            <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+                  ng-click="loadNamedFilters()">
+                <span class="glyphicon glyphicon-filter"></span>
+                <span class="view-mode-menu-text" translate>menu.filter</span>
+                <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+                <li ng-repeat="filter in namedFilters">
+                    <a href><span ng-click="applyNamedFilter(filter)">{{filter.name}}</span>
+                        <span class="pull-right glyphicon glyphicon-trash" ng-click="removeNamedFilter(filter)"></span></a>
+                </li>
+                <li role="separator" class="divider" ng-if="namedFilters.length > 0"></li>
+                <li ng-repeat="name in filterNames">
+                    <a ng-click="enableFilter(name, !filterEnabled(name))" href>
+                        <span class="glyphicon view-mode-menu-checkmark"
+                              ng-class="{ 'glyphicon-ok': filterEnabled(name), 'glyphicon-none': !filterEnabled(name) }"></span>
+                        <span ng-bind-html="'menu.filter.' + name | translate"></span>
+                    </a>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a ng-if="isLoggedIn" ng-click="clearAllFilters()" href translate>menu.filter.clear</a></li>
+                <li><a ng-if="isLoggedIn" ng-click="saveNamedFilter()" href translate>menu.filter.save</a></li>
+            </ul>
+        </li>
+
+
+        <!-- Action Menu -->
+        <li class="dropdown view-mode-menu-btn" style="padding: 0 10px">
+            <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="view-mode-menu-text" translate>menu.action</span>
+                <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+
+                <!-- Printing -->
+                <li>
+                    <a href ng-click="pdf()">
+                        <span class="glyphicon glyphicon-print menu-icon"></span>&nbsp;
+                        <span translate>menu.action.print</span>
+                    </a>
+                </li>
+                <li ng-if="isLoggedIn && selection.size() > 0">
+                    <a href ng-click="pdfForSelection()">
+                        <span class="glyphicon glyphicon-print menu-icon"></span>&nbsp;
+                        <span translate>menu.action.print.selection</span>
+                    </a>
+                </li>
+                <li ng-if="isLoggedIn">
+                    <a href ng-click="mailingListReportDialog()">
+                        <span class="fa fa-file menu-icon"></span>&nbsp;
+                        <span translate>menu.action.report</span>
+                    </a>
+                </li>
+
+
+                <!-- Mail -->
+                <li ng-if="isLoggedIn  && selection.size() > 0" role="separator" class="divider"></li>
+                <li ng-if="isLoggedIn  && selection.size() > 0">
+                    <a href ng-click="sendMailDialog()">
+                        <span class="glyphicon glyphicon-envelope menu-icon"></span>&nbsp;
+                        <span translate>menu.action.mail</span>
+                    </a>
+                </li>
+
+
+                <!-- Tags -->
+                <li ng-if="isLoggedIn && selection.size() > 0" role="separator" class="divider"></li>
+                <li ng-if="isLoggedIn && selection.size() > 0">
+                    <a href ng-click="addToTagDialog()">
+                        <span class="glyphicon glyphicon-tags menu-icon"></span>&nbsp;
+                        <span translate>menu.action.tag.add_selection</span>
+                    </a>
+                </li>
+                <li ng-if="isLoggedIn && selection.size() > 0">
+                    <a href ng-click="removeFromTagDialog()">
+                        <span class="glyphicon glyphicon-tags menu-icon"></span>&nbsp;
+                        <span translate>menu.action.tag.remove_selection</span>
+                    </a>
+                </li>
+
+
+                <!-- Selection -->
+                <li role="separator" class="divider"></li>
+                <li>
+                    <a href ng-click="selectAll()">
+                        <span class="glyphicon glyphicon-star menu-icon"></span>&nbsp;
+                        <span translate>menu.action.select.all</span>
+                    </a>
+                </li>
+                <li  ng-if="selection.size() > 0">
+                    <a href ng-click="clearSelection()">
+                        <span class="glyphicon glyphicon-star-empty menu-icon"></span>&nbsp;
+                        <span translate>menu.action.select.none</span>
+                    </a>
+                </li>
+
+
+                <!-- Compare -->
+                <li ng-if="selection.size() == 2" role="separator" class="divider"></li>
+                <li ng-if="selection.size() == 2">
+                    <a href ng-click="compareMessages()">
+                        <span class="glyphicon glyphicon-transfer"></span>&nbsp;
+                        <span translate>menu.action.message.compare</span>
+                    </a>
+                </li>
+
+
+                <!-- Exporting and Importing -->
+                <li ng-if="isLoggedIn" role="separator" class="divider"></li>
+                <li ng-if="isLoggedIn">
+                    <a href ng-click="exportMessages()">
+                        <span class="glyphicon glyphicon-export menu-icon"></span>&nbsp;
+                        <span translate>menu.action.export</span>
+                    </a>
+                </li>
+                <li ng-if="isLoggedIn && selection.size() > 0">
+                    <a href ng-click="exportSelection()">
+                        <span class="glyphicon glyphicon-export menu-icon"></span>&nbsp;
+                        <span translate>menu.action.export_selection</span>
+                    </a>
+                </li>
+                <li ng-if="hasRole('admin')" >
+                    <a href ng-click="importMessages()">
+                        <span class="glyphicon glyphicon-import menu-icon"></span>&nbsp;
+                        <span translate>menu.action.import</span>
+                    </a>
+                </li>
+
+
+                <!-- Status updates -->
+                <li ng-if="selection.size() > 0 && isEditor" role="separator" class="divider"></li>
+                <li ng-if="selection.size() > 0 && isEditor">
+                    <a href ng-click="updateStatusDialog()">
+                        <span class="glyphicon glyphicon-pencil menu-icon"></span>&nbsp;
+                        <span translate>menu.action.update_status</span>
+                    </a>
+                </li>
+
+
+                <!-- Sorting -->
+                <li role="separator" class="divider"></li>
+                <li ng-if="isEditor">
+                    <a href ng-click="sortAreaMessages()">
+                        <span class="glyphicon glyphicon-sort menu-icon"></span>&nbsp;
+                        <span translate>menu.action.sort_area</span>
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="toggleSortOrder('AREA')">
+                        <span class="glyphicon glyphicon-sort-by-attributes menu-icon"></span>&nbsp;
+                        <span translate>msg.field.areas</span>
+                        <small ng-bind-html="sortIndicator('AREA')"></small>
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="toggleSortOrder('ID')">
+                        <span class="glyphicon glyphicon-sort-by-attributes menu-icon"></span>&nbsp;
+                        <span translate>msg.field.id</span>
+                        <small ng-bind-html="sortIndicator('ID')"></small>
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="toggleSortOrder('DATE')">
+                        <span class="glyphicon glyphicon-sort-by-attributes menu-icon"></span>&nbsp;
+                        <span translate>msg.field.event_dates</span>
+                        <small ng-bind-html="sortIndicator('DATE')"></small>
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="toggleSortOrder('PUBLISH_DATE')">
+                        <span class="glyphicon glyphicon-sort-by-attributes menu-icon"></span>&nbsp;
+                        <span translate>msg.field.publish_date</span>
+                        <small ng-bind-html="sortIndicator('PUBLISH_DATE')"></small>
+                    </a>
+                </li>
+                <li>
+                    <a href ng-click="toggleSortOrder('FOLLOW_UP_DATE')">
+                        <span class="glyphicon glyphicon-sort-by-attributes menu-icon"></span>&nbsp;
+                        <span translate>msg.field.follow_up_date</span>
+                        <small ng-bind-html="sortIndicator('FOLLOW_UP_DATE')"></small>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

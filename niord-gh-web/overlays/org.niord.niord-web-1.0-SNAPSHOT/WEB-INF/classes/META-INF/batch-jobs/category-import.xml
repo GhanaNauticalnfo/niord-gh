@@ -1,0 +1,12 @@
+<job id="category-import" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
+    <listeners>
+        <listener ref="batchJobListener"/>
+    </listeners>
+    <step id="importCategoryStep">
+        <chunk item-count="10">
+            <reader ref="batchCategoryImportReader" />
+            <processor ref="batchCategoryImportProcessor"/>
+            <writer ref="batchCategoryImportWriter" />
+        </chunk>
+    </step>
+</job>

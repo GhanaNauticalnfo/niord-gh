@@ -29,6 +29,14 @@ angular.module('niord.messages')
                   messageId, messages, selection) {
             'use strict';
 
+            $scope.playAudio = function() {
+                var audio = new Audio('got-it-done.mp3');
+                audio.play();
+            };
+
+            growl.info("growl test", { ttl: 5000 });
+            console.log("Rettelse");
+
             $scope.warning = undefined;
             $scope.messages = messages;
             $scope.pushedMessageIds = [];

@@ -1,0 +1,247 @@
+
+<div class="view-mode-filter" ng-show="showFilter">
+
+    <div class="row">
+
+
+        <!-- Domain Filter -->
+        <view-mode-filter-panel state="state" filter-name="domain" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="btn-group full-width">
+                <domain-field domain-data="state.domain"></domain-field>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Map Filter -->
+        <view-mode-filter-panel state="state" filter-name="map" closable="false" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="map-extent">
+                <span>&swarr; {{extentBottomLeft() | lonlat:{ decimals : 2, pp: true } }}</span>
+                &nbsp;
+                <span>&nearr; {{extentTopRight() | lonlat:{ decimals : 2, pp: true } }}</span>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Text Filter -->
+        <view-mode-filter-panel state="state" filter-name="text" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+            <div class="btn-group full-width">
+                <input id="query" type="search" class="form-control input-sm" placeholder="Search Terms" ng-model="state.text.query"
+                        ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }"
+                        autocomplete="off" spellcheck="false">
+                <span class="glyphicon glyphicon-remove clear-input"
+                      ng-click="state.text.query = ''" ng-show="state.text.query != ''"></span>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Type Filter -->
+        <view-mode-filter-panel state="state" filter-name="type" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="btn-group" style="margin-right: 20px" ng-if="supportsNw() && supportsNm()">
+                <label class="btn btn-default btn-sm" ng-model="state.type.mainType" uib-btn-radio="''">All</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.mainType" uib-btn-radio="'NW'">NW</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.mainType" uib-btn-radio="'NM'">NM</label>
+            </div>
+            <div class="btn-group" ng-if="state.type.mainType == 'NW' || supportsNw(true)">
+                <label class="btn btn-default btn-sm" ng-model="state.type.LOCAL_WARNING"
+                       ng-if="supportsType('LOCAL_WARNING')"
+                       uib-btn-checkbox translate>msg.type.LOCAL_WARNING</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.COASTAL_WARNING"
+                       ng-if="supportsType('COASTAL_WARNING')"
+                       uib-btn-checkbox translate>msg.type.COASTAL_WARNING</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.SUBAREA_WARNING"
+                       ng-if="supportsType('SUBAREA_WARNING')"
+                       uib-btn-checkbox translate>msg.type.SUBAREA_WARNING</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.NAVAREA_WARNING"
+                       ng-if="supportsType('NAVAREA_WARNING')"
+                       uib-btn-checkbox translate>msg.type.NAVAREA_WARNING</label>
+                <span class="small-link">
+                    <a href ng-click="updateTypeFilter('NW', true)" translate>msg.filter.all</a> /
+                    <a href  ng-click="updateTypeFilter('NW', false)" translate>msg.filter.reset</a>
+                </span>
+            </div>
+            <div class="btn-group" ng-if="state.type.mainType == 'NM' || supportsNm(true)">
+                <label class="btn btn-default btn-sm" ng-model="state.type.TEMPORARY_NOTICE"
+                       ng-if="supportsType('TEMPORARY_NOTICE')"
+                       uib-btn-checkbox translate>msg.type.TEMPORARY_NOTICE</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.PRELIMINARY_NOTICE"
+                       ng-if="supportsType('PRELIMINARY_NOTICE')"
+                       uib-btn-checkbox translate>msg.type.PRELIMINARY_NOTICE</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.PERMANENT_NOTICE"
+                       ng-if="supportsType('PERMANENT_NOTICE')"
+                       uib-btn-checkbox translate>msg.type.PERMANENT_NOTICE</label>
+                <label class="btn btn-default btn-sm" ng-model="state.type.MISCELLANEOUS_NOTICE"
+                       ng-if="supportsType('MISCELLANEOUS_NOTICE')"
+                       uib-btn-checkbox translate>msg.type.MISCELLANEOUS_NOTICE</label>
+                <span class="small-link">
+                    <a href ng-click="updateTypeFilter('NM', true)" translate>msg.filter.all</a> /
+                    <a href  ng-click="updateTypeFilter('NM', false)" translate>msg.filter.reset</a>
+                </span>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Status Filter -->
+        <view-mode-filter-panel state="state" filter-name="status" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="btn-group">
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-model="state.status.PUBLISHED" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-PUBLISHED-outline" translate>msg.status.PUBLISHED</span>
+                </label>
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-if="!searchPublicMessages()" ng-model="state.status.DRAFT" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-DRAFT-outline" translate>msg.status.DRAFT</span>
+                </label>
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-if="!searchPublicMessages()" ng-model="state.status.VERIFIED" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-VERIFIED-outline" translate>msg.status.VERIFIED</span>
+                </label>
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-model="state.status.CANCELLED" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-CANCELLED-outline" translate>msg.status.CANCELLED</span>
+                </label>
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-model="state.status.EXPIRED" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-EXPIRED-outline" translate>msg.status.EXPIRED</span>
+                </label>
+                <label class="btn btn-default btn-sm" style="padding: 5px" ng-if="!searchPublicMessages()" ng-model="state.status.DELETED" uib-btn-checkbox>
+                    <span class="label label-message-id status-btn status-DELETED-outline" translate>msg.status.DELETED</span>
+                </label>
+                <span class="small-link">
+                    <a href ng-click="updateStateFilter(true)" translate>msg.filter.all</a> /
+                    <a href  ng-click="updateStateFilter(false)" translate>msg.filter.reset</a>
+                </span>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Tag Filter -->
+        <view-mode-filter-panel state="state" filter-name="tag" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <message-tags-field id="tags" tag-data="state.tag" init-ids="initTagIds" multiple="true" include-locked="true"></message-tags-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Publication Filter -->
+        <view-mode-filter-panel state="state" filter-name="publication" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <publication-field id="publications" publication-data="state.publication" init-ids="initPublicationIds" multiple="true"
+                                main-type="PUBLICATION" type="MESSAGE_REPORT" status="ACTIVE,RECORDING">
+            </publication-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Promulgation Type Filter -->
+        <view-mode-filter-panel state="state" filter-name="promulgationType" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <promulgation-type-field id="promulgationTypes" promulgation-type-data="state.promulgationType" init-ids="initPromulgationTypeIds">
+            </promulgation-type-field>
+        </view-mode-filter-panel>
+
+
+        <!-- User Filter -->
+        <view-mode-filter-panel state="state" filter-name="user" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-6 col-lg-5">
+            <div class="row">
+                <div class="col-sm-6">
+                    <user-field user-data="state.user"></user-field>
+                </div>
+                <div class="col-sm-6">
+                    <div class="btn-group">
+                        <label class="btn btn-default btn-sm" ng-model="state.user.userType" uib-btn-radio="'CREATED_BY'">Created</label>
+                        <label class="btn btn-default btn-sm" ng-model="state.user.userType" uib-btn-radio="'UPDATED_BY'">Updated</label>
+                        <label class="btn btn-default btn-sm" ng-model="state.user.userType" uib-btn-radio="'LAST_UPDATED_BY'">Last updated</label>
+                    </div>
+                </div>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Comments Filter -->
+        <view-mode-filter-panel state="state" filter-name="comments" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="btn-group" style="margin-right: 20px">
+                <label class="btn btn-default btn-sm" ng-model="state.comments.comments" uib-btn-radio="''">Ignore comments</label>
+                <label class="btn btn-default btn-sm" ng-model="state.comments.comments" uib-btn-radio="'ANY'">Any</label>
+                <label ng-if="loggedIn" class="btn btn-default btn-sm" ng-model="state.comments.comments" uib-btn-radio="'OWN'">Own</label>
+                <label class="btn btn-default btn-sm" ng-model="state.comments.comments" uib-btn-radio="'ANY_UNACK'">Any unack.</label>
+                <label ng-if="loggedIn" class="btn btn-default btn-sm" ng-model="state.comments.comments" uib-btn-radio="'OWN_UNACK'">Own unack.</label>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- Reference Filter -->
+        <view-mode-filter-panel state="state" filter-name="reference" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <message-id-field reference="state.reference"></message-id-field>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <input type="number" class="form-control input-sm" placeholder="Levels" ng-model="state.reference.referenceLevels"
+                           min="0" max="5"
+                           ng-model-options="{ updateOn: 'default blur', debounce: { default: 500, blur: 0 } }">
+                </div>
+            </div>
+        </view-mode-filter-panel>
+
+
+        <!-- AtoN Filter -->
+        <view-mode-filter-panel state="state" filter-name="aton" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <ui-select multiple id="atons" ng-model="state.aton.atons" >
+                <ui-select-match placeholder="Select AtoNs">
+                    {{$item.tags['seamark:ref']}}
+                    <span ng-if="$item.tags['seamark:name']">{{$item.tags['seamark:name']}}</span>
+                </ui-select-match>
+                <ui-select-choices repeat="aton in atons"
+                                   refresh="refreshAtons($select.search)"
+                                   refresh-delay="100">
+                    <div>
+                        <span ng-bind-html="aton.tags['seamark:ref'] | highlight: $select.search"></span>
+                        <small ng-bind-html="aton.tags['seamark:name'] | highlight: $select.search"></small>
+                    </div>
+
+                </ui-select-choices>
+            </ui-select>
+        </view-mode-filter-panel>
+
+
+        <!-- Chart Filter -->
+        <view-mode-filter-panel state="state" filter-name="chart" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <charts-field id="charts" chart-data="state.chart" init-ids="initChartIds" multiple="true"></charts-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Message Series Filter -->
+        <view-mode-filter-panel state="state" filter-name="messageSeries" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <message-series-field id="messageSeries" series-data="state.messageSeries" init-ids="initSeriesIds" multiple="true" domain="searchDomain"></message-series-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Area Filter -->
+        <view-mode-filter-panel state="state" filter-name="area" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <areas-field id="areas" area-data="state.area" init-ids="initAreaIds" multiple="true" domain="searchDomain"></areas-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Category Filter -->
+        <view-mode-filter-panel state="state" filter-name="category" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <categories-field id="categories" category-data="state.category" init-ids="initCategoryIds" multiple="true" domain="searchDomain"></categories-field>
+        </view-mode-filter-panel>
+
+
+        <!-- Date Filter -->
+        <view-mode-filter-panel state="state" filter-name="date" clear-filter="clearFilter(name)" class="col-xs-12 col-sm-8 col-md-5 col-lg-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <select class="form-control input-sm" ng-model="state.date.dateType">
+                        <option value="PUBLISH_DATE" translate>msg.field.publish_date</option>
+                        <option value="PUBLISH_FROM_DATE" translate>msg.field.publish_from_date</option>
+                        <option value="EVENT_DATE" translate>msg.field.event_dates</option>
+                        <option value="CREATED_DATE" translate>msg.field.created_date</option>
+                        <option value="UPDATED_DATE" translate>msg.field.updated_date</option>
+                    </select>
+                </div>
+                <div class="col-lg-4">
+                    <date-time-picker id="fromDate" ng-model="state.date.fromDate" placeholder="From date"
+                                      time="'00:00:00'" format="'l'"></date-time-picker>
+                </div>
+                <div class="col-lg-4">
+                    <date-time-picker id="toDate" ng-model="state.date.toDate" placeholder="To date"
+                                      time="'23:59:59'" format="'l'"></date-time-picker>
+                </div>
+            </div>
+        </view-mode-filter-panel>
+
+
+    </div>
+
+</div>

@@ -1,0 +1,73 @@
+
+.home-content {
+    background-color: black;
+}
+
+/** Footer Panel **/
+
+.home-footer .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/** Home -> Panel **/
+
+.home-panel {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(160, 160, 160, .7);
+    border-radius: 10px;
+}
+
+.home-panel h2 {
+    font-size: 20px;
+    margin: 5px 0;
+    color: #666;
+    text-shadow: 1px 1px 3px rgba(64, 64, 64, .2);
+}
+
+@keyframes flash-abbrev {
+    0%   {color: #666;}
+    50%  {color: magenta;}
+    100% {color: #666;}
+}
+
+.home-panel h2:hover .abbrev {
+    animation-name: flash-abbrev;
+    animation-duration: 1s;
+}
+
+.home-version-error {
+    opacity: 0.8;
+    max-width: 260px;
+    font-size: 13px;
+    color: white;
+    background-color: darkred;
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 10px;
+}
+
+.home-version-error .version {
+    margin-top: 10px;
+    font-size: 10px;
+}
+
+/** Home -> Map **/
+
+.home-map {
+    background-color: #d0cfd4;
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 50px;
+    right: 0;
+    z-index: -100;
+}
+
+.home-map .ol-zoom {
+    display: none;
+}

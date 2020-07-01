@@ -1,0 +1,14 @@
+
+<div class="row">
+    <div class="{{promulgationClass}}"
+         ng-repeat="promulgation in msg.promulgations" ng-if="promulgation.promulgate || allPromulgations">
+        <div class="promulgation-view-header"
+             ng-class="{ 'editor-field-invalid' : allPromulgations && promulgation.type.requirement == 'MANDATORY' && !promulgation.promulgate }">
+            <span ng-if="allPromulgations" class="glyphicon {{ 'glyphicon-' + (promulgation.promulgate ? 'check' : 'unchecked')}}"></span>
+            {{promulgation.type.name}}
+        </div>
+        <div class="promulgation" ng-class="{ 'disabled-promulgation' : !promulgation.promulgate }">
+            <ng-include src="'/app/promulgation/' + promulgation.type.serviceId + '-view.html'"></ng-include>
+        </div>
+    </div>
+</div>

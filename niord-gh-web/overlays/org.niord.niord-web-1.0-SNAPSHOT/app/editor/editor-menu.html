@@ -1,0 +1,100 @@
+
+<div class="view-mode-menu">
+    <ul style="padding-left: 0">
+
+        <li class="view-mode-menu-btn">
+            <span ui-sref="editor.edit({ id: initId, referenceType: referenceType })" ui-sref-active="active">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span class="view-mode-menu-text" translate>view_mode.edit</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn" ng-if="message.created">
+            <span ui-sref="editor.status({ id: initId, referenceType: referenceType })" ui-sref-active="active">
+                <span class="glyphicon glyphicon-wrench"></span>
+                <span class="view-mode-menu-text" translate>view_mode.status</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn" ng-if="message.created">
+            <span ui-sref="editor.comments({ id: initId, referenceType: referenceType })" ui-sref-active="active">
+                <span class="glyphicon glyphicon-comment"></span>
+                <span class="view-mode-menu-text" translate>view_mode.comments</span>
+                <span class="badge" ng-if="message && message.unackComments > 0">{{message.unackComments | numeral}}</span>
+            </span>
+        </li>
+
+        <li class="view-mode-menu-btn" ng-if="message.created">
+            <span ui-sref="editor.history({ id: initId, referenceType: referenceType })" ui-sref-active="active">
+                <span class="glyphicon glyphicon-calendar"></span>
+                <span class="view-mode-menu-text" translate>view_mode.history</span>
+            </span>
+        </li>
+
+        <li class="dropdown view-mode-menu-btn" style="padding: 0 10px">
+            <span class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-cog"></span>
+                <span class="view-mode-menu-text" translate>menu.action</span>
+                <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+                <li ng-if="message.created">
+                    <a href ng-click="pdf()">
+                        <span class="glyphicon glyphicon-print"></span>&nbsp;
+                        <span translate>menu.action.print</span>
+                    </a>
+                </li>
+                <li ng-if="message.created" role="separator" class="divider"></li>
+                <li>
+                    <a href ng-click="compareMessages()">
+                        <span class="glyphicon glyphicon-transfer"></span>&nbsp;
+                        <span translate>menu.action.message.compare</span>
+                    </a>
+                </li>
+                <li ng-if="message.created" role="separator" class="divider"></li>
+                <li ng-if="message.created">
+                    <a href ng-click="addToTagDialog()">
+                        <span class="glyphicon glyphicon-tags"></span>&nbsp;
+                        <span translate>menu.action.tag.add</span>
+                    </a>
+                </li>
+                <li ng-if="message.created && lastSelectedMessageTag">
+                    <a href ng-click="addToLastSelectedTag()">
+                        <span class="glyphicon glyphicon-tags"></span>&nbsp;
+                        {{ 'menu.action.tag.add_named' | translate : '{tag : "' + lastSelectedMessageTag + '"}' }}
+                    </a>
+                </li>
+                <li ng-if="message.created" ng-repeat="tag in messageTags">
+                    <a href ng-click="removeFromTag(tag)">
+                        <span class="glyphicon glyphicon-tags"></span>&nbsp;
+                        {{ 'menu.action.tag.remove_named' | translate : '{tag : "' + tag.name + '"}' }}
+                    </a>
+                </li>
+                <li ng-if="isEditor && onPage('editor.edit')" role="separator" class="divider"></li>
+                <li ng-if="isEditor && onPage('editor.edit')">
+                    <a href ng-click="expandCollapseFields(true)">
+                        <span class="glyphicon glyphicon-expand"></span>&nbsp;
+                        <span translate>menu.action.fields.expand</span>
+                    </a>
+                </li>
+                <li ng-if="isEditor && onPage('editor.edit')">
+                    <a href ng-click="expandCollapseFields(false)">
+                        <span class="glyphicon glyphicon-collapse-up"></span>&nbsp;
+                        <span translate>menu.action.fields.collapse</span>
+                    </a>
+                </li>
+                <li ng-if="isEditor && onPage('editor.edit')">
+                    <div style="color: lightgray; line-height: 20px; margin-left: 20px;" translate>menu.action.fields.more</div>
+                </li>
+                <li ng-repeat="(field, enabled) in unusedEditorFields" ng-if="isEditor && onPage('editor.edit')">
+                    <a href ng-click="toggleUseEditorField(field)">
+                        <span class="glyphicon view-mode-menu-checkmark"
+                              ng-class="{ 'glyphicon-ok': enabled, 'glyphicon-none': !enabled }"></span>
+                        {{'msg.field.' + field | translate}}
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>

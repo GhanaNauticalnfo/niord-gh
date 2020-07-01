@@ -1,0 +1,126 @@
+
+<td class="message-details-image" style="border: none" ng-if="format == 'list'">
+    <div class="message-selector-parent">
+        <img ng-if="msg.id" ng-src="/rest/message-map-image/{{msg.id}}.png"
+             message-details-link="msg.id" message-list="messageList" selection="selection"/>
+        <span ng-if="showDetailsMenu != 'false'" class="select-btn"
+              ng-click="toggleSelectMessage()" ng-class="{'message-selected' : isSelected()}">
+            <span class="glyphicon glyphicon-star"></span>
+        </span>
+    </div>
+</td>
+<td class="message-details-item" style="border: none">
+
+    <div style="position: relative; width: 100%;">
+
+        <message-details-menu ng-if="showDetailsMenu != 'false'" style="position: absolute; top: 2px; right: 5px; z-index: 100"
+                              message-id="msg.id" msg="msg" messages="messageList" size="xs"></message-details-menu>
+
+        <!-- Attachments to be displayed above message -->
+        <div class="row" ng-repeat="att in attachmentsAbove" ng-if="!compact">
+            <div class="col-sm-12">
+                <message-attachment attachment="att" image-type="source" label-type="caption"></message-attachment>
+            </div>
+        </div>
+
+
+        <!-- Title line -->
+        <div ng-if="msg.originalInformation">&#9733;</div>
+        <div><message-id-badge msg="msg" show-blank="true"></message-id-badge></div>
+        <div message-details-link="msg.id" message-list="messageList"  selection="selection" disabled="format == 'details'">
+            <strong>{{msg.descs[0].title}}</strong>
+            <span ng-if="msg.descs[0].lang != language && !compact" style="color: darkgray;">
+                <img ng-src="/img/flags/{{msg.descs[0].lang}}.png" style="height: 12px; opacity: 0.5;"/>
+            </span>
+        </div>
+
+
+        <table class="message-details-item-fields">
+
+            <!-- Reference lines -->
+            <tr ng-if="msg.references && msg.references.length > 0">
+                <th translate-language="{{language}}" translate>msg.field.references</th>
+                <td>
+                    <div ng-repeat="ref in msg.references">
+                        <a href ng-click="referenceClicked(ref.messageId)">{{ref.messageId}}</a><render-reference-type ref="ref" lang="language"></render-reference-type>
+                    </div>
+                </td>
+            </tr>
+
+
+            <!-- Details line -->
+            <tr ng-if="msg.parts" ng-repeat="part in msg.parts">
+                <th>
+                    <span ng-if="$index == 0 || msg.parts[$index].type != msg.parts[$index - 1].type"
+                          translate-language="{{language}}" translate="{{'msg.field.' + part.type.toLowerCase()}}">
+                    </span>
+                </th>
+                <td class="message-description">
+                    <render-message-part part="part" subject="true"></render-message-part>
+                </td>
+            </tr>
+
+
+            <!-- Attachments -->
+            <tr ng-if="msg.attachments">
+                <th translate-language="{{language}}" translate>msg.field.attachments</th>
+                <td>
+                    <div ng-if="!compact">
+                        <span class="glyphicon glyphicon-paperclip" style="color: darkgray"></span>
+                        <a href ng-if="showAttachments" ng-click="setShowAttachments(false)" class="clickable" translate>msg.hide_attachments</a>
+                        <a href ng-if="!showAttachments" ng-click="setShowAttachments(true)" class="clickable" translate>msg.show_attachments</a>
+                    </div>
+                    <div ng-if="showAttachments || compact">
+                        <span class="attachment-list" ng-repeat="att in msg.attachments">
+                            <message-attachment attachment="att" size="32"></message-attachment>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+
+
+            <!-- Charts line -->
+            <tr ng-if="msg.charts.length > 0">
+                <th translate-language="{{language}}" translate>msg.field.charts</th>
+                <td>
+                    <span render-charts="msg.charts"></span>
+                </td>
+            </tr>
+
+
+            <!-- Publication -->
+            <tr ng-if="msg.descs[0].publication || msg.descs[0].internalPublication">
+                <th translate-language="{{language}}" translate>msg.field.publication</th>
+                <td>
+                    <render-message-publication msg="msg" lang="language"></render-message-publication>
+                </td>
+            </tr>
+
+
+            <!-- Source line -->
+            <tr ng-if="msg.descs[0].source || msg.publishDateFrom">
+                <td colspan="2" class="text-right">
+                    (<render-message-source msg="msg" lang="language"></render-message-source>)
+                </td>
+            </tr>
+
+
+            <!-- Promulgation -->
+            <tr ng-if="promulgations.length > 0">
+                <th style="padding-top: 30px" translate-language="{{language}}" translate>msg.field.promulgation</th>
+                <td style="padding-top: 30px">
+                    <render-promulgations msg="msg" all-promulgations="false" promulgation-class="{{promulgationClass}}"></render-promulgations>
+                </td>
+            </tr>
+
+        </table>
+
+        <!-- Attachments to be displayed below message -->
+        <div class="row" ng-repeat="att in attachmentsBelow" ng-if="!compact">
+            <div class="col-sm-12">
+                <message-attachment attachment="att" image-type="source" label-type="caption"></message-attachment>
+            </div>
+        </div>
+
+    </div>
+</td>

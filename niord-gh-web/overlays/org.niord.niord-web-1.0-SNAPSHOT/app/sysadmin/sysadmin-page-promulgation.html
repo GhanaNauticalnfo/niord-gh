@@ -1,0 +1,216 @@
+
+<admin-page admin-page-title="Promulgation Types" parent-page="sysadmin" parent-page-title="Sysadmin">
+
+    <div ng-controller="PromulgationAdminCtrl" ng-init="loadPromulgationTypes()">
+
+        <p>
+            Manage message promulgation types.<br>
+            An instance of a message promulgation type will add a new tab
+            in the message editor with promulgation-specific field.
+        </p>
+
+        <form id="promulgationForm" name="promulgationForm" class="form-horizontal">
+
+            <!-- Edit promulgation -->
+            <div ng-if="promulgationType !== undefined" style="margin-top: 20px">
+
+                <div class="row">
+                    <div class="form-controls col-sm-12 col-md-10 col-lg-8">
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Active</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" ng-model="promulgationType.active" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Requirement</label>
+                            <div class="col-sm-8">
+                                <select class="form-control input-sm" ng-model="promulgationType.requirement" style="width: 180px">
+                                    <option value="OPTIONAL">Optional</option>
+                                    <option value="DEFAULT">Default</option>
+                                    <option value="MANDATORY">Mandatory</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Type ID</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" required
+                                       ng-model="promulgationType.typeId" ng-disabled="editMode == 'edit'" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control input-sm" required
+                                       ng-model="promulgationType.name" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Priority</label>
+                            <div class="col-sm-8">
+                                <input type="number" step="1" ng-model="promulgationType.priority" style="width: 200px">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Language</label>
+                            <div class="col-sm-8">
+                                <select class="form-control input-sm" ng-model="promulgationType.language"
+                                        ng-options="lang for lang in languages">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Domains</label>
+                            <div class="col-sm-8">
+                                <domain-field
+                                        domain-data="promulgationType"
+                                        domain-changed="domainsUpdated()"
+                                        multiple="true">
+                                </domain-field>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Restrict Types</label>
+                            <div class="col-sm-8">
+                                <div ng-if="supportsMainType('NW')" class="btn-group input-group">
+                                    <span class="input-group-addon" style="font-size: 12px">NW types: </span>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NW'].LOCAL_WARNING"
+                                           uib-btn-checkbox translate>msg.type.LOCAL_WARNING</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NW'].COASTAL_WARNING"
+                                           uib-btn-checkbox translate>msg.type.COASTAL_WARNING</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NW'].SUBAREA_WARNING"
+                                           uib-btn-checkbox translate>msg.type.SUBAREA_WARNING</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NW'].NAVAREA_WARNING"
+                                           uib-btn-checkbox translate>msg.type.NAVAREA_WARNING</label>
+                                </div>
+                                <div ng-if="supportsMainType('NM')" class="btn-group input-group" style="margin-top: 5px">
+                                    <span class="input-group-addon" style="font-size: 12px">NM types: </span>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NM'].TEMPORARY_NOTICE"
+                                           uib-btn-checkbox translate>msg.type.TEMPORARY_NOTICE</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NM'].PRELIMINARY_NOTICE"
+                                           uib-btn-checkbox translate>msg.type.PRELIMINARY_NOTICE</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NM'].PERMANENT_NOTICE"
+                                           uib-btn-checkbox translate>msg.type.PERMANENT_NOTICE</label>
+                                    <label class="btn btn-default btn-sm" ng-model="messageTypes['NM'].MISCELLANEOUS_NOTICE"
+                                           uib-btn-checkbox translate>msg.type.MISCELLANEOUS_NOTICE</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4">Script Resource Paths</label>
+                            <div class="col-sm-8">
+                                <script-resources-field path-data="promulgationType" multiple="true"></script-resources-field>
+                            </div>
+                        </div>
+
+                        <ng-include src="'/app/promulgation/' + promulgationType.serviceId + '-admin.html'"></ng-include>
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px;" class="row">
+                    <div class="col-sm-offset-4">
+                        <button type="submit" class="btn btn-default btn-sm" ng-click="loadPromulgationTypes()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-sm" ng-click="savePromulgationType(promulgation)"
+                                ng-disabled="promulgationForm.$pristine || promulgationForm.$invalid">
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- List promulgations -->
+            <div ng-if="promulgationType === undefined">
+
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <span class="btn-group" uib-dropdown>
+                            <button type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                                Add Promulgation Type
+                                <span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" ng-repeat="service in promulgationServices">
+                                    <a href ng-click="addPromulgationType(service.serviceId)">{{service.serviceName}}</a>
+                                </li>
+                            </ul>
+                        </span>
+
+                        <span class="btn-group" style="margin-left: 5px;" uib-dropdown>
+                            <button id="single-button" type="button" class="btn btn-primary btn-sm" uib-dropdown-toggle>
+                                <span class="glyphicon glyphicon-cog"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                <li role="menuitem"><a href ng-click="exportPromulgationTypes()" target="_blank">Export...</a></li>
+                                <li role="menuitem"><a href ng-click="uploadPromulgationTypesDialog()">Import...</a></li>
+                            </ul>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="row" style="padding-top: 20px;">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <table class='table table-condensed table-hover'>
+                            <tr>
+                                <th>Active</th>
+                                <th>Service ID</th>
+                                <th>Type ID</th>
+                                <th>Name</th>
+                                <th>Requirement</th>
+                                <th>Priority</th>
+                                <th>Language</th>
+                                <th>Domains</th>
+                                <th>Types</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-repeat="promulgationType in promulgationTypes">
+                                <td><input type="checkbox" ng-model="promulgationType.active" disabled="disabled"></td>
+                                <td>{{promulgationType.serviceId}}</td>
+                                <td>{{promulgationType.typeId}}</td>
+                                <td>{{promulgationType.name}}</td>
+                                <td>{{promulgationType.requirement | capitalize}}</td>
+                                <td>{{promulgationType.priority}}</td>
+                                <td>{{promulgationType.language}}</td>
+                                <td>
+                                    <span ng-repeat="domain in promulgationType.domains"><span ng-if="!$first">, </span>{{domain.name}}</span>
+                                </td>
+                                <td>
+                                    <div ng-if="promulgationType.messageTypes" ng-repeat="type in promulgationType.messageTypes"
+                                        translate="{{'msg.type.' + type}}">
+                                    </div>
+                                </td>
+                                <td nowrap align="right">
+                                    <a href ng-click="editPromulgationType(promulgationType);"
+                                       title="Edit Promulgation Type"><i class="glyphicon glyphicon-pencil"></i></a>
+                                    &nbsp;
+                                    <a href ng-click="deletePromulgationType(promulgationType);"
+                                       title="Delete Promulgation Type"><i class="glyphicon glyphicon-trash"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</admin-page>

@@ -16,9 +16,9 @@
         </div>
     </div>
     <div ng-if="verifiedMessagesList.length > 0 ">
-        <h4>{{ 'msg.messages_awaiting_publication_headline' | translate }} <span class="badge">{{verifiedMessagesList.length}}</span></h4>
+        <h4>{{ 'msg.messages_awaiting_publication_headline' | translate }} <span class="badge badge-danger">{{verifiedMessagesList.length}}</span></h4>
         <small>{{ 'msg.messages_awaiting_publication_text' | translate }}</small>
-        <div ng-repeat="msg in verifiedMessagesList" style="padding: 5px 0; border-bottom: 1px solid lightgray">
+        <div ng-repeat="msg in verifiedMessagesList" class="alert-danger border border-danger"  style="padding: 5px 5px 5px 5px; border-bottom: 1px solid lightgray">
             <div message-details-link="msg.id" message-list="messages" selection="selection">
                 <message-id-badge msg="msg" show-blank="true"></message-id-badge>&nbsp;
                 <strong>{{msg.descs[0].title}}</strong>

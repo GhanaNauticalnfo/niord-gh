@@ -1,0 +1,58 @@
+<div>
+
+    <div class="modal-header" style="text-align: center; padding: 5px 15px">
+        <button type="button" class="close" ng-click="$dismiss('aborted')">x</button>
+        <h4>Mail {{totalMessageNo}} selected messages</h4>
+        <help section="e-mail-selection-action" class="dialog-help-link"></help>
+    </div>
+
+    <div class="modal-body" style="padding-bottom: 0">
+        <form name="mailForm" id="mailForm" role="form">
+            <div class="container-fluid">
+
+                <div class="form-group row" style="margin-top: 20px">
+                    <label class="col-sm-3 col-md-2 control-label" style="text-align: right">
+                        To
+                    </label>
+                    <div class="col-sm-9 col-md-10" >
+                        <email-address-field email-data="data" field="emailAddresses"></email-address-field>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-2 control-label" style="text-align: right">
+                        Subject
+                    </label>
+                    <div class="col-sm-9 col-md-10" >
+                        <input type="text" id="mailSubject" name="mailSubject" class="form-control input-sm"
+                               ng-model="data.mailSubject"
+                               autocapitalize="off" autocorrect="off" autocomplete="off" required />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-md-2 control-label" style="text-align: right">
+                        Message
+                    </label>
+                    <div class="col-sm-9 col-md-10" >
+                            <textarea type="text" id="mailMessage" name="mailMessage" class="form-control input-sm"
+                                      ng-model="data.mailMessage" rows="4"
+                                      autocapitalize="off" autocorrect="off" autocomplete="off" ></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 24px;">
+                <div class="form-group col-xs-12" style="text-align: right">
+                    <button class="btn btn-default btn-sm" ng-click="$dismiss('aborted')">Close</button>
+                    &nbsp;
+                    <button class="btn btn-primary btn-sm" ng-click="sendMail()"
+                            ng-disabled="mailForm.$pristine || mailForm.$invalid || data.emailAddresses.length == 0">
+                        <span class="glyphicon glyphicon-envelope"></span>
+                        Send Mail
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

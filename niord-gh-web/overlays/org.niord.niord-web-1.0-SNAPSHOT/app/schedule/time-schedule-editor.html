@@ -1,0 +1,53 @@
+
+<div>
+
+    <div ng-if="firingAreaPeriods.editing" class="time-schedule-editor">
+        <div>
+
+            <table>
+                <tr ng-repeat="ti in firingAreaPeriods.editFiringPeriods">
+                    <td>
+                        <date-time-picker id="fromDate" ng-model="ti.fromDate" placeholder="From" style="width: 120px"
+                                          format="'LT'" icon="glyphicon-time"></date-time-picker>
+                    </td>
+                    <td width="20" align="center">&nbsp;-&nbsp;</td>
+                    <td>
+                        <date-time-picker id="toDate" ng-model="ti.toDate" placeholder="To" style="width: 120px"
+                                          format="'LT'" icon="glyphicon-time"></date-time-picker>
+                    </td>
+                    <td width="30" align="right">
+                        <a hreg ng-click="removeTimeInterval($index)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+        <div style="margin-top: 10px; text-align: center">
+            <button class="btn btn-default btn-sm" ng-click="addTimeInterval()">
+                <span class="glyphicon glyphicon-plus"></span> Add
+            </button>
+            <button class="btn btn-default btn-sm" ng-click="clear()">
+                <span class="glyphicon glyphicon-trash"></span> Clear
+            </button>
+            &nbsp;&nbsp;
+            <button class="btn btn-default btn-sm" ng-click="cancel()">
+                Cancel
+            </button>
+            <button class="btn btn-primary btn-sm" ng-click="save()">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Save
+            </button>
+        </div>
+    </div>
+
+
+    <div ng-if="!firingAreaPeriods.editing" style="text-align: right">
+        <div ng-repeat="ti in firingAreaPeriods.firingPeriods">
+            {{formatTimeInterval(ti)}}
+        </div>
+    </div>
+
+
+</div>
