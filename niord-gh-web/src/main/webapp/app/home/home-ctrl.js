@@ -27,7 +27,7 @@ angular.module('niord.home')
             $scope.webBuildVersion = '${timestamp}';
             $scope.isEditor = $rootScope.hasRole('editor');
             $scope.isAdmin = $rootScope.hasRole('admin');
-            var audio = new Audio('got-it-done.mp3');
+            var audio = new Audio('audio/got-it-done.mp3');
             // audio.play();
             $scope.init = function () {
 
@@ -50,13 +50,8 @@ angular.module('niord.home')
                                 $scope.verifiedMessagesList.push(result.data[x]);
                             }
                             $scope.totalVerifiedMessageNo = result.total;
-                            if(result.total==1 ) {
-                                audio.play();
-                                growl.info("one new message! ", { ttl: 5000 });
-                            }
                             if(result.total>0 ) {
                                 audio.play();
-                                growl.info(result.total + " new messages! ", { ttl: 5000 });
                             }
                         });
                 }
