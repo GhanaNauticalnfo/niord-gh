@@ -1,0 +1,32 @@
+
+<div id="msg-info"/>
+
+<div class="map-no-pos-messages">
+    <div ng-if="noPosMessages.length > 0">
+        <h4>{{ 'msg.no_pos_messages_headline' | translate }} <span class="badge">{{noPosMessages.length}}</span></h4>
+        <small>{{ 'msg.no_pos_messages_text' | translate }}</small>
+        <div ng-repeat="msg in noPosMessages" style="padding: 5px 0; border-bottom: 1px solid lightgray">
+            <div message-details-link="msg.id" message-list="messages" selection="selection">
+                <message-id-badge msg="msg" show-blank="true"></message-id-badge>&nbsp;
+                <strong>{{msg.descs[0].title}}</strong>
+                <span ng-if="msg.descs[0].lang != language" style="color: darkgray;">
+                    <img ng-src="/img/flags/{{msg.descs[0].lang}}.png" style="height: 12px; opacity: 0.5;"/>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div ng-if="verifiedMessagesList.length > 0 ">
+        <h4>{{ 'msg.messages_awaiting_publication_headline' | translate }} <span class="badge badge-danger">{{verifiedMessagesList.length}}</span></h4>
+        <small>{{ 'msg.messages_awaiting_publication_text' | translate }}</small>
+        <div ng-repeat="msg in verifiedMessagesList" class="alert-danger"  style="padding: 5px 5px 5px 5px; border: 1px solid darkred; margin-bottom: 2px;">
+            <div message-details-link="msg.id" message-list="messages" selection="selection">
+                <message-id-badge msg="msg" show-blank="true"></message-id-badge>&nbsp;
+                <strong>{{msg.descs[0].title}}</strong>
+                <span ng-if="msg.descs[0].lang != language" style="color: darkgray;">
+                    <img ng-src="/img/flags/{{msg.descs[0].lang}}.png" style="height: 12px; opacity: 0.5;"/>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
